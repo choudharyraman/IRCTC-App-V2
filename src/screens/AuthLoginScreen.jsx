@@ -17,7 +17,7 @@ export default function AuthLoginScreen() {
   };
 
   return (
-    <div style={{ padding: '2rem 1.5rem', minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+    <div className="screen-wrapper">
       
       <div style={{ position: 'absolute', top: '24px', right: '24px', zIndex: 10 }}>
         <ThemeToggle />

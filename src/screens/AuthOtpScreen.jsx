@@ -22,7 +22,7 @@ export default function AuthOtpScreen() {
   };
 
   return (
-    <div style={{ padding: '1.5rem', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="screen-wrapper">
       
       {/* Header */}
       <div className="flex-row items-center gap-4 mb-8">

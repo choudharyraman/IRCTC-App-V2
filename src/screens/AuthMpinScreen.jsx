@@ -22,7 +22,7 @@ export default function AuthMpinScreen() {
   }, [pin, navigate]);
 
   return (
-    <div style={{ padding: '2rem', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div className="screen-wrapper" style={{ alignItems: 'center' }}>
       
       {/* Header / Avatar */}
       <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

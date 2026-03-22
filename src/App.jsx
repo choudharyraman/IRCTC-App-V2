@@ -18,7 +18,7 @@ import AuthTatkalScreen from './screens/AuthTatkalScreen';
 function App() {
   return (
     <Router>
-      <div style={{ maxWidth: '420px', margin: '0 auto', minHeight: '100vh', backgroundColor: 'var(--bg-page)', overflowX: 'hidden', position: 'relative', boxShadow: '0 0 20px rgba(0,0,0,0.1)' }}>
+      <div className="app-container">
         <Routes>
           {/* Default Route */}
           <Route path="/" element={<Navigate to="/login" replace />} />

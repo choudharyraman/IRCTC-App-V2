@@ -18,8 +18,7 @@ export default function AuthTatkalScreen() {
   const isReady = timeLeft === 0;
 
   return (
-    <div style={{ 
-       padding: '1.5rem', minHeight: '100vh', display: 'flex', flexDirection: 'column',
+    <div className="screen-wrapper" style={{ 
        background: 'linear-gradient(160deg, #0A192F, #112240)', color: 'white'
     }}>
       

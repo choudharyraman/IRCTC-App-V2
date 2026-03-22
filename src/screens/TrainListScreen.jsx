@@ -38,7 +38,7 @@ export default function TrainListScreen() {
   ];
 
   return (
-    <div style={{ paddingBottom: '2rem', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="screen-wrapper" style={{ paddingBottom: '2rem' }}>
       
       {/* Sticky Header */}
       <div style={{

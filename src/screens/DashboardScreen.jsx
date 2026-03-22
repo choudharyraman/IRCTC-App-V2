@@ -15,7 +15,7 @@ export default function DashboardScreen() {
   };
 
   return (
-    <div style={{ padding: '1.5rem', paddingBottom: '80px', minHeight: '100vh' }}>
+    <div className="screen-wrapper" style={{ paddingBottom: '80px' }}>
       {/* Header */}
       <div className="flex-row justify-between items-center mb-4">
         <div>
@@ -73,7 +73,7 @@ export default function DashboardScreen() {
 
       {/* Super App Services */}
       <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', fontWeight: 600 }}>RailOne Ecosystem</h3>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
         <ServiceTile icon={<Utensils className="text-saffron" size={28} />} label="E-Catering" onClick={() => {}} />
         <ServiceTile icon={<Clock className="text-navy" size={28} />} label="UTS" onClick={() => {}} />
         <ServiceTile icon={<AlertTriangle className="text-green" size={28} />} label="Rail Madad" onClick={() => {}} />

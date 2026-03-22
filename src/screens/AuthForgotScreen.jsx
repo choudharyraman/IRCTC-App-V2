@@ -20,7 +20,7 @@ export default function AuthForgotScreen() {
   };
 
   return (
-    <div style={{ padding: '2rem 1.5rem', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="screen-wrapper">
       
       {/* Header */}
       <div className="flex-row items-center gap-4 mb-6">

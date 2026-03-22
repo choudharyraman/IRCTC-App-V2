@@ -7,14 +7,14 @@ import { ArrowLeft, UserPlus, CreditCard, ChevronRight } from 'lucide-react';
 
 export default function BookingScreen() {
   const navigate = useNavigate();
-  const [passengers, setPassengers] = useState([{ name: 'Raman Choudhary', age: 28, gender: 'Male', berth: 'Lower' }]);
+  const [passengers] = useState([{ name: 'Raman Choudhary', age: 28, gender: 'Male', berth: 'Lower' }]);
 
   const handlePayment = () => {
     alert('Proceeding to Payment via R-Wallet');
   };
 
   return (
-    <div style={{ paddingBottom: '100px', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="screen-wrapper" style={{ paddingBottom: '100px' }}>
       
       {/* Header */}
       <div style={{ padding: '1.5rem 1rem 1rem 1rem', background: 'var(--bg-color)' }}>

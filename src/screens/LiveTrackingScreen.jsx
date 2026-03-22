@@ -9,7 +9,7 @@ export default function LiveTrackingScreen() {
   const [alarmActive, setAlarmActive] = useState(false);
 
   return (
-    <div style={{ paddingBottom: '2rem', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="screen-wrapper" style={{ paddingBottom: '2rem' }}>
       
       {/* Header */}
       <div style={{ padding: '1.5rem 1rem 1rem 1rem', background: 'var(--bg-color)' }}>

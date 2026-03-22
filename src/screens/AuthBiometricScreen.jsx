@@ -16,7 +16,7 @@ export default function AuthBiometricScreen() {
   }, [navigate]);
 
   return (
-    <div style={{ padding: '2rem', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+    <div className="screen-wrapper" style={{ alignItems: 'center', justifyContent: 'center' }}>
       
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
          <div 

@@ -9,7 +9,7 @@ export default function PNRStatusScreen() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ padding: '1.5rem', minHeight: '100vh', paddingBottom: '2rem' }}>
+    <div className="screen-wrapper" style={{ paddingBottom: '2rem' }}>
       
       {/* Header */}
       <div className="flex-row items-center justify-between mb-6">
