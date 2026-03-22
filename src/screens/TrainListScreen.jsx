@@ -124,7 +124,9 @@ function TrainCard({ train }) {
 
       <div className="flex-row gap-2" style={{ overflowX: 'auto', paddingBottom: '0.5rem', scrollbarWidth: 'none' }}>
         {train.classes.map((cls, idx) => (
-          <div key={idx} style={{
+          <div key={idx} 
+            onClick={() => window.location.href='/book'}
+            style={{
             minWidth: '100px',
             padding: '0.75rem',
             borderRadius: 'var(--radius-sm)',
@@ -132,7 +134,8 @@ function TrainCard({ train }) {
             background: 'var(--bg-color)',
             border: '1px solid rgba(255,255,255,0.2)',
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            cursor: 'pointer'
           }}>
              <div className="flex-row justify-between mb-1">
                <span style={{ fontSize: '0.9rem', fontWeight: 700 }}>{cls.type}</span>

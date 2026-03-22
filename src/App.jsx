@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LoginScreen from './screens/LoginScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import TrainListScreen from './screens/TrainListScreen';
+import BookingScreen from './screens/BookingScreen';
+import PNRStatusScreen from './screens/PNRStatusScreen';
+import LiveTrackingScreen from './screens/LiveTrackingScreen';
 
 function App() {
   return (
@@ -13,6 +16,9 @@ function App() {
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/dashboard" element={<DashboardScreen />} />
           <Route path="/trains" element={<TrainListScreen />} />
+          <Route path="/book" element={<BookingScreen />} />
+          <Route path="/pnr" element={<PNRStatusScreen />} />
+          <Route path="/live" element={<LiveTrackingScreen />} />
         </Routes>
       </div>
     </Router>

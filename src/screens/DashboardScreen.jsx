@@ -70,9 +70,11 @@ export default function DashboardScreen() {
       {/* Super App Services */}
       <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', fontWeight: 600 }}>RailOne Ecosystem</h3>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
-        <ServiceTile icon={<Utensils className="text-saffron" size={28} />} label="E-Catering" />
-        <ServiceTile icon={<Clock className="text-navy" size={28} />} label="UTS (Unreserved)" />
-        <ServiceTile icon={<AlertTriangle className="text-green" size={28} />} label="Rail Madad" />
+        <ServiceTile icon={<Utensils className="text-saffron" size={28} />} label="E-Catering" onClick={() => {}} />
+        <ServiceTile icon={<Clock className="text-navy" size={28} />} label="UTS" onClick={() => {}} />
+        <ServiceTile icon={<AlertTriangle className="text-green" size={28} />} label="Rail Madad" onClick={() => {}} />
+        <ServiceTile icon={<Search className="text-navy" size={28} />} label="PNR Status" onClick={() => navigate('/pnr')} />
+        <ServiceTile icon={<MapPin className="text-saffron" size={28} />} label="Live Train" onClick={() => navigate('/live')} />
       </div>
 
       <BottomNav active="home" />
@@ -80,9 +82,9 @@ export default function DashboardScreen() {
   );
 }
 
-function ServiceTile({ icon, label }) {
+function ServiceTile({ icon, label, onClick }) {
   return (
-    <div className="flex-col items-center gap-2" style={{ cursor: 'pointer' }}>
+    <div className="flex-col items-center gap-2" style={{ cursor: 'pointer' }} onClick={onClick}>
       <div className="neu-icon-btn" style={{ width: '64px', height: '64px', background: 'var(--bg-color)', boxShadow: 'var(--shadow-dark), var(--shadow-light)' }}>
         {icon}
       </div>
