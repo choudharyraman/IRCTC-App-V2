@@ -4,6 +4,7 @@ import Card from '../components/Card';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import BottomNav from '../components/BottomNav';
+import ThemeToggle from '../components/ThemeToggle';
 import { MapPin, Calendar, Clock, Utensils, AlertTriangle, CreditCard, Search } from 'lucide-react';
 
 export default function DashboardScreen() {
@@ -19,10 +20,13 @@ export default function DashboardScreen() {
       <div className="flex-row justify-between items-center mb-4">
         <div>
           <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>Welcome, User</h1>
-          <p className="text-light" style={{ margin: 0, fontSize: '0.9rem' }}>Where are we traveling today?</p>
+          <p className="text-light" style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Where are we traveling today?</p>
         </div>
-        <div className="neu-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-color)', boxShadow: 'var(--shadow-dark), var(--shadow-light)' }}>
-          <img src="https://ui-avatars.com/api/?name=User&background=e6eef5&color=000080" alt="Profile" style={{ borderRadius: '50%', width: '100%', height: '100%' }} />
+        <div className="flex-row items-center gap-4">
+          <ThemeToggle />
+          <div className="neuro-raised" style={{ width: '40px', height: '40px', background: 'var(--bg-page)', borderRadius: '50%', overflow: 'hidden' }}>
+            <img src="https://ui-avatars.com/api/?name=User&background=4B7EFF&color=FFF" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </div>
         </div>
       </div>
 

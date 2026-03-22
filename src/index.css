@@ -24,20 +24,18 @@
   --shadow-active: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-page: #1A202C;
-    --shadow-dark: #0D1117;
-    --shadow-light: #2D3748;
-    --text-primary: #EDF2F7;
-    --text-secondary: #A0AEC0;
-    --card-bg: #1E2530;
-    --accent-primary: #5B8EFF;
-    --accent-primary-gradient: linear-gradient(145deg, #5B8EFF, #3B6EE3);
-    --success: #48BB78;
-    --error: #FC8181;
-    --warning: #ECC94B;
-  }
+body[data-theme='dark'] {
+  --bg-page: #1A202C;
+  --shadow-dark: #0D1117;
+  --shadow-light: #2D3748;
+  --text-primary: #EDF2F7;
+  --text-secondary: #A0AEC0;
+  --card-bg: #1E2530;
+  --accent-primary: #5B8EFF;
+  --accent-primary-gradient: linear-gradient(145deg, #5B8EFF, #3B6EE3);
+  --success: #48BB78;
+  --error: #FC8181;
+  --warning: #ECC94B;
 }
 
 * {

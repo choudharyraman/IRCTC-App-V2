@@ -5,6 +5,7 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import IconButton from '../components/IconButton';
 import { Fingerprint, Grid, MessageSquare, Eye, EyeOff } from 'lucide-react';
+import ThemeToggle from '../components/ThemeToggle';
 
 export default function AuthLoginScreen() {
   const navigate = useNavigate();
@@ -16,8 +17,12 @@ export default function AuthLoginScreen() {
   };
 
   return (
-    <div style={{ padding: '2rem 1.5rem', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ padding: '2rem 1.5rem', minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
       
+      <div style={{ position: 'absolute', top: '24px', right: '24px', zIndex: 10 }}>
+        <ThemeToggle />
+      </div>
+
       {/* Zone 1: App Identity */}
       <div className="flex-col items-center mb-6 mt-2">
         <div className="neuro-card" style={{ width: '64px', height: '64px', background: 'var(--accent-primary-gradient)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '16px', marginBottom: '16px' }}>
