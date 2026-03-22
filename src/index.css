@@ -1,140 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap');
 
 :root {
-  --bg-color: #e6eef5;
-  --text-dark: #000080; /* Navy Blue */
-  --text-light: #5a6b7c;
+  /* Color Tokens - Light Mode */
+  --bg-page: #E4EAF2;
+  --shadow-dark: #B8BEC7;
+  --shadow-light: #FFFFFF;
+  --accent-primary: #4B7EFF;
+  --accent-primary-gradient: linear-gradient(145deg, #4B7EFF, #3461E3);
+  --text-primary: #2D3748;
+  --text-secondary: #718096;
+  --success: #38A169;
+  --error: #E53E3E;
+  --warning: #D69E2E;
+  --card-bg: #E4EAF2;
+
+  /* Legacy Indian Tricolor (Keeping for other screens) */
   --accent-saffron: #FF9933;
   --accent-green: #138808;
-  --accent-white: #FFFFFF;
-  
-  --shadow-light: -6px -6px 12px rgba(255, 255, 255, 0.8);
-  --shadow-dark: 6px 6px 12px rgba(184, 197, 214, 0.6);
-  --shadow-inset-light: inset -4px -4px 8px rgba(255, 255, 255, 0.7);
-  --shadow-inset-dark: inset 4px 4px 8px rgba(184, 197, 214, 0.6);
-  
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-full: 9999px;
-  
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Shadows */
+  --shadow-raised: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+  --shadow-sunken: inset 3px 3px 7px var(--shadow-dark), inset -3px -3px 7px var(--shadow-light);
+  --shadow-active: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-page: #1A202C;
+    --shadow-dark: #0D1117;
+    --shadow-light: #2D3748;
+    --text-primary: #EDF2F7;
+    --text-secondary: #A0AEC0;
+    --card-bg: #1E2530;
+    --accent-primary: #5B8EFF;
+    --accent-primary-gradient: linear-gradient(145deg, #5B8EFF, #3B6EE3);
+    --success: #48BB78;
+    --error: #FC8181;
+    --warning: #ECC94B;
+  }
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-dark);
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Typography Helpers */
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  color: var(--text-dark);
-}
-
-.text-saffron { color: var(--accent-saffron); }
-.text-green { color: var(--accent-green); }
-.text-navy { color: var(--text-dark); }
-.text-light { color: var(--text-light); }
-
-/* Base Neumorphic Card */
-.neu-card {
-  background: var(--bg-color);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-dark), var(--shadow-light);
-  padding: 1.5rem;
-  border: 1px solid rgba(255,255,255,0.4);
-}
-
-/* Base Neumorphic Button */
-.neu-btn {
-  background: var(--bg-color);
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-dark), var(--shadow-light);
-  border: none;
-  cursor: pointer;
-  padding: 1rem 2rem;
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--text-dark);
-  transition: all 0.2s ease-in-out;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.neu-btn:active {
-  box-shadow: var(--shadow-inset-dark), var(--shadow-inset-light);
-}
-
-/* Saffron Primary Button */
-.neu-btn-primary {
-  background: var(--accent-saffron);
-  color: white;
-  box-shadow: 4px 4px 10px rgba(255, 153, 51, 0.4), -4px -4px 10px rgba(255, 255, 255, 0.8);
-}
-.neu-btn-primary:active {
-  box-shadow: inset 4px 4px 8px rgba(200, 110, 20, 0.6), inset -4px -4px 8px rgba(255, 180, 100, 0.6);
-}
-
-/* Green Action Button */
-.neu-btn-success {
-  background: var(--accent-green);
-  color: white;
-  box-shadow: 4px 4px 10px rgba(19, 136, 8, 0.4), -4px -4px 10px rgba(255, 255, 255, 0.8);
-}
-
-.neu-btn-success:active {
-  box-shadow: inset 4px 4px 8px rgba(10, 100, 5, 0.6), inset -4px -4px 8px rgba(30, 180, 20, 0.6);
-}
-
-
-/* Neumorphic Input */
-.neu-input {
-  background: var(--bg-color);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-inset-dark), var(--shadow-inset-light);
-  border: none;
-  padding: 1rem 1.25rem;
-  width: 100%;
-  color: var(--text-dark);
-  outline: none;
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-}
-
-.neu-input::placeholder {
-  color: var(--text-light);
-}
-
-/* Neumorphic Icon Button */
-.neu-icon-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  padding: 0;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
   display: flex;
-  align-items: center;
   justify-content: center;
+  min-height: 100vh;
 }
 
-/* Layout Helpers */
+/* Base Neumorphic Classes */
+.neuro-raised {
+  box-shadow: var(--shadow-raised);
+}
+
+.neuro-sunken {
+  box-shadow: var(--shadow-sunken);
+}
+
+.neuro-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: var(--shadow-raised);
+}
+
+/* Animations Core */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+/* Utility layout */
 .flex-row { display: flex; flex-direction: row; }
 .flex-col { display: flex; flex-direction: column; }
 .items-center { align-items: center; }
 .justify-between { justify-content: space-between; }
 .justify-center { justify-content: center; }
-.gap-2 { gap: 0.5rem; }
-.gap-4 { gap: 1rem; }
+.gap-2 { gap: 8px; }
+.gap-4 { gap: 16px; }
 .w-full { width: 100%; }
-.mt-4 { margin-top: 1rem; }
-.mb-4 { margin-bottom: 1rem; }
