@@ -6,6 +6,14 @@ import BookingScreen from './screens/BookingScreen';
 import PNRStatusScreen from './screens/PNRStatusScreen';
 import LiveTrackingScreen from './screens/LiveTrackingScreen';
 
+// Super App Modules
+import ProfileScreen from './screens/ProfileScreen';
+import WalletScreen from './screens/WalletScreen';
+import MyBookingsScreen from './screens/MyBookingsScreen';
+import FoodScreen from './screens/FoodScreen';
+import UtsScreen from './screens/UtsScreen';
+import RailMadadScreen from './screens/RailMadadScreen';
+
 // New Advanced Login Ecosystem
 import AuthLoginScreen from './screens/AuthLoginScreen';
 import AuthOtpScreen from './screens/AuthOtpScreen';
@@ -38,6 +46,14 @@ function App() {
           <Route path="/register" element={<AuthRegistrationScreen />} />
           <Route path="/forgot" element={<AuthForgotScreen />} />
           <Route path="/tatkal" element={<AuthTatkalScreen />} />
+
+          {/* Super App Modules */}
+          <Route path="/profile" element={<ProfileScreen />} />
+          <Route path="/wallet" element={<WalletScreen />} />
+          <Route path="/bookings" element={<MyBookingsScreen />} />
+          <Route path="/food" element={<FoodScreen />} />
+          <Route path="/uts" element={<UtsScreen />} />
+          <Route path="/madad" element={<RailMadadScreen />} />
         </Routes>
       </div>
     </Router>

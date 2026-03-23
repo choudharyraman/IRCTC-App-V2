@@ -74,9 +74,9 @@ export default function DashboardScreen() {
       {/* Super App Services */}
       <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', fontWeight: 600 }}>RailOne Ecosystem</h3>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-        <ServiceTile icon={<Utensils className="text-saffron" size={28} />} label="E-Catering" onClick={() => {}} />
-        <ServiceTile icon={<Clock className="text-navy" size={28} />} label="UTS" onClick={() => {}} />
-        <ServiceTile icon={<AlertTriangle className="text-green" size={28} />} label="Rail Madad" onClick={() => {}} />
+        <ServiceTile icon={<Utensils className="text-saffron" size={28} />} label="E-Catering" onClick={() => navigate('/food')} />
+        <ServiceTile icon={<Clock className="text-navy" size={28} />} label="UTS" onClick={() => navigate('/uts')} />
+        <ServiceTile icon={<AlertTriangle className="text-green" size={28} />} label="Rail Madad" onClick={() => navigate('/madad')} />
         <ServiceTile icon={<Search className="text-navy" size={28} />} label="PNR Status" onClick={() => navigate('/pnr')} />
         <ServiceTile icon={<MapPin className="text-saffron" size={28} />} label="Live Train" onClick={() => navigate('/live')} />
       </div>
