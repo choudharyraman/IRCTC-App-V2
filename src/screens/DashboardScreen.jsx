@@ -79,6 +79,7 @@ export default function DashboardScreen() {
         <ServiceTile icon={<AlertTriangle className="text-green" size={28} />} label="Rail Madad" onClick={() => navigate('/madad')} />
         <ServiceTile icon={<Search className="text-navy" size={28} />} label="PNR Status" onClick={() => navigate('/pnr')} />
         <ServiceTile icon={<MapPin className="text-saffron" size={28} />} label="Live Train" onClick={() => navigate('/live')} />
+        <ServiceTile icon={<CreditCard className="text-navy" size={28} />} label="Recharge" onClick={() => navigate('/recharge')} />
       </div>
 
       <BottomNav active="home" />

@@ -13,6 +13,7 @@ import MyBookingsScreen from './screens/MyBookingsScreen';
 import FoodScreen from './screens/FoodScreen';
 import UtsScreen from './screens/UtsScreen';
 import RailMadadScreen from './screens/RailMadadScreen';
+import RechargeScreen from './screens/RechargeScreen';
 
 // Checkout and Ticketing
 import PaymentGatewayScreen from './screens/PaymentGatewayScreen';
@@ -59,6 +60,7 @@ function App() {
           <Route path="/food" element={<FoodScreen />} />
           <Route path="/uts" element={<UtsScreen />} />
           <Route path="/madad" element={<RailMadadScreen />} />
+          <Route path="/recharge" element={<RechargeScreen />} />
 
           {/* Checkout & Tickets */}
           <Route path="/payment" element={<PaymentGatewayScreen />} />
