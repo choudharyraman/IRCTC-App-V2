@@ -1,6 +1,6 @@
 import React from 'react';
 import BottomNav from '../components/BottomNav';
-import { ArrowLeft, UserCard, Users, Settings, LogOut, FileText, ChevronRight } from 'lucide-react';
+import { ArrowLeft, IdCard, Users, Settings, LogOut, FileText, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function ProfileScreen() {
@@ -31,7 +31,7 @@ export default function ProfileScreen() {
       </div>
 
       <div className="flex-col gap-4">
-         <ProfileOption icon={<UserCard size={20} className="text-saffron" />} title="Aadhaar Verification" status="Verified" />
+         <ProfileOption icon={<IdCard size={20} className="text-saffron" />} title="Aadhaar Verification" status="Verified" />
          <ProfileOption icon={<Users size={20} className="text-navy" />} title="Master Passenger List" status="Saved (4)" />
          <ProfileOption icon={<FileText size={20} className="text-green" />} title="Terms & Conditions" />
          <ProfileOption icon={<Settings size={20} className="text-navy" />} title="App Settings" />
