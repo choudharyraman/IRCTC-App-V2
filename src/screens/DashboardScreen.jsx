@@ -48,7 +48,15 @@ export default function DashboardScreen() {
     }}>
       
       {/* Header Profile & Theme Toggle */}
-      <div className="flex-row items-center justify-between mb-8" style={{ marginTop: '12px' }}>
+      <div className="flex-row items-center justify-between" style={{ 
+          position: 'sticky', 
+          top: 0, 
+          zIndex: 50, 
+          background: colors.bg, 
+          padding: '16px 24px', 
+          margin: '-32px -24px 24px -24px', // Offset .screen-wrapper padding
+          boxShadow: isDark ? '0 8px 24px rgba(0,0,0,0.5)' : '0 8px 24px rgba(0,0,0,0.05)'
+      }}>
         <div className="flex-row items-center gap-3">
           <div style={{ width: '48px', height: '48px', borderRadius: '50%', overflow: 'hidden', border: `2px solid ${colors.slate}` }}>
             <img src="https://i.pravatar.cc/150?img=11" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />

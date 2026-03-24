@@ -15,19 +15,21 @@ export default function BottomNav({ active = 'home' }) {
 
   return (
     <div style={{
-      position: 'absolute',
+      position: 'fixed',
       bottom: 0,
       left: '50%',
       transform: 'translateX(-50%)',
       width: '100%',
       maxWidth: '640px',
       background: 'var(--bg-page)',
-      borderTop: '1px solid rgba(184, 197, 214, 0.4)',
-      boxShadow: '0 -4px 12px rgba(0, 0, 0, 0.05)',
+      borderTop: '1px solid rgba(184, 197, 214, 0.1)',
+      boxShadow: '0 -8px 32px rgba(0, 0, 0, 0.3)',
       display: 'flex',
       justifyContent: 'space-around',
-      padding: '0.75rem 0',
-      zIndex: 100
+      padding: '16px 0',
+      paddingBottom: 'calc(16px + env(safe-area-inset-bottom))',
+      zIndex: 100,
+      backdropFilter: 'blur(24px)'
     }}>
       {items.map(item => (
         <div key={item.id} onClick={() => navigate(item.path)} className="flex-col items-center" style={{ cursor: 'pointer', color: active === item.id ? 'var(--accent-primary)' : 'var(--text-secondary)' }}>
