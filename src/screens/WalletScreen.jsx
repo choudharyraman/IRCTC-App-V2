@@ -14,7 +14,7 @@ export default function WalletScreen() {
       <div className="flex-row items-center gap-4 mb-6">
         <button 
            className="neuro-icon-btn" 
-           style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
+           style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
            onClick={() => navigate('/dashboard')}
         >
           <ArrowLeft size={20} color="var(--text-primary)" />
@@ -55,7 +55,7 @@ export default function WalletScreen() {
 
 function Transaction({ title, date, amount, isDebit }) {
    return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', borderRadius: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', borderRadius: '16px' }}>
          <div className="flex-row items-center gap-4">
             <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: isDebit ? 'rgba(229, 62, 62, 0.1)' : 'rgba(72, 187, 120, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                <ArrowUpRight size={20} color={isDebit ? 'var(--error)' : 'var(--success)'} style={{ transform: isDebit ? 'none' : 'rotate(180deg)' }} />

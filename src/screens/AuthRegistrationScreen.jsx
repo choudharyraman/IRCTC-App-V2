@@ -42,8 +42,8 @@ export default function AuthRegistrationScreen() {
                <div style={{ display: 'flex', gap: '4px', height: '4px' }}>
                   <div style={{ flex: 1, background: 'var(--success)', borderRadius: '2px' }}></div>
                   <div style={{ flex: 1, background: 'var(--success)', borderRadius: '2px' }}></div>
-                  <div style={{ flex: 1, background: 'var(--bg-page)', boxShadow: 'var(--shadow-sunken)', borderRadius: '2px' }}></div>
-                  <div style={{ flex: 1, background: 'var(--bg-page)', boxShadow: 'var(--shadow-sunken)', borderRadius: '2px' }}></div>
+                  <div style={{ flex: 1, background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)', borderRadius: '2px' }}></div>
+                  <div style={{ flex: 1, background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)', borderRadius: '2px' }}></div>
                </div>
                <span style={{ fontSize: '12px', color: 'var(--success)' }}>✓ 8+ chars ✓ 1 Number</span>
             </div>
@@ -84,7 +84,7 @@ export default function AuthRegistrationScreen() {
       <div className="flex-row items-center gap-4 mb-8">
         <button 
            className="neuro-icon-btn" 
-           style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
+           style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
            onClick={() => step > 1 ? setStep(step - 1) : navigate('/login')}
         >
           <ArrowLeft size={20} color="var(--text-primary)" />

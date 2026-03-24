@@ -44,14 +44,14 @@ export default function TrainListScreen() {
       {/* Sticky Header */}
       <div style={{
         position: 'sticky', top: 0, zIndex: 50,
-        background: 'var(--bg-color)',
+        background: 'var(--glass-bg)', backdropFilter: 'blur(12px)',
         padding: '1.5rem 1rem 1rem 1rem',
         boxShadow: '0 4px 12px rgba(184, 197, 214, 0.3)',
         borderBottom: '1px solid rgba(255,255,255,0.4)'
       }}>
         <div className="flex-row justify-between items-center mb-4">
           <div className="flex-row items-center gap-4">
-            <button className="neu-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-color)', boxShadow: 'var(--shadow-dark), var(--shadow-light)', border: 'none' }} onClick={handleBack}>
+            <button className="neuro-card" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none' }} onClick={handleBack}>
               <ArrowLeft size={20} className="text-navy" />
             </button>
             <div className="flex-col">
@@ -59,7 +59,7 @@ export default function TrainListScreen() {
               <span className="text-light" style={{ fontSize: '0.8rem' }}>24 Mar, Tomorrow</span>
             </div>
           </div>
-          <button className="neu-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowFilters(true)}>
+          <button className="neuro-card" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowFilters(true)}>
             <SlidersHorizontal size={20} color="var(--accent-primary)" />
           </button>
         </div>
@@ -83,7 +83,7 @@ export default function TrainListScreen() {
       {/* Filter Modal */}
       {showFilters && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center' }}>
-           <div className="neuro-card" style={{ width: '100%', maxWidth: '640px', background: 'var(--bg-page)', padding: '24px', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', position: 'relative' }}>
+           <div className="neuro-card" style={{ width: '100%', maxWidth: '640px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '24px', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', position: 'relative' }}>
              <div className="flex-row justify-between items-center mb-6">
                <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 700 }}>Filter Trains</h3>
                <span style={{ fontWeight: 600, color: 'var(--text-secondary)', cursor: 'pointer' }} onClick={() => setShowFilters(false)}>Close</span>
@@ -111,7 +111,7 @@ export default function TrainListScreen() {
                 <FilterChip label="Evening" active />
              </div>
              
-             <button style={{ width: '100%', padding: '16px', borderRadius: '16px', background: 'var(--accent-primary)', color: 'white', border: 'none', fontWeight: 700, fontSize: '1.05rem', boxShadow: '0 8px 16px rgba(75, 126, 255, 0.3)' }} onClick={() => setShowFilters(false)}>
+             <button style={{ width: '100%', padding: '16px', borderRadius: '16px', background: 'var(--accent-primary)', color: 'white', border: 'none', fontWeight: 700, fontSize: '1.05rem', boxShadow: '0 8px 32px rgba(75, 126, 255, 0.3)' }} onClick={() => setShowFilters(false)}>
                 Apply Filters
              </button>
            </div>
@@ -131,7 +131,7 @@ function FilterChip({ label, active }) {
          cursor: 'pointer',
          background: active ? 'var(--accent-primary)' : 'var(--bg-page)',
          color: active ? 'white' : 'var(--text-primary)',
-         boxShadow: active ? 'inset 2px 2px 5px rgba(0,0,0,0.2)' : 'var(--shadow-raised)',
+         boxShadow: active ? 'inset 0 2px 8px rgba(0,0,0,0.1)' : 'var(--glass-shadow)',
          border: active ? 'none' : '1px solid rgba(255,255,255,0.2)',
          whiteSpace: 'nowrap'
       }}>
@@ -146,7 +146,7 @@ function DateChip({ day, date, active }) {
       minWidth: '70px',
       padding: '0.5rem',
       borderRadius: 'var(--radius-sm)',
-      boxShadow: active ? 'var(--shadow-inset-dark), var(--shadow-inset-light)' : 'var(--shadow-dark), var(--shadow-light)',
+      boxShadow: active ? 'inset 0 2px 8px rgba(0,0,0,0.1)' : 'var(--glass-shadow)',
       background: active ? 'transparent' : 'var(--bg-color)',
       color: active ? 'var(--text-dark)' : 'var(--text-light)',
       border: '1px solid rgba(255,255,255,0.2)'
@@ -188,8 +188,8 @@ function TrainCard({ train }) {
             minWidth: '100px',
             padding: '0.75rem',
             borderRadius: 'var(--radius-sm)',
-            boxShadow: 'var(--shadow-dark), var(--shadow-light)',
-            background: 'var(--bg-color)',
+            boxShadow: 'var(--glass-shadow)',
+            background: 'var(--glass-bg)', backdropFilter: 'blur(12px)',
             border: '1px solid rgba(255,255,255,0.2)',
             display: 'flex',
             flexDirection: 'column',

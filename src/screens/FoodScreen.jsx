@@ -22,7 +22,7 @@ export default function FoodScreen() {
       <div className="flex-row items-center gap-4 mb-6">
         <button 
            className="neuro-icon-btn" 
-           style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} 
+           style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} 
            onClick={() => navigate('/dashboard')}
         >
           <ArrowLeft size={20} color="var(--text-primary)" />
@@ -104,7 +104,7 @@ export default function FoodScreen() {
                   <span style={{ fontSize: '18px', fontWeight: 700 }}>₹ {total}.00</span>
                </div>
             </div>
-            <button onClick={() => setStep('success')} style={{ padding: '12px 24px', background: 'var(--accent-primary)', color: 'white', border: 'none', borderRadius: '12px', fontWeight: 700, fontSize: '1rem', boxShadow: '0 8px 16px rgba(75, 126, 255, 0.3)', cursor: 'pointer' }}>
+            <button onClick={() => setStep('success')} style={{ padding: '12px 24px', background: 'var(--accent-primary)', color: 'white', border: 'none', borderRadius: '12px', fontWeight: 700, fontSize: '1rem', boxShadow: '0 8px 32px rgba(75, 126, 255, 0.3)', cursor: 'pointer' }}>
                Pay Now
             </button>
          </div>
@@ -117,7 +117,7 @@ export default function FoodScreen() {
 function PartnerCard({ name, tag }) {
    return (
       <div className="neuro-raised" style={{ minWidth: '140px', padding: '16px', borderRadius: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-         <div style={{ width: '48px', height: '48px', borderRadius: '24px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-sunken)', marginBottom: '12px' }}></div>
+         <div style={{ width: '48px', height: '48px', borderRadius: '24px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)', marginBottom: '12px' }}></div>
          <span style={{ fontSize: '14px', fontWeight: 600 }}>{name}</span>
          <span style={{ fontSize: '10px', color: 'var(--text-secondary)', marginTop: '4px' }}>{tag}</span>
       </div>
@@ -132,7 +132,7 @@ function MenuItem({ name, desc, price, onAdd }) {
             <span style={{ fontSize: '12px', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{desc}</span>
             <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)', marginTop: '8px' }}>₹ {price}</span>
          </div>
-         <button onClick={onAdd} className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
+         <button onClick={onAdd} className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
             <Plus size={20} color="var(--success)" />
          </button>
       </div>

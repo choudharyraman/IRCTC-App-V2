@@ -26,7 +26,7 @@ export default function AuthForgotScreen() {
       <div className="flex-row items-center gap-4 mb-6">
         <button 
            className="neuro-icon-btn" 
-           style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
+           style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
            onClick={() => navigate('/login')}
         >
           <ArrowLeft size={20} color="var(--text-primary)" />
@@ -54,7 +54,7 @@ export default function AuthForgotScreen() {
          </Button>
 
          {successMsg && (
-           <div className="neuro-card" style={{ padding: '16px', background: 'var(--bg-page)', borderLeft: '4px solid var(--success)', marginTop: '16px' }}>
+           <div className="neuro-card" style={{ padding: '16px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', borderLeft: '4px solid var(--success)', marginTop: '16px' }}>
               <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--success)' }}>✓ Success</span>
               <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '4px' }}>{successMsg}</p>
            </div>

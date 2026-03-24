@@ -19,9 +19,9 @@ export default function BookingScreen() {
     <div className="screen-wrapper" style={{ paddingBottom: '100px' }}>
       
       {/* Header */}
-      <div style={{ padding: '1.5rem 1rem 1rem 1rem', background: 'var(--bg-color)' }}>
+      <div style={{ padding: '1.5rem 1rem 1rem 1rem', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)' }}>
         <div className="flex-row items-center gap-4">
-          <button className="neu-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-color)', boxShadow: 'var(--shadow-dark), var(--shadow-light)', border: 'none' }} onClick={() => navigate('/trains')}>
+          <button className="neuro-card" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none' }} onClick={() => navigate('/trains')}>
             <ArrowLeft size={20} className="text-navy" />
           </button>
           <div className="flex-col">
@@ -64,7 +64,7 @@ export default function BookingScreen() {
              </div>
              <div className="flex-row justify-between items-center mt-2 pt-3" style={{ borderTop: '1px solid rgba(184, 197, 214, 0.4)' }}>
                 <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Berth Preference</span>
-                <div onClick={() => setShowSeatMap(true)} className="neuro-raised" style={{ padding: '8px 16px', background: 'var(--bg-page)', borderRadius: '16px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--accent-primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <div onClick={() => setShowSeatMap(true)} className="neuro-raised" style={{ padding: '8px 16px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', borderRadius: '16px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--accent-primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                    <Grid size={16} /> {selectedSeat}
                 </div>
              </div>
@@ -95,10 +95,10 @@ export default function BookingScreen() {
       {/* Seat Map Modal */}
       {showSeatMap && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '16px' }}>
-           <div className="neuro-card flex-col" style={{ width: '100%', maxWidth: '400px', background: 'var(--bg-page)', padding: '24px', borderRadius: '24px' }}>
+           <div className="neuro-card flex-col" style={{ width: '100%', maxWidth: '400px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '24px', borderRadius: '24px' }}>
              <div className="flex-row justify-between items-center mb-6">
                <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 700 }}>Select Coach Berth</h3>
-               <span style={{ fontWeight: 600, color: 'var(--accent-primary)', cursor: 'pointer', padding: '8px 16px', borderRadius: '16px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)' }} onClick={() => setShowSeatMap(false)}>Done</span>
+               <span style={{ fontWeight: 600, color: 'var(--accent-primary)', cursor: 'pointer', padding: '8px 16px', borderRadius: '16px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)' }} onClick={() => setShowSeatMap(false)}>Done</span>
              </div>
              
              <div className="neuro-sunken" style={{ display: 'flex', flexDirection: 'column', gap: '8px', height: '320px', overflowY: 'auto', padding: '16px', borderRadius: '16px' }}>
@@ -111,8 +111,8 @@ export default function BookingScreen() {
 
              <div className="flex-row justify-between mt-6 px-4 text-center">
                  <div className="flex-col items-center"><div style={{width: 20, height: 20, background: '#A0AEC0', borderRadius: 6, marginBottom: 8}}></div><span style={{fontSize: 11, fontWeight: 600}}>Booked</span></div>
-                 <div className="flex-col items-center"><div style={{width: 20, height: 20, background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', borderRadius: 6, marginBottom: 8}}></div><span style={{fontSize: 11, fontWeight: 600}}>Available</span></div>
-                 <div className="flex-col items-center"><div style={{width: 20, height: 20, background: 'var(--success)', borderRadius: 6, marginBottom: 8, boxShadow: 'var(--shadow-raised)'}}></div><span style={{fontSize: 11, fontWeight: 600}}>Selected</span></div>
+                 <div className="flex-col items-center"><div style={{width: 20, height: 20, background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', borderRadius: 6, marginBottom: 8}}></div><span style={{fontSize: 11, fontWeight: 600}}>Available</span></div>
+                 <div className="flex-col items-center"><div style={{width: 20, height: 20, background: 'var(--success)', borderRadius: 6, marginBottom: 8, boxShadow: 'var(--glass-shadow)'}}></div><span style={{fontSize: 11, fontWeight: 600}}>Selected</span></div>
              </div>
            </div>
         </div>

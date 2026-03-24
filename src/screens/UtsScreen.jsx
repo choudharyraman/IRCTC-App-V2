@@ -19,7 +19,7 @@ export default function UtsScreen() {
       <div className="flex-row items-center gap-4 mb-6">
         <button 
            className="neuro-icon-btn" 
-           style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} 
+           style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} 
            onClick={() => navigate('/dashboard')}
         >
           <ArrowLeft size={20} color="var(--text-primary)" />
@@ -56,7 +56,7 @@ export default function UtsScreen() {
                      <span style={{ fontSize: '16px', fontWeight: 600 }}>Platform Ticket</span>
                      <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Valid for 2 hours • ₹10</span>
                   </div>
-                  <button onClick={handleBook} style={{ padding: '8px 16px', background: 'var(--bg-page)', color: 'var(--accent-primary)', border: 'none', borderRadius: '8px', fontWeight: 600, boxShadow: 'var(--shadow-raised)', cursor: 'pointer' }}>Book</button>
+                  <button onClick={handleBook} style={{ padding: '8px 16px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', color: 'var(--accent-primary)', border: 'none', borderRadius: '8px', fontWeight: 600, boxShadow: 'var(--glass-shadow)', cursor: 'pointer' }}>Book</button>
                </div>
             </div>
          </div>
@@ -89,7 +89,7 @@ export default function UtsScreen() {
                </div>
             </div>
 
-            <div style={{ padding: '12px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-sunken)', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
+            <div style={{ padding: '12px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
                <CheckCircle size={20} color="var(--success)" />
                <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--success)' }}>Valid until 23:45 Today</span>
             </div>

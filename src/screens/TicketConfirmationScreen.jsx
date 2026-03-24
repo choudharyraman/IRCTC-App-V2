@@ -9,7 +9,7 @@ export default function TicketConfirmationScreen() {
     <div className="screen-wrapper" style={{ paddingBottom: '90px' }}>
       
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginTop: '24px', marginBottom: '24px' }}>
-         <div style={{ width: '64px', height: '64px', borderRadius: '32px', background: 'var(--success)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px', boxShadow: '0 8px 16px rgba(72, 187, 120, 0.3)' }}>
+         <div style={{ width: '64px', height: '64px', borderRadius: '32px', background: 'var(--success)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px', boxShadow: '0 8px 32px rgba(16, 185, 129, 0.3)' }}>
             <CheckCircle size={32} color="white" />
          </div>
          <h1 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '8px' }}>Booking Confirmed!</h1>
@@ -18,8 +18,8 @@ export default function TicketConfirmationScreen() {
 
       <div className="neuro-card flex-col" style={{ padding: '24px', marginBottom: '24px', position: 'relative' }}>
          {/* Ticket Cutout Effects */}
-         <div style={{ position: 'absolute', left: '-12px', top: '55%', width: '24px', height: '24px', borderRadius: '50%', background: 'var(--bg-page)', boxShadow: 'inset -3px 0 5px rgba(0,0,0,0.1)' }}></div>
-         <div style={{ position: 'absolute', right: '-12px', top: '55%', width: '24px', height: '24px', borderRadius: '50%', background: 'var(--bg-page)', boxShadow: 'inset 3px 0 5px rgba(0,0,0,0.1)' }}></div>
+         <div style={{ position: 'absolute', left: '-12px', top: '55%', width: '24px', height: '24px', borderRadius: '50%', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)' }}></div>
+         <div style={{ position: 'absolute', right: '-12px', top: '55%', width: '24px', height: '24px', borderRadius: '50%', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)' }}></div>
 
          <div className="flex-row justify-between mb-4">
             <div className="flex-col">
@@ -59,7 +59,7 @@ export default function TicketConfirmationScreen() {
          </div>
 
          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
-            <div style={{ width: '160px', height: '160px', background: 'white', padding: '16px', borderRadius: '16px', boxShadow: 'var(--shadow-sunken)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '160px', height: '160px', background: 'white', padding: '16px', borderRadius: '16px', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                {/* Mock QR Code Pattern via CSS grid */}
                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '4px', width: '100%', height: '100%' }}>
                   {Array.from({length: 25}).map((_, i) => (
@@ -71,10 +71,10 @@ export default function TicketConfirmationScreen() {
       </div>
 
       <div className="flex-row gap-4 mb-4">
-         <button className="neuro-raised" style={{ flex: 1, padding: '16px', border: 'none', background: 'var(--bg-page)', color: 'var(--accent-primary)', fontWeight: 600, borderRadius: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
+         <button className="neuro-raised" style={{ flex: 1, padding: '16px', border: 'none', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', color: 'var(--accent-primary)', fontWeight: 600, borderRadius: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
             <Download size={20} /> Save E-Ticket
          </button>
-         <button className="neuro-raised" style={{ flex: 1, padding: '16px', border: 'none', background: 'var(--bg-page)', color: 'var(--text-primary)', fontWeight: 600, borderRadius: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
+         <button className="neuro-raised" style={{ flex: 1, padding: '16px', border: 'none', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', color: 'var(--text-primary)', fontWeight: 600, borderRadius: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
             <Share2 size={20} /> Share
          </button>
       </div>

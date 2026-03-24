@@ -15,7 +15,7 @@ export default function MyBookingsScreen() {
       <div className="flex-row items-center gap-4 mb-6">
         <button 
            className="neuro-icon-btn" 
-           style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
+           style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
            onClick={() => navigate('/dashboard')}
         >
           <ArrowLeft size={20} color="var(--text-primary)" />
@@ -31,7 +31,7 @@ export default function MyBookingsScreen() {
 
       <div className="flex-col gap-4 mt-6">
         {activeTab === 0 && (
-          <div className="neuro-card flex-col" style={{ padding: '16px', background: 'var(--bg-page)' }}>
+          <div className="neuro-card flex-col" style={{ padding: '16px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)' }}>
              <div className="flex-row justify-between items-center mb-4">
                 <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--accent-primary)' }}>12951 • MUMBAI RAJDHANI</span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', background: 'var(--success)', color: 'white', padding: '4px 8px', borderRadius: '12px' }}>
@@ -45,7 +45,7 @@ export default function MyBookingsScreen() {
                    <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>17:00 • Today</span>
                 </div>
                 <div style={{ flex: 1, height: '2px', background: 'var(--shadow-dark)', margin: '0 12px', position: 'relative' }}>
-                   <div style={{ position: 'absolute', top: '-6px', left: '50%', transform: 'translateX(-50%)', background: 'var(--bg-page)', padding: '2px 8px', borderRadius: '12px', border: '1px solid var(--shadow-dark)', fontSize: '10px' }}>
+                   <div style={{ position: 'absolute', top: '-6px', left: '50%', transform: 'translateX(-50%)', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '2px 8px', borderRadius: '12px', border: '1px solid var(--shadow-dark)', fontSize: '10px' }}>
                       15h 30m
                    </div>
                 </div>
@@ -75,7 +75,7 @@ export default function MyBookingsScreen() {
                 </button>
                 <button 
                    onClick={() => navigate('/cancel')}
-                   style={{ flex: 1, padding: '12px', borderRadius: '8px', border: 'none', background: 'var(--error)', boxShadow: 'var(--shadow-raised)', fontWeight: 600, color: 'white', cursor: 'pointer' }}
+                   style={{ flex: 1, padding: '12px', borderRadius: '8px', border: 'none', background: 'var(--error)', boxShadow: 'var(--glass-shadow)', fontWeight: 600, color: 'white', cursor: 'pointer' }}
                 >
                    Cancel Ticket
                 </button>

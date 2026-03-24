@@ -16,16 +16,17 @@ export default function IconButton({ icon, onClick, label }) {
           width: '56px',
           height: '56px',
           borderRadius: '50%',
-          background: 'var(--bg-page)',
-          border: 'none',
+          background: 'var(--glass-bg)',
+          backdropFilter: 'blur(12px)',
+          border: '1px solid var(--glass-border)',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: 'var(--accent-primary)',
-          boxShadow: pressed ? 'var(--shadow-active)' : '5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light)',
+          color: 'var(--text-primary)',
+          boxShadow: pressed ? 'none' : 'var(--glass-shadow)',
           transform: pressed ? 'scale(0.96)' : 'scale(1)',
-          transition: 'box-shadow 0.15s ease, transform 0.1s ease'
+          transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
         {icon}

@@ -19,7 +19,7 @@ export default function CancellationScreen() {
   return (
     <div className="screen-wrapper" style={{ paddingBottom: '90px' }}>
       <div className="flex-row items-center gap-4 mb-6">
-        <button onClick={() => navigate(-1)} className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <button onClick={() => navigate(-1)} className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <ArrowLeft size={20} color="var(--text-primary)" />
         </button>
         <div className="flex-col">
@@ -67,7 +67,7 @@ export default function CancellationScreen() {
 function PassengerCheckbox({ name, age, status, berth, checked, onChange }) {
    return (
       <div onClick={onChange} className="neuro-raised" style={{ padding: '16px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '16px', cursor: 'pointer', border: checked ? '2px solid var(--error)' : '2px solid transparent' }}>
-         <div style={{ width: '24px', height: '24px', borderRadius: '8px', border: checked ? 'none' : '2px solid var(--text-secondary)', background: checked ? 'var(--error)' : 'var(--bg-page)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: checked ? 'none' : 'var(--shadow-sunken)' }}>
+         <div style={{ width: '24px', height: '24px', borderRadius: '8px', border: checked ? 'none' : '2px solid var(--text-secondary)', background: checked ? 'var(--error)' : 'var(--bg-page)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: checked ? 'none' : 'inset 0 2px 8px rgba(0,0,0,0.05)' }}>
             {checked && <div style={{ width: '12px', height: '12px', background: 'white', borderRadius: '2px' }}></div>}
          </div>
          <div className="flex-col" style={{ flex: 1 }}>

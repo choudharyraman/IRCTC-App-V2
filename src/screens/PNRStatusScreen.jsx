@@ -20,7 +20,7 @@ export default function PNRStatusScreen() {
       {/* Header */}
       <div className="flex-row items-center justify-between mb-6">
         <div className="flex-row items-center gap-4">
-          <button className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => navigate('/dashboard')}>
+          <button className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => navigate('/dashboard')}>
             <ArrowLeft size={20} className="text-navy" />
           </button>
           <h2 style={{ fontSize: '1.2rem', margin: 0, fontWeight: 700 }}>PNR Status</h2>
@@ -44,7 +44,7 @@ export default function PNRStatusScreen() {
             <Card style={{ padding: '1.5rem', marginBottom: '1.5rem', border: '1px solid rgba(19, 136, 8, 0.3)' }}>
                <div className="flex-row justify-between items-center mb-4">
                   <span style={{ fontSize: '1.1rem', fontWeight: 700 }}>Chart Not Prepared</span>
-                  <span style={{ background: 'var(--bg-page)', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 600, boxShadow: 'var(--shadow-sunken)' }}>2345678901</span>
+                  <span style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 600, boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)' }}>2345678901</span>
                </div>
 
                <div className="flex-col gap-2 mb-4">
@@ -59,8 +59,8 @@ export default function PNRStatusScreen() {
                </div>
 
                {/* ML Prediction Widget */}
-               <div style={{ background: 'var(--bg-page)', padding: '1rem', borderRadius: '12px', boxShadow: 'var(--shadow-sunken)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ background: 'var(--accent-green)', color: 'white', padding: '0.5rem', borderRadius: '50%', display: 'flex', boxShadow: 'var(--shadow-raised)' }}>
+               <div style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '1rem', borderRadius: '12px', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <div style={{ background: 'var(--accent-green)', color: 'white', padding: '0.5rem', borderRadius: '50%', display: 'flex', boxShadow: 'var(--glass-shadow)' }}>
                      <Info size={24} />
                   </div>
                   <div className="flex-col">
@@ -74,7 +74,7 @@ export default function PNRStatusScreen() {
             <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', fontWeight: 600 }}>Smart Alternatives</h3>
             
             <Card style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-               <div style={{ background: 'var(--bg-page)', padding: '0.5rem', borderRadius: '50%', boxShadow: 'var(--shadow-raised)', color: 'var(--accent-saffron)' }}>
+               <div style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '0.5rem', borderRadius: '50%', boxShadow: 'var(--glass-shadow)', color: 'var(--accent-saffron)' }}>
                   <AlertTriangle size={20} />
                </div>
                <div className="flex-col" style={{ flex: 1 }}>
@@ -85,7 +85,7 @@ export default function PNRStatusScreen() {
             </Card>
 
             <Card style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-               <div style={{ background: 'var(--bg-page)', padding: '0.5rem', borderRadius: '50%', boxShadow: 'var(--shadow-raised)', color: 'var(--text-primary)' }}>
+               <div style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '0.5rem', borderRadius: '50%', boxShadow: 'var(--glass-shadow)', color: 'var(--text-primary)' }}>
                   <Route size={20} />
                </div>
                <div className="flex-col" style={{ flex: 1 }}>

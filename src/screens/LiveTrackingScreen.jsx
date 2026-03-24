@@ -19,15 +19,15 @@ export default function LiveTrackingScreen() {
     <div className="screen-wrapper" style={{ paddingBottom: '2rem' }}>
       
       {/* Header */}
-      <div style={{ padding: '1.5rem 1rem 1rem 1rem', background: 'var(--bg-color)' }}>
+      <div style={{ padding: '1.5rem 1rem 1rem 1rem', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)' }}>
         <div className="flex-row items-center justify-between mb-4">
           <div className="flex-row items-center gap-4">
-             <button className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => navigate('/dashboard')}>
+             <button className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => navigate('/dashboard')}>
                <ArrowLeft size={20} className="text-navy" />
              </button>
              <h2 style={{ fontSize: '1.2rem', margin: 0, fontWeight: 700 }}>Live Tracking</h2>
           </div>
-          <button className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <button className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
              <MapIcon size={20} className="text-navy" />
           </button>
         </div>
@@ -49,8 +49,8 @@ export default function LiveTrackingScreen() {
 
         {status === 'tracking' && (
            <div style={{ 
-              background: 'var(--bg-page)', padding: '1rem', borderRadius: '12px', 
-              boxShadow: 'var(--shadow-sunken)', 
+              background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '1rem', borderRadius: '12px', 
+              boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)', 
               display: 'flex', flexDirection: 'column', gap: '0.5rem', animation: 'slideUp 0.3s ease-out' 
            }}>
               <span style={{ fontSize: '0.85rem', color: 'var(--text-light)', fontWeight: 600 }}>MUMBAI RAJDHANI (12951)</span>
@@ -86,7 +86,7 @@ export default function LiveTrackingScreen() {
                {/* Station 2: Current */}
                <div className="flex-row" style={{ position: 'relative', marginBottom: '1.5rem' }}>
                   <div style={{ position: 'absolute', left: '11px', top: '24px', bottom: '-24px', width: '2px', background: 'var(--text-light)', zIndex: 0, opacity: 0.3 }}></div>
-                  <div className="neu-icon-btn" style={{ width: '24px', height: '24px', background: 'var(--bg-page)', border: `2px solid var(--accent-saffron)`, zIndex: 1, flexShrink: 0, padding: 0 }}>
+                  <div className="neuro-card" style={{ width: '24px', height: '24px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', border: `2px solid var(--accent-saffron)`, zIndex: 1, flexShrink: 0, padding: 0 }}>
                      <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--accent-saffron)' }}></div>
                   </div>
                   <div className="flex-col" style={{ marginLeft: '1rem', flex: 1 }}>
@@ -100,7 +100,7 @@ export default function LiveTrackingScreen() {
 
                {/* Station 3: Future */}
                <div className="flex-row" style={{ position: 'relative' }}>
-                  <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'var(--bg-page)', border: '2px solid rgba(0,0,128,0.2)', zIndex: 1, flexShrink: 0 }}></div>
+                  <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', border: '2px solid rgba(0,0,128,0.2)', zIndex: 1, flexShrink: 0 }}></div>
                   <div className="flex-col" style={{ marginLeft: '1rem', flex: 1 }}>
                      <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-light)' }}>Vadodara (BRC)</span>
                      <div className="flex-row justify-between">
@@ -115,7 +115,7 @@ export default function LiveTrackingScreen() {
             {/* Smart Station Alarm Card */}
             <Card style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                <div className="flex-row items-center gap-4">
-                  <div className="neu-icon-btn" style={{ width: '48px', height: '48px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', color: alarmActive ? 'var(--accent-saffron)' : 'var(--text-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%' }}>
+                  <div className="neuro-card" style={{ width: '48px', height: '48px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', color: alarmActive ? 'var(--accent-saffron)' : 'var(--text-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%' }}>
                      <Bell size={24} />
                   </div>
                   <div className="flex-col" style={{ flex: 1 }}>

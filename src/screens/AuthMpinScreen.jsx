@@ -28,7 +28,7 @@ export default function AuthMpinScreen() {
       <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
          <div style={{ 
             width: '80px', height: '80px', borderRadius: '50%', background: 'var(--card-bg)', 
-            boxShadow: 'var(--shadow-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: 'var(--glass-shadow)', display: 'flex', alignItems: 'center', justifyContent: 'center',
             marginBottom: '1rem', border: '3px solid var(--bg-page)'
          }}>
             <span style={{ fontSize: '28px', fontWeight: 700, color: 'var(--accent-primary)' }}>AK</span>

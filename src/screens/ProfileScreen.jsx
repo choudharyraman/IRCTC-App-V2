@@ -7,13 +7,13 @@ export default function ProfileScreen() {
   const navigate = useNavigate();
 
   return (
-    <div className="screen-wrapper" style={{ paddingBottom: '90px', background: 'var(--bg-page)' }}>
+    <div className="screen-wrapper" style={{ paddingBottom: '90px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)' }}>
       
       {/* Header */}
       <div className="flex-row items-center gap-4 mb-8">
         <button 
            className="neuro-icon-btn" 
-           style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
+           style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} 
            onClick={() => navigate('/dashboard')}
         >
           <ArrowLeft size={20} color="var(--text-primary)" />
@@ -50,7 +50,7 @@ function ProfileOption({ icon, title, status }) {
    return (
       <div className="neuro-card" style={{ padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}>
          <div className="flex-row items-center gap-4">
-            <div style={{ width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-sunken)' }}>
+            <div style={{ width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)' }}>
                {icon}
             </div>
             <span style={{ fontSize: '15px', fontWeight: 600 }}>{title}</span>

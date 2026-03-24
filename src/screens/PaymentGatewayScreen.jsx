@@ -9,7 +9,7 @@ export default function PaymentGatewayScreen() {
   return (
     <div className="screen-wrapper" style={{ paddingBottom: '90px' }}>
       <div className="flex-row items-center gap-4 mb-6">
-        <button onClick={() => navigate(-1)} className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <button onClick={() => navigate(-1)} className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <ArrowLeft size={20} color="var(--text-primary)" />
         </button>
         <h2 style={{ fontSize: '18px', fontWeight: 600, margin: 0 }}>Payment</h2>
@@ -49,7 +49,7 @@ export default function PaymentGatewayScreen() {
          padding: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.4)',
          display: 'flex', justifyContent: 'center', zIndex: 100, borderBottomLeftRadius: '20px', borderBottomRightRadius: '20px'
       }}>
-         <button onClick={() => navigate('/ticket')} style={{ width: '100%', padding: '16px', background: 'var(--accent-primary)', color: 'white', border: 'none', borderRadius: '16px', fontWeight: 700, fontSize: '1.1rem', boxShadow: '0 8px 16px rgba(75, 126, 255, 0.3)', cursor: 'pointer' }}>
+         <button onClick={() => navigate('/ticket')} style={{ width: '100%', padding: '16px', background: 'var(--accent-primary)', color: 'white', border: 'none', borderRadius: '16px', fontWeight: 700, fontSize: '1.1rem', boxShadow: '0 8px 32px rgba(75, 126, 255, 0.3)', cursor: 'pointer' }}>
             Pay ₹2,750
          </button>
       </div>
@@ -60,7 +60,7 @@ export default function PaymentGatewayScreen() {
 function PaymentOption({ icon, title, subtitle, active, onSelect }) {
    return (
       <div onClick={onSelect} className="neuro-raised" style={{ padding: '16px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '16px', cursor: 'pointer', border: active ? '2px solid var(--accent-primary)' : '2px solid transparent' }}>
-         <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-sunken)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+         <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {icon}
          </div>
          <div className="flex-col" style={{ flex: 1 }}>

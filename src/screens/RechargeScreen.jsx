@@ -17,7 +17,7 @@ export default function RechargeScreen() {
     <div className="screen-wrapper" style={{ paddingBottom: '90px' }}>
       
       <div className="flex-row items-center gap-4 mb-6">
-        <button onClick={() => navigate('/dashboard')} className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+        <button onClick={() => navigate('/dashboard')} className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
           <ArrowLeft size={20} color="var(--text-primary)" />
         </button>
         <div className="flex-col">
@@ -45,7 +45,7 @@ export default function RechargeScreen() {
 
             <h3 style={{ fontSize: '14px', fontWeight: 600, marginBottom: '12px', color: 'var(--text-secondary)' }}>Recent Recharges</h3>
             <div className="neuro-raised" style={{ padding: '16px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-               <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--bg-page)', boxShadow: 'var(--shadow-sunken)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+               <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <span style={{ fontSize: '10px', fontWeight: 700, color: 'var(--accent-primary)' }}>JIO</span>
                </div>
                <div className="flex-col" style={{ flex: 1 }}>

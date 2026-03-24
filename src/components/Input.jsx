@@ -20,26 +20,24 @@ export default function Input({
     gap: '4px'
   };
 
-  // Injecting inline styles here to precisely match spec
   const inputStyle = {
-    background: 'var(--bg-page)',
-    border: 'none',
-    borderRadius: '8px',
+    background: 'rgba(255, 255, 255, 0.05)',
+    borderRadius: '12px',
     height: '56px',
     padding: icon ? '0 16px 0 48px' : '0 16px',
     fontSize: '16px',
     color: 'var(--text-primary)',
-    transition: 'box-shadow 0.2s ease, border 0.2s ease',
+    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     width: '100%',
     outline: 'none',
     boxShadow: error 
-      ? 'inset 3px 3px 7px #E8B4B4, inset -3px -3px 7px var(--shadow-light)'
+      ? '0 0 0 2px var(--error)'
       : focused 
-        ? 'inset 4px 4px 9px var(--shadow-dark), inset -4px -4px 9px var(--shadow-light)'
-        : 'var(--shadow-sunken)',
-    borderLeft: error 
-      ? '2px solid var(--error)' 
-      : focused ? '2px solid var(--accent-primary)' : 'none'
+        ? '0 0 0 2px var(--accent-primary)'
+        : 'none',
+    border: error 
+      ? '1px solid transparent' 
+      : focused ? '1px solid transparent' : '1px solid var(--glass-border)'
   };
 
   return (
@@ -47,7 +45,7 @@ export default function Input({
       {label && (
         <label style={{ 
           fontSize: focused || value ? '12px' : '16px', 
-          fontWeight: 500, 
+          fontWeight: 600, 
           color: focused ? 'var(--accent-primary)' : 'var(--text-secondary)',
           transition: 'all 0.2s ease',
           marginBottom: '4px'
@@ -58,7 +56,11 @@ export default function Input({
       
       <div style={{ position: 'relative' }}>
         {icon && (
-          <span style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)', display: 'flex' }}>
+          <span style={{ 
+             position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', 
+             color: focused ? 'var(--accent-primary)' : 'var(--text-secondary)', 
+             display: 'flex', transition: 'color 0.2s ease' 
+          }}>
             {icon}
           </span>
         )}
@@ -70,13 +72,14 @@ export default function Input({
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           style={inputStyle}
+          className="glass-input"
         />
       </div>
 
       {error ? (
-        <span style={{ fontSize: '12px', color: 'var(--error)' }}>{error}</span>
+        <span style={{ fontSize: '12px', color: 'var(--error)', fontWeight: 500 }}>{error}</span>
       ) : hint ? (
-        <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{hint}</span>
+        <span style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 500 }}>{hint}</span>
       ) : null}
     </div>
   );

@@ -40,7 +40,7 @@ export default function AuthBiometricScreen() {
                width: '80px', height: '80px', borderRadius: '50%', 
                background: success ? 'var(--success)' : 'var(--accent-primary-gradient)', 
                display: 'flex', alignItems: 'center', justifyContent: 'center',
-               boxShadow: 'var(--shadow-raised)',
+               boxShadow: 'var(--glass-shadow)',
                zIndex: 2,
                transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                transform: success ? 'scale(1.1)' : 'scale(1)'
