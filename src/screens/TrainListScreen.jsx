@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 import { ArrowLeft, SlidersHorizontal } from 'lucide-react';
 
 export default function TrainListScreen() {
   const navigate = useNavigate();
+  const [showFilters, setShowFilters] = useState(false);
 
   const handleBack = () => {
     navigate('/dashboard');
@@ -58,8 +59,8 @@ export default function TrainListScreen() {
               <span className="text-light" style={{ fontSize: '0.8rem' }}>24 Mar, Tomorrow</span>
             </div>
           </div>
-          <button className="neu-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-color)', boxShadow: 'var(--shadow-dark), var(--shadow-light)', border: 'none' }}>
-            <SlidersHorizontal size={20} className="text-navy" />
+          <button className="neu-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowFilters(true)}>
+            <SlidersHorizontal size={20} color="var(--accent-primary)" />
           </button>
         </div>
 
@@ -78,8 +79,65 @@ export default function TrainListScreen() {
           <TrainCard key={train.id} train={train} />
         ))}
       </div>
+
+      {/* Filter Modal */}
+      {showFilters && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center' }}>
+           <div className="neuro-card" style={{ width: '100%', maxWidth: '640px', background: 'var(--bg-page)', padding: '24px', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', position: 'relative' }}>
+             <div className="flex-row justify-between items-center mb-6">
+               <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 700 }}>Filter Trains</h3>
+               <span style={{ fontWeight: 600, color: 'var(--text-secondary)', cursor: 'pointer' }} onClick={() => setShowFilters(false)}>Close</span>
+             </div>
+             
+             <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Class Options</span>
+             <div className="flex-row gap-3 mt-3 mb-5" style={{ overflowX: 'auto', paddingBottom: '4px' }}>
+                <FilterChip label="1A" />
+                <FilterChip label="2A" active />
+                <FilterChip label="3A" />
+                <FilterChip label="SL" />
+             </div>
+
+             <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Quota</span>
+             <div className="flex-row gap-3 mt-3 mb-5" style={{ overflowX: 'auto', paddingBottom: '4px' }}>
+                <FilterChip label="General" active />
+                <FilterChip label="Tatkal" />
+                <FilterChip label="Ladies" />
+             </div>
+
+             <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Departure Time</span>
+             <div className="flex-row gap-3 mt-3 mb-6" style={{ overflowX: 'auto', paddingBottom: '4px' }}>
+                <FilterChip label="Morning" />
+                <FilterChip label="Afternoon" />
+                <FilterChip label="Evening" active />
+             </div>
+             
+             <button style={{ width: '100%', padding: '16px', borderRadius: '16px', background: 'var(--accent-primary)', color: 'white', border: 'none', fontWeight: 700, fontSize: '1.05rem', boxShadow: '0 8px 16px rgba(75, 126, 255, 0.3)' }} onClick={() => setShowFilters(false)}>
+                Apply Filters
+             </button>
+           </div>
+        </div>
+      )}
     </div>
   );
+}
+
+function FilterChip({ label, active }) {
+   return (
+      <div style={{
+         padding: '10px 20px',
+         borderRadius: '24px',
+         fontSize: '0.9rem',
+         fontWeight: 600,
+         cursor: 'pointer',
+         background: active ? 'var(--accent-primary)' : 'var(--bg-page)',
+         color: active ? 'white' : 'var(--text-primary)',
+         boxShadow: active ? 'inset 2px 2px 5px rgba(0,0,0,0.2)' : 'var(--shadow-raised)',
+         border: active ? 'none' : '1px solid rgba(255,255,255,0.2)',
+         whiteSpace: 'nowrap'
+      }}>
+         {label}
+      </div>
+   );
 }
 
 function DateChip({ day, date, active }) {

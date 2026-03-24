@@ -66,12 +66,20 @@ export default function MyBookingsScreen() {
                 </div>
              </div>
              
-             <button 
-                onClick={() => navigate('/pnr')}
-                style={{ marginTop: '16px', height: '44px', width: '100%', borderRadius: '8px', border: 'none', background: 'var(--bg-page)', boxShadow: 'var(--shadow-raised)', fontWeight: 600, color: 'var(--accent-primary)' }}
-             >
-                Track Live Status
-             </button>
+             <div className="flex-row gap-4 mt-4">
+                <button 
+                   onClick={() => navigate('/pnr')}
+                   style={{ flex: 1, padding: '12px', borderRadius: '8px', border: '1px solid var(--accent-primary)', background: 'transparent', fontWeight: 600, color: 'var(--accent-primary)', cursor: 'pointer' }}
+                >
+                   Track Live
+                </button>
+                <button 
+                   onClick={() => navigate('/cancel')}
+                   style={{ flex: 1, padding: '12px', borderRadius: '8px', border: 'none', background: 'var(--error)', boxShadow: 'var(--shadow-raised)', fontWeight: 600, color: 'white', cursor: 'pointer' }}
+                >
+                   Cancel Ticket
+                </button>
+             </div>
           </div>
         )}
 

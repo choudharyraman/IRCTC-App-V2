@@ -14,6 +14,11 @@ import FoodScreen from './screens/FoodScreen';
 import UtsScreen from './screens/UtsScreen';
 import RailMadadScreen from './screens/RailMadadScreen';
 
+// Checkout and Ticketing
+import PaymentGatewayScreen from './screens/PaymentGatewayScreen';
+import TicketConfirmationScreen from './screens/TicketConfirmationScreen';
+import CancellationScreen from './screens/CancellationScreen';
+
 // New Advanced Login Ecosystem
 import AuthLoginScreen from './screens/AuthLoginScreen';
 import AuthOtpScreen from './screens/AuthOtpScreen';
@@ -54,6 +59,11 @@ function App() {
           <Route path="/food" element={<FoodScreen />} />
           <Route path="/uts" element={<UtsScreen />} />
           <Route path="/madad" element={<RailMadadScreen />} />
+
+          {/* Checkout & Tickets */}
+          <Route path="/payment" element={<PaymentGatewayScreen />} />
+          <Route path="/ticket" element={<TicketConfirmationScreen />} />
+          <Route path="/cancel" element={<CancellationScreen />} />
         </Routes>
       </div>
     </Router>
