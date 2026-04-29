@@ -1,10 +1,22 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
+// Core Screens
 import DashboardScreen from './screens/DashboardScreen';
+import SearchScreen from './screens/SearchScreen';
 import TrainListScreen from './screens/TrainListScreen';
 import BookingScreen from './screens/BookingScreen';
 import PNRStatusScreen from './screens/PNRStatusScreen';
 import LiveTrackingScreen from './screens/LiveTrackingScreen';
+
+// Auth Screens
+import AuthLoginScreen from './screens/AuthLoginScreen';
+import AuthOtpScreen from './screens/AuthOtpScreen';
+import AuthBiometricScreen from './screens/AuthBiometricScreen';
+import AuthMpinScreen from './screens/AuthMpinScreen';
+import AuthRegistrationScreen from './screens/AuthRegistrationScreen';
+import AuthForgotScreen from './screens/AuthForgotScreen';
+import AuthTatkalScreen from './screens/AuthTatkalScreen';
 
 // Super App Modules
 import ProfileScreen from './screens/ProfileScreen';
@@ -15,19 +27,10 @@ import UtsScreen from './screens/UtsScreen';
 import RailMadadScreen from './screens/RailMadadScreen';
 import RechargeScreen from './screens/RechargeScreen';
 
-// Checkout and Ticketing
+// Checkout & Tickets
 import PaymentGatewayScreen from './screens/PaymentGatewayScreen';
 import TicketConfirmationScreen from './screens/TicketConfirmationScreen';
 import CancellationScreen from './screens/CancellationScreen';
-
-// New Advanced Login Ecosystem
-import AuthLoginScreen from './screens/AuthLoginScreen';
-import AuthOtpScreen from './screens/AuthOtpScreen';
-import AuthBiometricScreen from './screens/AuthBiometricScreen';
-import AuthMpinScreen from './screens/AuthMpinScreen';
-import AuthRegistrationScreen from './screens/AuthRegistrationScreen';
-import AuthForgotScreen from './screens/AuthForgotScreen';
-import AuthTatkalScreen from './screens/AuthTatkalScreen';
 
 function App() {
   return (
@@ -37,14 +40,7 @@ function App() {
           {/* Default Route */}
           <Route path="/" element={<Navigate to="/login" replace />} />
           
-          {/* Old routes kept for dashboard flow */}
-          <Route path="/dashboard" element={<DashboardScreen />} />
-          <Route path="/trains" element={<TrainListScreen />} />
-          <Route path="/book" element={<BookingScreen />} />
-          <Route path="/pnr" element={<PNRStatusScreen />} />
-          <Route path="/live" element={<LiveTrackingScreen />} />
-
-          {/* New Auth Ecosystem */}
+          {/* Auth Ecosystem */}
           <Route path="/login" element={<AuthLoginScreen />} />
           <Route path="/otp" element={<AuthOtpScreen />} />
           <Route path="/biometric" element={<AuthBiometricScreen />} />
@@ -52,6 +48,14 @@ function App() {
           <Route path="/register" element={<AuthRegistrationScreen />} />
           <Route path="/forgot" element={<AuthForgotScreen />} />
           <Route path="/tatkal" element={<AuthTatkalScreen />} />
+
+          {/* Core Booking Flow */}
+          <Route path="/dashboard" element={<DashboardScreen />} />
+          <Route path="/search" element={<SearchScreen />} />
+          <Route path="/trains" element={<TrainListScreen />} />
+          <Route path="/book" element={<BookingScreen />} />
+          <Route path="/pnr" element={<PNRStatusScreen />} />
+          <Route path="/live" element={<LiveTrackingScreen />} />
 
           {/* Super App Modules */}
           <Route path="/profile" element={<ProfileScreen />} />

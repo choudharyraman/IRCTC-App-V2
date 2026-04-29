@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function Button({ 
   children, 
@@ -7,108 +7,108 @@ export default function Button({
   loading = false, 
   disabled = false, 
   icon,
-  className,
-  style
+  iconRight,
+  className = '',
+  style = {},
+  size = 'md',
+  fullWidth = true
 }) {
-  const [hovered, setHovered] = useState(false);
-  const [pressed, setPressed] = useState(false);
-  const [success, setSuccess] = useState(false);
-
-  const handleClick = (e) => {
-    if (loading || disabled) return;
-    if (onClick) onClick(e);
+  const sizes = {
+    sm: { height: '40px', fontSize: '13px', padding: '0 16px', borderRadius: 'var(--radius-md)' },
+    md: { height: '52px', fontSize: '15px', padding: '0 24px', borderRadius: 'var(--radius-lg)' },
+    lg: { height: '56px', fontSize: '16px', padding: '0 32px', borderRadius: 'var(--radius-lg)' },
   };
 
-  const getStyle = () => {
-    const base = {
-       transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-       backdropFilter: 'blur(12px)',
-       border: '1px solid transparent',
-       transform: pressed ? 'scale(0.97)' : hovered ? 'scale(1.02)' : 'scale(1)',
-    };
-
-    if (disabled) {
-      return { ...base, background: 'rgba(148, 163, 184, 0.5)', color: '#fff', cursor: 'not-allowed', opacity: 0.6 };
-    }
-
-    if (success) {
-      return { ...base, background: 'var(--success)', color: '#FFFFFF' };
-    }
-
-    if (variant === 'primary') {
-      return {
-        ...base,
-        background: hovered ? 'linear-gradient(135deg, #FFB057, #FFA23A)' : 'var(--accent-saffron)',
-        color: '#FFFFFF',
-        boxShadow: hovered ? '0 8px 24px -6px rgba(255, 153, 51, 0.5)' : '0 4px 12px -4px rgba(255, 153, 51, 0.3)',
-      };
-    }
-    
-    if (variant === 'secondary') {
-       return {
-         ...base,
-         background: 'rgba(255, 255, 255, 0.1)',
-         color: 'var(--text-primary)',
-         border: '1px solid var(--glass-border)',
-         boxShadow: hovered ? '0 8px 24px -6px rgba(0, 0, 0, 0.1)' : 'none',
-       };
-    }
-
-    // Default variant (Glass surface)
-    return {
-      ...base,
-      background: 'var(--glass-bg)',
+  const variants = {
+    primary: {
+      background: 'var(--gradient-primary)',
+      color: '#FFFFFF',
+      border: 'none',
+      boxShadow: '0 4px 20px var(--primary-glow)',
+    },
+    accent: {
+      background: 'var(--gradient-saffron)',
+      color: '#FFFFFF',
+      border: 'none',
+      boxShadow: '0 4px 20px var(--accent-glow)',
+    },
+    secondary: {
+      background: 'var(--bg-card)',
       color: 'var(--text-primary)',
-      border: '1px solid var(--glass-border)',
-      boxShadow: hovered ? '0 8px 24px -8px rgba(0,0,0,0.1)' : '0 4px 12px -4px rgba(0,0,0,0.05)',
-    };
+      border: '1.5px solid var(--border-primary)',
+      backdropFilter: 'blur(16px)',
+      boxShadow: 'var(--shadow-sm)',
+    },
+    outline: {
+      background: 'transparent',
+      color: 'var(--primary)',
+      border: '1.5px solid var(--primary)',
+      boxShadow: 'none',
+    },
+    ghost: {
+      background: 'transparent',
+      color: 'var(--text-secondary)',
+      border: 'none',
+      boxShadow: 'none',
+    },
+    danger: {
+      background: 'linear-gradient(135deg, #EF4444, #DC2626)',
+      color: '#FFFFFF',
+      border: 'none',
+      boxShadow: '0 4px 20px rgba(239,68,68,0.25)',
+    },
+    success: {
+      background: 'var(--gradient-success)',
+      color: '#FFFFFF',
+      border: 'none',
+      boxShadow: '0 4px 20px rgba(16,185,129,0.25)',
+    },
   };
+
+  const sizeStyle = sizes[size] || sizes.md;
+  const variantStyle = variants[variant] || variants.primary;
 
   return (
     <button
       className={className}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); setPressed(false); }}
-      onMouseDown={() => setPressed(true)}
-      onMouseUp={() => setPressed(false)}
-      onTouchStart={() => setPressed(true)}
-      onTouchEnd={() => setPressed(false)}
-      onClick={handleClick}
+      onClick={disabled || loading ? undefined : onClick}
       disabled={disabled || loading}
       style={{
-        height: '56px',
-        width: '100%',
-        borderRadius: '14px',
-        fontSize: '16px',
-        fontWeight: 600,
-        fontFamily: 'Inter',
+        width: fullWidth ? '100%' : 'auto',
+        fontFamily: "'Inter', sans-serif",
+        fontWeight: 650,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         gap: '8px',
-        cursor: (disabled || loading) ? 'not-allowed' : 'pointer',
-        ...getStyle(),
-        ...style
+        cursor: disabled || loading ? 'not-allowed' : 'pointer',
+        opacity: disabled ? 0.5 : 1,
+        transition: 'all var(--duration-fast) var(--ease-smooth)',
+        letterSpacing: '0.01em',
+        ...sizeStyle,
+        ...variantStyle,
+        ...(disabled ? { filter: 'grayscale(0.5)' } : {}),
+        ...style,
       }}
+      onMouseDown={e => { if (!disabled) e.currentTarget.style.transform = 'scale(0.97)'; }}
+      onMouseUp={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+      onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+      onTouchStart={e => { if (!disabled) e.currentTarget.style.transform = 'scale(0.97)'; }}
+      onTouchEnd={e => { e.currentTarget.style.transform = 'scale(1)'; }}
     >
       {loading ? (
-        <span className="spinner" style={{
-           display: 'inline-block', width: '20px', height: '20px', 
-           border: '3px solid rgba(255,255,255,0.3)', borderTopColor: '#FFF', 
-           borderRadius: '50%', animation: 'spin 0.8s linear infinite'
-        }}></span>
-      ) : icon ? (
-        <>
-          {icon}
-          {children}
-        </>
+        <span style={{
+          display: 'inline-block', width: '20px', height: '20px',
+          border: '2.5px solid rgba(255,255,255,0.3)', borderTopColor: '#FFF',
+          borderRadius: '50%', animation: 'spin 0.7s linear infinite'
+        }} />
       ) : (
-        children
+        <>
+          {icon && <span style={{ display: 'flex', flexShrink: 0 }}>{icon}</span>}
+          <span>{children}</span>
+          {iconRight && <span style={{ display: 'flex', flexShrink: 0 }}>{iconRight}</span>}
+        </>
       )}
-      
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-      `}} />
     </button>
   );
 }

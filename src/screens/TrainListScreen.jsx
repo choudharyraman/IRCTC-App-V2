@@ -1,208 +1,120 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Card from '../components/Card';
-import { ArrowLeft, SlidersHorizontal } from 'lucide-react';
+import { ArrowLeft, SlidersHorizontal, X, Train } from 'lucide-react';
+import Button from '../components/Button';
+
+const TRAINS = [
+  { id:'12951',name:'Mumbai Rajdhani',type:'Rajdhani',from:'MMCT',to:'NDLS',dep:'17:00',arr:'08:32',dur:'15h 32m',days:'Daily',
+    classes:[{type:'3A',st:'AVL',s:42,p:2735,c:'var(--success)'},{type:'2A',st:'WL',s:-12,p:3825,c:'var(--warning)'},{type:'1A',st:'RAC',s:4,p:4765,c:'var(--accent)'}]},
+  { id:'12903',name:'Golden Temple Mail',type:'SF Express',from:'MMCT',to:'NDLS',dep:'21:25',arr:'13:50',dur:'16h 25m',days:'Daily',
+    classes:[{type:'SL',st:'AVL',s:104,p:670,c:'var(--success)'},{type:'3A',st:'AVL',s:18,p:1765,c:'var(--success)'},{type:'2A',st:'WL',s:-45,p:2530,c:'var(--warning)'}]},
+  { id:'12953',name:'August Kranti Raj',type:'Rajdhani',from:'MMCT',to:'NDLS',dep:'17:35',arr:'10:55',dur:'17h 20m',days:'Mon,Wed,Fri',
+    classes:[{type:'3A',st:'AVL',s:8,p:2735,c:'var(--success)'},{type:'2A',st:'AVL',s:3,p:3825,c:'var(--success)'}]},
+  { id:'22209',name:'Duronto Express',type:'Duronto',from:'MMCT',to:'NDLS',dep:'23:05',arr:'16:20',dur:'17h 15m',days:'Tue,Thu,Sat',
+    classes:[{type:'SL',st:'AVL',s:56,p:790,c:'var(--success)'},{type:'3A',st:'RAC',s:2,p:1990,c:'var(--accent)'}]},
+];
+
+const DATES = [{day:'Today',date:'29 Apr',k:'d0'},{day:'Tomorrow',date:'30 Apr',k:'d1'},{day:'Thu',date:'1 May',k:'d2'},{day:'Fri',date:'2 May',k:'d3'},{day:'Sat',date:'3 May',k:'d4'}];
 
 export default function TrainListScreen() {
-  const navigate = useNavigate();
-  const [showFilters, setShowFilters] = useState(false);
-
-  const handleBack = () => {
-    navigate('/dashboard');
-  };
-
-  const dummyTrains = [
-    {
-      id: "12951",
-      name: "MUMBAI RAJDHANI",
-      startsAt: "17:00",
-      endsAt: "08:32",
-      duration: "15h 32m",
-      classes: [
-        { type: "3A", status: "AVAILABLE 42", color: "var(--accent-green)", price: "₹2,735" },
-        { type: "2A", status: "WL 12", color: "var(--accent-saffron)", price: "₹3,825" },
-        { type: "1A", status: "RAC 4", color: "var(--accent-saffron)", price: "₹4,765" }
-      ]
-    },
-    {
-      id: "12903",
-      name: "GOLDEN TEMPLE M",
-      startsAt: "21:25",
-      endsAt: "13:50",
-      duration: "16h 25m",
-      classes: [
-        { type: "SL", status: "AVAILABLE 104", color: "var(--accent-green)", price: "₹670" },
-        { type: "3A", status: "AVAILABLE 18", color: "var(--accent-green)", price: "₹1,765" },
-        { type: "2A", status: "WL 45", color: "var(--accent-saffron)", price: "₹2,530" }
-      ]
-    }
-  ];
+  const nav = useNavigate();
+  const [filters, setFilters] = useState(false);
+  const [dateKey, setDateKey] = useState('d1');
+  const [sortBy, setSortBy] = useState('departure');
 
   return (
-    <div className="screen-wrapper" style={{ paddingBottom: '2rem' }}>
-      
-      {/* Sticky Header */}
-      <div style={{
-        position: 'sticky', top: 0, zIndex: 50,
-        background: 'var(--glass-bg)', backdropFilter: 'blur(12px)',
-        padding: '1.5rem 1rem 1rem 1rem',
-        boxShadow: '0 4px 12px rgba(184, 197, 214, 0.3)',
-        borderBottom: '1px solid rgba(255,255,255,0.4)'
-      }}>
-        <div className="flex-row justify-between items-center mb-4">
-          <div className="flex-row items-center gap-4">
-            <button className="neuro-card" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none' }} onClick={handleBack}>
-              <ArrowLeft size={20} className="text-navy" />
-            </button>
-            <div className="flex-col">
-              <h2 style={{ fontSize: '1.1rem', margin: 0, fontWeight: 700 }}>Mumbai ↔ New Delhi</h2>
-              <span className="text-light" style={{ fontSize: '0.8rem' }}>24 Mar, Tomorrow</span>
-            </div>
+    <div className="screen-wrapper" style={{ paddingBottom: '24px', padding: 0 }}>
+      <div style={{ position:'sticky',top:0,zIndex:50,background:'var(--bg-primary)',borderBottom:'1px solid var(--border-primary)',padding:'16px 16px 0' }}>
+        <div className="flex-row items-center justify-between mb-4">
+          <div className="flex-row items-center gap-3">
+            <button onClick={()=>nav('/dashboard')} className="icon-btn"><ArrowLeft size={20}/></button>
+            <div><h2 style={{fontSize:'16px',margin:0,fontWeight:700}}>Mumbai → New Delhi</h2><span style={{fontSize:'11px',color:'var(--text-tertiary)'}}>3A • General Quota</span></div>
           </div>
-          <button className="neuro-card" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowFilters(true)}>
-            <SlidersHorizontal size={20} color="var(--accent-primary)" />
-          </button>
+          <button onClick={()=>setFilters(true)} className="icon-btn"><SlidersHorizontal size={18} color="var(--primary)"/></button>
         </div>
-
-        {/* Date Scroller */}
-        <div className="flex-row gap-4" style={{ overflowX: 'auto', paddingBottom: '0.5rem', whiteSpace: 'nowrap', msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
-           <DateChip day="Today" date="23 Mar" />
-           <DateChip day="Tomorrow" date="24 Mar" active />
-           <DateChip day="Monday" date="25 Mar" />
-           <DateChip day="Tuesday" date="26 Mar" />
+        <div className="flex-row gap-2 hide-scrollbar" style={{overflowX:'auto',paddingBottom:'12px'}}>
+          {DATES.map(d=>(
+            <div key={d.k} onClick={()=>setDateKey(d.k)} style={{minWidth:'72px',padding:'8px 12px',borderRadius:'var(--radius-md)',display:'flex',flexDirection:'column',alignItems:'center',gap:'2px',cursor:'pointer',flexShrink:0,background:dateKey===d.k?'var(--primary)':'transparent',color:dateKey===d.k?'#FFF':'var(--text-secondary)',transition:'all 150ms',border:dateKey===d.k?'none':'1px solid var(--border-subtle)'}}>
+              <span style={{fontSize:'10px',fontWeight:600,opacity:0.8}}>{d.day}</span>
+              <span style={{fontSize:'13px',fontWeight:700}}>{d.date}</span>
+            </div>
+          ))}
+        </div>
+        <div className="flex-row gap-2 hide-scrollbar" style={{overflowX:'auto',paddingBottom:'12px'}}>
+          {['departure','duration','price','availability'].map(s=>(
+            <div key={s} onClick={()=>setSortBy(s)} style={{padding:'6px 14px',borderRadius:'var(--radius-full)',fontSize:'11px',fontWeight:sortBy===s?650:500,cursor:'pointer',whiteSpace:'nowrap',flexShrink:0,background:sortBy===s?'var(--primary-glow)':'transparent',color:sortBy===s?'var(--primary)':'var(--text-tertiary)',border:`1px solid ${sortBy===s?'var(--primary)':'var(--border-subtle)'}`,textTransform:'capitalize'}}>{s}</div>
+          ))}
         </div>
       </div>
 
-      {/* Train List */}
-      <div className="flex-col gap-4" style={{ padding: '1rem' }}>
-        {dummyTrains.map(train => (
-          <TrainCard key={train.id} train={train} />
-        ))}
+      <div style={{padding:'12px 16px 0'}}><span style={{fontSize:'12px',color:'var(--text-tertiary)'}}>{TRAINS.length} trains found</span></div>
+
+      <div className="flex-col gap-3 stagger" style={{padding:'12px 16px'}}>
+        {TRAINS.map(t=><TCard key={t.id} t={t} nav={nav}/>)}
       </div>
 
-      {/* Filter Modal */}
-      {showFilters && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center' }}>
-           <div className="neuro-card" style={{ width: '100%', maxWidth: '640px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '24px', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', position: 'relative' }}>
-             <div className="flex-row justify-between items-center mb-6">
-               <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 700 }}>Filter Trains</h3>
-               <span style={{ fontWeight: 600, color: 'var(--text-secondary)', cursor: 'pointer' }} onClick={() => setShowFilters(false)}>Close</span>
-             </div>
-             
-             <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Class Options</span>
-             <div className="flex-row gap-3 mt-3 mb-5" style={{ overflowX: 'auto', paddingBottom: '4px' }}>
-                <FilterChip label="1A" />
-                <FilterChip label="2A" active />
-                <FilterChip label="3A" />
-                <FilterChip label="SL" />
-             </div>
-
-             <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Quota</span>
-             <div className="flex-row gap-3 mt-3 mb-5" style={{ overflowX: 'auto', paddingBottom: '4px' }}>
-                <FilterChip label="General" active />
-                <FilterChip label="Tatkal" />
-                <FilterChip label="Ladies" />
-             </div>
-
-             <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Departure Time</span>
-             <div className="flex-row gap-3 mt-3 mb-6" style={{ overflowX: 'auto', paddingBottom: '4px' }}>
-                <FilterChip label="Morning" />
-                <FilterChip label="Afternoon" />
-                <FilterChip label="Evening" active />
-             </div>
-             
-             <button style={{ width: '100%', padding: '16px', borderRadius: '16px', background: 'var(--accent-primary)', color: 'white', border: 'none', fontWeight: 700, fontSize: '1.05rem', boxShadow: '0 8px 32px rgba(75, 126, 255, 0.3)' }} onClick={() => setShowFilters(false)}>
-                Apply Filters
-             </button>
-           </div>
+      {filters&&(
+        <div style={{position:'fixed',inset:0,background:'var(--bg-overlay)',zIndex:1000,display:'flex',flexDirection:'column',justifyContent:'flex-end',alignItems:'center',animation:'fadeIn 0.2s'}} onClick={()=>setFilters(false)}>
+          <div onClick={e=>e.stopPropagation()} style={{width:'100%',maxWidth:'480px',background:'var(--bg-primary)',borderRadius:'var(--radius-2xl) var(--radius-2xl) 0 0',padding:'24px',maxHeight:'75vh',overflowY:'auto',animation:'slideUp 0.3s var(--ease-spring)'}}>
+            <div className="flex-row items-center justify-between mb-6">
+              <h3 style={{fontSize:'18px',fontWeight:700,margin:0}}>Filters</h3>
+              <button onClick={()=>setFilters(false)} className="icon-btn"><X size={18}/></button>
+            </div>
+            {[{l:'Class',items:['1A','2A','3A','3E','SL','CC'],a:'3A'},{l:'Quota',items:['General','Tatkal','Ladies'],a:'General'},{l:'Departure',items:['Morning','Afternoon','Evening','Night'],a:'Evening'},{l:'Type',items:['Rajdhani','Shatabdi','Duronto','Superfast'],a:null}].map(section=>(
+              <div key={section.l} className="mb-5">
+                <span style={{fontSize:'13px',fontWeight:600,color:'var(--text-secondary)',marginBottom:'12px',display:'block'}}>{section.l}</span>
+                <div className="flex-row flex-wrap gap-2">
+                  {section.items.map(i=><div key={i} className={`chip ${i===section.a?'active':''}`}>{i}</div>)}
+                </div>
+              </div>
+            ))}
+            <Button variant="primary" onClick={()=>setFilters(false)}>Apply Filters</Button>
+          </div>
         </div>
       )}
     </div>
   );
 }
 
-function FilterChip({ label, active }) {
-   return (
-      <div style={{
-         padding: '10px 20px',
-         borderRadius: '24px',
-         fontSize: '0.9rem',
-         fontWeight: 600,
-         cursor: 'pointer',
-         background: active ? 'var(--accent-primary)' : 'var(--bg-page)',
-         color: active ? 'white' : 'var(--text-primary)',
-         boxShadow: active ? 'inset 0 2px 8px rgba(0,0,0,0.1)' : 'var(--glass-shadow)',
-         border: active ? 'none' : '1px solid rgba(255,255,255,0.2)',
-         whiteSpace: 'nowrap'
-      }}>
-         {label}
-      </div>
-   );
-}
-
-function DateChip({ day, date, active }) {
-  return (
-    <div className="flex-col items-center justify-center" style={{
-      minWidth: '70px',
-      padding: '0.5rem',
-      borderRadius: 'var(--radius-sm)',
-      boxShadow: active ? 'inset 0 2px 8px rgba(0,0,0,0.1)' : 'var(--glass-shadow)',
-      background: active ? 'transparent' : 'var(--bg-color)',
-      color: active ? 'var(--text-dark)' : 'var(--text-light)',
-      border: '1px solid rgba(255,255,255,0.2)'
-    }}>
-      <span style={{ fontSize: '0.7rem', fontWeight: 600 }}>{day}</span>
-      <span style={{ fontSize: '0.85rem', fontWeight: active ? 700 : 500 }}>{date}</span>
-    </div>
-  );
-}
-
-function TrainCard({ train }) {
-  return (
-    <Card style={{ padding: '1.25rem' }}>
-      <div className="flex-row justify-between items-center mb-2">
-        <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>{train.name}</h3>
-        <span className="text-light" style={{ fontSize: '0.85rem', fontWeight: 600 }}>#{train.id}</span>
-      </div>
-      
-      <div className="flex-row justify-between items-center mb-4">
-        <div className="flex-col">
-          <span style={{ fontSize: '1.2rem', fontWeight: 700 }}>{train.startsAt}</span>
-          <span className="text-light" style={{ fontSize: '0.75rem' }}>MMCT</span>
+function TCard({t,nav}){
+  const stLabel=(cls)=>cls.st==='AVL'?`AVL ${cls.s}`:cls.st==='RAC'?`RAC ${cls.s}`:`WL ${Math.abs(cls.s)}`;
+  return(
+    <div className="glass-card" style={{padding:0,overflow:'hidden'}}>
+      <div style={{padding:'16px 16px 12px'}}>
+        <div className="flex-row items-center justify-between mb-1">
+          <div className="flex-row items-center gap-2">
+            <span style={{fontSize:'14px',fontWeight:700}}>{t.name}</span>
+            <span className="badge badge-info" style={{fontSize:'9px'}}>{t.type}</span>
+          </div>
+          <span style={{fontSize:'11px',color:'var(--text-tertiary)',fontWeight:600}}>#{t.id}</span>
         </div>
-        <div className="flex-col items-center">
-           <span style={{ fontSize: '0.75rem', color: 'var(--text-light)' }}>{train.duration}</span>
-           <div style={{ width: '60px', height: '2px', background: 'rgba(0,0,128,0.2)', margin: '4px 0' }}></div>
-        </div>
-        <div className="flex-col items-end">
-          <span style={{ fontSize: '1.2rem', fontWeight: 700 }}>{train.endsAt}</span>
-          <span className="text-light" style={{ fontSize: '0.75rem' }}>NDLS</span>
+        <span style={{fontSize:'10px',color:'var(--text-tertiary)'}}>Runs: {t.days}</span>
+      </div>
+      <div style={{padding:'0 16px 16px'}}>
+        <div className="flex-row items-center">
+          <div style={{minWidth:'60px'}}><span style={{fontSize:'20px',fontWeight:800,fontFamily:"'Outfit'"}}>{t.dep}</span><br/><span style={{fontSize:'11px',color:'var(--text-tertiary)'}}>{t.from}</span></div>
+          <div className="flex-col items-center flex-1" style={{padding:'0 8px'}}>
+            <span style={{fontSize:'10px',color:'var(--text-tertiary)'}}>{t.dur}</span>
+            <div style={{width:'100%',height:'1px',background:'var(--border-primary)',margin:'6px 0',position:'relative'}}>
+              <div style={{position:'absolute',left:'50%',top:'-4px',transform:'translateX(-50%)',width:'8px',height:'8px',borderRadius:'50%',border:'2px solid var(--primary)',background:'var(--bg-primary)'}}/>
+            </div>
+          </div>
+          <div style={{minWidth:'60px',textAlign:'right'}}><span style={{fontSize:'20px',fontWeight:800,fontFamily:"'Outfit'"}}>{t.arr}</span><br/><span style={{fontSize:'11px',color:'var(--text-tertiary)'}}>{t.to}</span></div>
         </div>
       </div>
-
-      <div className="flex-row gap-2" style={{ overflowX: 'auto', paddingBottom: '0.5rem', scrollbarWidth: 'none' }}>
-        {train.classes.map((cls, idx) => (
-          <div key={idx} 
-            onClick={() => window.location.href='/book'}
-            style={{
-            minWidth: '100px',
-            padding: '0.75rem',
-            borderRadius: 'var(--radius-sm)',
-            boxShadow: 'var(--glass-shadow)',
-            background: 'var(--glass-bg)', backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255,255,255,0.2)',
-            display: 'flex',
-            flexDirection: 'column',
-            cursor: 'pointer'
-          }}>
-             <div className="flex-row justify-between mb-1">
-               <span style={{ fontSize: '0.9rem', fontWeight: 700 }}>{cls.type}</span>
-               <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>{cls.price}</span>
-             </div>
-             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: cls.color }}>{cls.status}</span>
+      <div style={{padding:'12px 16px',borderTop:'1px solid var(--border-subtle)',display:'flex',gap:'8px',overflowX:'auto'}} className="hide-scrollbar">
+        {t.classes.map((cls,i)=>(
+          <div key={i} onClick={()=>nav('/book')} style={{minWidth:'110px',padding:'10px 14px',borderRadius:'var(--radius-md)',background:'var(--bg-input)',border:'1px solid var(--border-subtle)',cursor:'pointer',flexShrink:0,transition:'all 150ms'}}
+            onMouseOver={e=>{e.currentTarget.style.borderColor='var(--primary)';e.currentTarget.style.background='var(--primary-glow)'}}
+            onMouseOut={e=>{e.currentTarget.style.borderColor='var(--border-subtle)';e.currentTarget.style.background='var(--bg-input)'}}>
+            <div className="flex-row items-center justify-between mb-1">
+              <span style={{fontSize:'14px',fontWeight:700}}>{cls.type}</span>
+              <span style={{fontSize:'13px',fontWeight:700}}>₹{cls.p.toLocaleString()}</span>
+            </div>
+            <span style={{fontSize:'11px',fontWeight:650,color:cls.c}}>{stLabel(cls)}</span>
           </div>
         ))}
       </div>
-    </Card>
+    </div>
   );
 }

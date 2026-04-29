@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  MapPin, Calendar, Clock, Utensils, AlertTriangle, 
-  CreditCard, Search, ArrowRight, Train, Zap, Shield, Moon, Sun, Ticket
+  MapPin, Calendar, Utensils, AlertTriangle, CreditCard, Search, 
+  ArrowRight, Train, Shield, Moon, Sun, Ticket, Bell, ChevronRight,
+  Wallet, ArrowUpDown, Clock, Sparkles, Zap, Star, TrendingUp,
+  Navigation, FileText, Smartphone
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import BottomNav from '../components/BottomNav';
 
 export default function DashboardScreen() {
   const navigate = useNavigate();
-  const [theme, setTheme] = useState(document.body.getAttribute('data-theme') || 'dark'); // Default deep slate
-
-  // The reference UI implies a permanent OLED/Slate background
-  // If light mode is toggled, we can fallback to a soft ivory, but dark mode is identical to the target image
+  const [theme, setTheme] = useState(document.body.getAttribute('data-theme') || 'dark');
   const isDark = theme === 'dark';
 
   const toggleTheme = () => {
@@ -24,170 +23,323 @@ export default function DashboardScreen() {
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
 
-  // Pastel Color Palette from Reference Image
-  const colors = {
-    yellow: '#FDE047',  // Progress (Book Ticket)
-    orange: '#FB923C',  // Time (PNR Status)
-    green: '#86EFAC',   // Streak (Live Tracking)
-    purple: '#D8B4FE',  // Level (R-Wallet)
-    blue: '#93C5FD',    // Badges (Food)
-    pink: '#F9A8D4',    // Rail Madad
-    slate: isDark ? '#2A2D3E' : '#FFFFFF',  // Secondary / Leaderboard block
-    bg: isDark ? '#1C1C24' : '#F8FAFC'      // Base canvas
-  };
+  // Promotional banners
+  const promos = [
+    { title: 'Tatkal Bookings', subtitle: 'Book faster with auto-fill', gradient: 'linear-gradient(135deg, #FF6B35, #F7931A)', icon: Zap },
+    { title: 'Travel Insurance', subtitle: 'Protect your journey for ₹35', gradient: 'linear-gradient(135deg, #10B981, #059669)', icon: Shield },
+    { title: 'Refer & Earn', subtitle: 'Get ₹100 for each referral', gradient: 'linear-gradient(135deg, #8B5CF6, #6366F1)', icon: Star },
+  ];
 
-  // Text colors inside pastel boxes must be intense Dark Slate/Black
-  const darkText = '#020617';
+  const [promoIndex, setPromoIndex] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => setPromoIndex(i => (i + 1) % promos.length), 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Quick Actions grid
+  const quickActions = [
+    { icon: Search, label: 'PNR Status', color: '#F59E0B', bg: 'rgba(245,158,11,0.12)', path: '/pnr' },
+    { icon: Navigation, label: 'Live Track', color: '#10B981', bg: 'rgba(16,185,129,0.12)', path: '/live' },
+    { icon: Utensils, label: 'Food', color: '#EF4444', bg: 'rgba(239,68,68,0.12)', path: '/food' },
+    { icon: CreditCard, label: 'R-Wallet', color: '#8B5CF6', bg: 'rgba(139,92,246,0.12)', path: '/wallet' },
+    { icon: AlertTriangle, label: 'Rail Madad', color: '#F43F5E', bg: 'rgba(244,63,94,0.12)', path: '/madad' },
+    { icon: Shield, label: 'UTS', color: '#3B82F6', bg: 'rgba(59,130,246,0.12)', path: '/uts' },
+    { icon: Smartphone, label: 'Recharge', color: '#06B6D4', bg: 'rgba(6,182,212,0.12)', path: '/recharge' },
+    { icon: FileText, label: 'Bookings', color: '#6366F1', bg: 'rgba(99,102,241,0.12)', path: '/bookings' },
+  ];
 
   return (
-    <div className="screen-wrapper" style={{ 
-       paddingBottom: '100px', 
-       background: colors.bg, 
-       minHeight: '100vh',
-       transition: 'background 0.3s ease'
-    }}>
-      
-      {/* Header Profile & Theme Toggle */}
-      <div className="flex-row items-center justify-between" style={{ 
-          position: 'sticky', 
-          top: 0, 
-          zIndex: 50, 
-          background: colors.bg, 
-          padding: '16px 24px', 
-          margin: '-32px -24px 24px -24px', // Offset .screen-wrapper padding
-          boxShadow: isDark ? '0 8px 24px rgba(0,0,0,0.5)' : '0 8px 24px rgba(0,0,0,0.05)'
-      }}>
+    <div className="screen-wrapper" style={{ paddingBottom: '90px' }}>
+
+      {/* ─── HEADER ─────────────────────────────────────── */}
+      <div className="flex-row items-center justify-between mb-6" style={{ animation: 'slideDown 0.4s var(--ease-spring)' }}>
         <div className="flex-row items-center gap-3">
-          <div style={{ width: '48px', height: '48px', borderRadius: '50%', overflow: 'hidden', border: `2px solid ${colors.slate}` }}>
-            <img src="https://i.pravatar.cc/150?img=11" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div style={{ 
+            width: '44px', height: '44px', borderRadius: '50%', overflow: 'hidden', 
+            border: '2px solid var(--primary)', padding: '2px',
+            boxShadow: '0 0 20px var(--primary-glow)',
+          }}>
+            <img src="https://i.pravatar.cc/150?img=11" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
           </div>
           <div className="flex-col">
-            <span style={{ fontSize: '12px', color: isDark ? '#94A3B8' : '#64748B', fontWeight: 600 }}>Welcome back,</span>
-            <h2 style={{ fontSize: '18px', margin: 0, fontWeight: 700, color: isDark ? '#F8FAFC' : '#0F172A' }}>Arjun Sharma</h2>
+            <span style={{ fontSize: '11px', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Welcome back</span>
+            <h2 style={{ fontSize: '17px', margin: 0, fontWeight: 700 }}>Arjun Sharma</h2>
           </div>
         </div>
         
-        <button onClick={toggleTheme} style={{ width: '40px', height: '40px', borderRadius: '50%', background: colors.slate, display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', cursor: 'pointer', transition: 'transform 0.2s', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}>
-           {isDark ? <Sun size={18} color="#FDE047" /> : <Moon size={18} color="#0F172A" />}
-        </button>
+        <div className="flex-row items-center gap-2">
+          <button onClick={() => {}} className="icon-btn" style={{ position: 'relative' }}>
+            <Bell size={20} />
+            <span style={{ position: 'absolute', top: '8px', right: '8px', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--error)', border: '2px solid var(--bg-primary)' }} />
+          </button>
+          <button onClick={toggleTheme} className="icon-btn">
+            {isDark ? <Sun size={20} color="#FCD34D" /> : <Moon size={20} />}
+          </button>
+        </div>
       </div>
 
-      {/* Primary Hero Interaction - Bright Yellow */}
+      {/* ─── HERO SEARCH CARD ───────────────────────────── */}
       <div 
-         className="cursor-pointer" 
-         onClick={() => navigate('/train-list')}
-         style={{ 
-            background: colors.yellow, 
-            borderRadius: '28px', 
-            padding: '24px', 
-            marginBottom: '16px',
-            boxShadow: '0 8px 24px rgba(253, 224, 71, 0.2)',
-            transform: 'scale(1)',
-            transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
-         }}
-         onMouseOver={e => e.currentTarget.style.transform = 'scale(0.98)'}
-         onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+        onClick={() => navigate('/search')}
+        className="glass-card-interactive"
+        style={{ 
+          background: 'var(--gradient-primary)', 
+          borderRadius: 'var(--radius-2xl)', 
+          padding: '24px',
+          marginBottom: '20px',
+          border: 'none',
+          cursor: 'pointer',
+          position: 'relative',
+          overflow: 'hidden',
+          boxShadow: '0 8px 32px var(--primary-glow)',
+          transition: 'transform var(--duration-fast) var(--ease-spring)',
+        }}
+        onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
+        onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
       >
-         <div className="flex-row items-center justify-between mb-4">
-            <span style={{ fontSize: '11px', fontWeight: 800, color: darkText, letterSpacing: '1px', textTransform: 'uppercase' }}>Ticketing</span>
-            <div style={{ background: 'rgba(0,0,0,0.05)', padding: '8px', borderRadius: '50%' }}>
-               <ArrowRight size={18} color={darkText} />
-            </div>
-         </div>
+        {/* Decorative circles */}
+        <div style={{ position: 'absolute', right: '-30px', top: '-30px', width: '120px', height: '120px', borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
+        <div style={{ position: 'absolute', right: '40px', bottom: '-20px', width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)' }} />
+        
+        <div className="flex-row items-center justify-between mb-3" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="flex-row items-center gap-2">
+            <Train size={20} color="#FFF" />
+            <span style={{ fontSize: '12px', fontWeight: 700, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase', letterSpacing: '1px' }}>Book Tickets</span>
+          </div>
+          <div style={{ 
+            background: 'rgba(255,255,255,0.15)', padding: '6px 12px', borderRadius: 'var(--radius-full)',
+            fontSize: '11px', fontWeight: 600, color: '#FFF',
+          }}>
+            <Sparkles size={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+            10,000+ Routes
+          </div>
+        </div>
 
-         <div className="flex-row items-end justify-between">
-            <div>
-               <div className="flex-row items-center gap-3 mb-2">
-                  <Ticket size={28} color={darkText} />
-                  <h2 style={{ color: darkText, fontSize: '36px', fontWeight: 800, margin: 0, lineHeight: 1 }}>Book</h2>
-               </div>
-               <span style={{ color: darkText, fontSize: '13px', fontWeight: 600, opacity: 0.8 }}>Over 10,000 active routes</span>
+        {/* Search Preview */}
+        <div style={{ 
+          background: 'rgba(255,255,255,0.12)', borderRadius: 'var(--radius-lg)', 
+          padding: '16px', position: 'relative', zIndex: 1, backdropFilter: 'blur(8px)',
+        }}>
+          <div className="flex-row items-center gap-3">
+            <div style={{ flex: 1 }}>
+              <div className="flex-row items-center gap-2 mb-2">
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FCD34D' }} />
+                <span style={{ fontSize: '15px', fontWeight: 600, color: '#FFF' }}>Where from?</span>
+              </div>
+              <div className="flex-row items-center gap-2">
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#34D399' }} />
+                <span style={{ fontSize: '15px', fontWeight: 600, color: '#FFF' }}>Where to?</span>
+              </div>
             </div>
-         </div>
+            <div style={{
+              width: '44px', height: '44px', borderRadius: '50%',
+              background: 'rgba(255,255,255,0.2)', display: 'flex',
+              alignItems: 'center', justifyContent: 'center',
+            }}>
+              <Search size={20} color="#FFF" />
+            </div>
+          </div>
+        </div>
       </div>
 
-      <h3 style={{ fontSize: '18px', marginBottom: '16px', fontWeight: 700, color: isDark ? '#F8FAFC' : '#0F172A', marginTop: '8px' }}>RailOne Analytics</h3>
-      
-      {/* 2x2 Bento Matrix Exactly matching the reference layout constraints */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', width: '100%', marginBottom: '16px' }}>
-         
-         {/* Live Tracking - Green Box (Streak equivalence) */}
-         <div className="cursor-pointer" onClick={() => navigate('/live')} style={{ background: colors.green, borderRadius: '24px', padding: '20px', display: 'flex', flexDirection: 'column', height: '140px' }}>
-            <div className="flex-row justify-between mb-1">
-               <span style={{ fontSize: '11px', fontWeight: 800, color: darkText, letterSpacing: '0.5px', textTransform: 'uppercase' }}>Tracking</span>
-               <MapPin size={16} color={darkText} />
-            </div>
-            <h3 style={{ fontSize: '28px', fontWeight: 800, color: darkText, margin: '8px 0', lineHeight: 1 }}>Live</h3>
-            <p style={{ fontSize: '11px', color: darkText, fontWeight: 600, opacity: 0.8, lineHeight: 1.3, marginTop: 'auto' }}>GPS radar & smart alarms active</p>
-         </div>
-
-         {/* PNR Status - Orange Box (Time equivalence) */}
-         <div className="cursor-pointer" onClick={() => navigate('/pnr')} style={{ background: colors.orange, borderRadius: '24px', padding: '20px', display: 'flex', flexDirection: 'column', height: '140px' }}>
-            <div className="flex-row justify-between mb-1">
-               <span style={{ fontSize: '11px', fontWeight: 800, color: darkText, letterSpacing: '0.5px', textTransform: 'uppercase' }}>Prediction</span>
-               <Search size={16} color={darkText} />
-            </div>
-            <h3 style={{ fontSize: '28px', fontWeight: 800, color: darkText, margin: '8px 0', lineHeight: 1 }}>PNR</h3>
-            <p style={{ fontSize: '11px', color: darkText, fontWeight: 600, opacity: 0.8, lineHeight: 1.3, marginTop: 'auto' }}>AI validation & alternatives</p>
-         </div>
-
-         {/* R-Wallet - Purple Box (Level equivalence) */}
-         <div className="cursor-pointer" onClick={() => navigate('/wallet')} style={{ background: colors.purple, borderRadius: '24px', padding: '20px', display: 'flex', flexDirection: 'column', height: '140px' }}>
-            <div className="flex-row justify-between mb-1">
-               <span style={{ fontSize: '11px', fontWeight: 800, color: darkText, letterSpacing: '0.5px', textTransform: 'uppercase' }}>Balance</span>
-               <CreditCard size={16} color={darkText} />
-            </div>
-            <h3 style={{ fontSize: '24px', fontWeight: 800, color: darkText, margin: '8px 0', lineHeight: 1 }}>₹4,500</h3>
-            <p style={{ fontSize: '11px', color: darkText, fontWeight: 600, opacity: 0.8, lineHeight: 1.3, marginTop: 'auto' }}>Zero fee deductions</p>
-         </div>
-
-         {/* Food - Blue Box (Badges equivalence) */}
-         <div className="cursor-pointer" onClick={() => navigate('/food')} style={{ background: colors.blue, borderRadius: '24px', padding: '20px', display: 'flex', flexDirection: 'column', height: '140px' }}>
-            <div className="flex-row justify-between mb-1">
-               <span style={{ fontSize: '11px', fontWeight: 800, color: darkText, letterSpacing: '0.5px', textTransform: 'uppercase' }}>Catering</span>
-               <Utensils size={16} color={darkText} />
-            </div>
-            <h3 style={{ fontSize: '24px', fontWeight: 800, color: darkText, margin: '8px 0', lineHeight: 1 }}>Orders</h3>
-            <div className="flex-row gap-2" style={{ marginTop: 'auto' }}>
-               <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🍕</div>
-               <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>☕</div>
-            </div>
-         </div>
+      {/* ─── QUICK ACTIONS ──────────────────────────────── */}
+      <div className="mb-6">
+        <div className="flex-row items-center justify-between mb-4">
+          <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0 }}>Quick Actions</h3>
+          <span style={{ fontSize: '12px', color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}>View All</span>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }} className="stagger">
+          {quickActions.map((action, i) => {
+            const Icon = action.icon;
+            return (
+              <div 
+                key={i}
+                onClick={() => navigate(action.path)}
+                style={{ 
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px',
+                  cursor: 'pointer', padding: '12px 4px',
+                  transition: 'transform var(--duration-fast)',
+                }}
+                onMouseDown={e => e.currentTarget.style.transform = 'scale(0.92)'}
+                onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                <div style={{
+                  width: '48px', height: '48px', borderRadius: 'var(--radius-lg)',
+                  background: action.bg, display: 'flex',
+                  alignItems: 'center', justifyContent: 'center',
+                  transition: 'all var(--duration-fast)',
+                }}>
+                  <Icon size={22} color={action.color} strokeWidth={1.8} />
+                </div>
+                <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-secondary)', textAlign: 'center', lineHeight: '1.2' }}>
+                  {action.label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Secondary Actions - Stacked Dark Slates */}
+      {/* ─── PROMO BANNER ───────────────────────────────── */}
+      <div style={{ marginBottom: '24px' }}>
+        <div 
+          style={{
+            background: promos[promoIndex].gradient,
+            borderRadius: 'var(--radius-xl)',
+            padding: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '16px',
+            cursor: 'pointer',
+            position: 'relative',
+            overflow: 'hidden',
+            transition: 'transform var(--duration-fast)',
+          }}
+          onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
+          onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+          onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+        >
+          <div style={{ position: 'absolute', right: '-20px', bottom: '-20px', width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)' }} />
+          <div style={{
+            width: '48px', height: '48px', borderRadius: 'var(--radius-lg)',
+            background: 'rgba(255,255,255,0.2)', display: 'flex',
+            alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+          }}>
+            {React.createElement(promos[promoIndex].icon, { size: 24, color: '#FFF' })}
+          </div>
+          <div style={{ flex: 1, zIndex: 1 }}>
+            <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#FFF', margin: '0 0 4px 0' }}>{promos[promoIndex].title}</h4>
+            <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.85)', margin: 0 }}>{promos[promoIndex].subtitle}</p>
+          </div>
+          <ChevronRight size={20} color="rgba(255,255,255,0.6)" />
+        </div>
+        {/* Dots */}
+        <div className="flex-row justify-center gap-2 mt-3">
+          {promos.map((_, i) => (
+            <div key={i} style={{
+              width: i === promoIndex ? '20px' : '6px', height: '6px',
+              borderRadius: 'var(--radius-full)',
+              background: i === promoIndex ? 'var(--primary)' : 'var(--border-primary)',
+              transition: 'all var(--duration-normal) var(--ease-spring)',
+            }} />
+          ))}
+        </div>
+      </div>
+
+      {/* ─── ACTIVE BOOKING CARD ────────────────────────── */}
+      <div className="mb-6">
+        <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 12px 0' }}>Active Journey</h3>
+        <div 
+          className="glass-card glass-card-interactive"
+          onClick={() => navigate('/live')}
+          style={{ padding: '16px', position: 'relative', overflow: 'hidden' }}
+        >
+          <div style={{ 
+            position: 'absolute', left: 0, top: 0, bottom: 0, width: '4px',
+            background: 'var(--gradient-success)', borderRadius: '0 4px 4px 0',
+          }} />
+          
+          <div className="flex-row items-center justify-between mb-3">
+            <div className="flex-row items-center gap-2">
+              <span className="badge badge-success">
+                <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--success)' }} />
+                On Time
+              </span>
+              <span style={{ fontSize: '12px', color: 'var(--text-tertiary)', fontWeight: 500 }}>12951 • Rajdhani Express</span>
+            </div>
+          </div>
+
+          <div className="flex-row items-center justify-between">
+            <div className="flex-col items-start">
+              <span style={{ fontSize: '22px', fontWeight: 800, fontFamily: "'Outfit', sans-serif" }}>MMCT</span>
+              <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>17:00</span>
+            </div>
+            <div className="flex-col items-center" style={{ flex: 1, padding: '0 12px' }}>
+              <span style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginBottom: '4px' }}>15h 32m</span>
+              <div style={{ width: '100%', height: '2px', background: 'var(--border-primary)', borderRadius: '1px', position: 'relative' }}>
+                <div style={{ position: 'absolute', left: '35%', top: '-3px', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--success)', boxShadow: '0 0 8px rgba(16,185,129,0.5)' }} />
+              </div>
+              <span style={{ fontSize: '10px', color: 'var(--success)', marginTop: '4px', fontWeight: 600 }}>105 km/h</span>
+            </div>
+            <div className="flex-col items-end">
+              <span style={{ fontSize: '22px', fontWeight: 800, fontFamily: "'Outfit', sans-serif" }}>NDLS</span>
+              <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>08:32</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ─── WALLET BALANCE ─────────────────────────────── */}
       <div 
-         className="cursor-pointer flex-row items-center justify-between" 
-         onClick={() => navigate('/madad')}
-         style={{ background: colors.slate, padding: '20px', borderRadius: '24px', marginBottom: '12px' }}
+        className="glass-card glass-card-interactive mb-6"
+        onClick={() => navigate('/wallet')}
+        style={{ padding: '16px' }}
       >
-         <div className="flex-row items-center gap-4">
-            <div style={{ background: colors.pink, padding: '12px', borderRadius: '50%' }}><AlertTriangle size={20} color={darkText} /></div>
+        <div className="flex-row items-center justify-between">
+          <div className="flex-row items-center gap-3">
+            <div style={{
+              width: '44px', height: '44px', borderRadius: 'var(--radius-lg)',
+              background: 'rgba(139,92,246,0.12)', display: 'flex',
+              alignItems: 'center', justifyContent: 'center',
+            }}>
+              <Wallet size={22} color="#8B5CF6" />
+            </div>
             <div className="flex-col">
-               <span style={{ fontSize: '15px', fontWeight: 700, color: isDark ? '#F8FAFC' : '#0F172A' }}>Rail Madad</span>
-               <span style={{ fontSize: '12px', color: isDark ? '#94A3B8' : '#64748B' }}>Rapid Grievance Redressal</span>
+              <span style={{ fontSize: '12px', color: 'var(--text-tertiary)', fontWeight: 500 }}>R-Wallet Balance</span>
+              <span style={{ fontSize: '20px', fontWeight: 800, fontFamily: "'Outfit', sans-serif" }}>₹4,500</span>
             </div>
-         </div>
-         <ArrowRight size={20} color={isDark ? '#64748B' : '#94A3B8'} />
+          </div>
+          <div style={{
+            padding: '8px 16px', borderRadius: 'var(--radius-full)',
+            background: 'var(--primary-glow)', color: 'var(--primary)',
+            fontSize: '13px', fontWeight: 650,
+          }}>
+            + Add
+          </div>
+        </div>
       </div>
 
-      <div 
-         className="cursor-pointer flex-row items-center justify-between" 
-         onClick={() => navigate('/uts')}
-         style={{ background: colors.slate, padding: '20px', borderRadius: '24px' }}
-      >
-         <div className="flex-row items-center gap-4">
-            <div style={{ background: '#E2E8F0', padding: '12px', borderRadius: '50%' }}><Shield size={20} color={darkText} /></div>
-            <div className="flex-col">
-               <span style={{ fontSize: '15px', fontWeight: 700, color: isDark ? '#F8FAFC' : '#0F172A' }}>UTS Unreserved</span>
-               <span style={{ fontSize: '12px', color: isDark ? '#94A3B8' : '#64748B' }}>Local & Sub-Urban Tickets</span>
+      {/* ─── TRENDING ROUTES ────────────────────────────── */}
+      <div>
+        <div className="flex-row items-center gap-2 mb-3">
+          <TrendingUp size={16} color="var(--accent)" />
+          <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0 }}>Trending Routes</h3>
+        </div>
+        <div className="flex-col gap-3 stagger">
+          {[
+            { from: 'New Delhi', to: 'Mumbai', price: '₹1,765', trains: '42 trains' },
+            { from: 'Bengaluru', to: 'Chennai', price: '₹450', trains: '38 trains' },
+            { from: 'Kolkata', to: 'Delhi', price: '₹1,250', trains: '28 trains' },
+          ].map((route, i) => (
+            <div 
+              key={i}
+              className="glass-card glass-card-interactive"
+              onClick={() => navigate('/trains')}
+              style={{ padding: '14px', display: 'flex', alignItems: 'center', gap: '12px' }}
+            >
+              <div style={{
+                width: '40px', height: '40px', borderRadius: 'var(--radius-md)',
+                background: `hsl(${220 + i * 30}, 70%, 95%)`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+              }}>
+                <Train size={18} color={`hsl(${220 + i * 30}, 70%, 50%)`} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: '14px', fontWeight: 600 }}>{route.from} → {route.to}</div>
+                <div style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>{route.trains} available</div>
+              </div>
+              <div className="flex-col items-end">
+                <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--primary)' }}>{route.price}</span>
+                <span style={{ fontSize: '10px', color: 'var(--text-tertiary)' }}>onwards</span>
+              </div>
             </div>
-         </div>
-         <ArrowRight size={20} color={isDark ? '#64748B' : '#94A3B8'} />
+          ))}
+        </div>
       </div>
 
       <BottomNav active="home" />
-
     </div>
   );
 }

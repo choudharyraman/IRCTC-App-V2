@@ -1,101 +1,68 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Card from '../components/Card';
+import { ArrowLeft, RefreshCw, Info, AlertTriangle, Route, TrendingUp, ChevronRight } from 'lucide-react';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import { ArrowLeft, RefreshCw, Info, AlertTriangle, Route } from 'lucide-react';
+import Card from '../components/Card';
 
 export default function PNRStatusScreen() {
-  const navigate = useNavigate();
+  const nav = useNavigate();
   const [status, setStatus] = useState('input');
+  const [pnr, setPnr] = useState('');
 
-  const checkStatus = () => {
-     setStatus('loading');
-     setTimeout(() => setStatus('result'), 1500);
-  };
+  const check = () => { setStatus('loading'); setTimeout(() => setStatus('result'), 1500); };
 
   return (
-    <div className="screen-wrapper" style={{ paddingBottom: '2rem' }}>
-      
-      {/* Header */}
-      <div className="flex-row items-center justify-between mb-6">
-        <div className="flex-row items-center gap-4">
-          <button className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => navigate('/dashboard')}>
-            <ArrowLeft size={20} className="text-navy" />
-          </button>
-          <h2 style={{ fontSize: '1.2rem', margin: 0, fontWeight: 700 }}>PNR Status</h2>
-        </div>
+    <div className="screen-wrapper" style={{paddingBottom:'24px'}}>
+      <div className="flex-row items-center gap-3 mb-6">
+        <button onClick={()=>nav('/dashboard')} className="icon-btn"><ArrowLeft size={20}/></button>
+        <div><h2 style={{fontSize:'18px',fontWeight:700,margin:0}}>PNR Status</h2><span style={{fontSize:'11px',color:'var(--text-tertiary)'}}>AI-powered prediction</span></div>
       </div>
 
-      {/* PNR Search Card */}
-      <Card style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
-         <p style={{ margin: '0 0 1rem 0', fontWeight: 600, fontSize: '0.9rem' }}>Check PNR Prediction</p>
-         <div className="flex-row gap-4 mb-2">
-            <Input type="text" placeholder="Enter 10-digit PNR" className="w-full" />
-         </div>
-         <Button variant="primary" className="w-full" icon={<RefreshCw size={18} />} onClick={checkStatus}>
-            {status === 'loading' ? 'Checking...' : 'Check Status'}
-         </Button>
-      </Card>
+      <div className="glass-card mb-6" style={{padding:'20px'}}>
+        <p style={{fontSize:'14px',fontWeight:600,margin:'0 0 16px'}}>Check Your PNR</p>
+        <Input placeholder="Enter 10-digit PNR Number" value={pnr} onChange={e=>setPnr(e.target.value)} style={{marginBottom:'16px'}}/>
+        <Button variant="primary" onClick={check} loading={status==='loading'} icon={<RefreshCw size={18}/>}>
+          {status==='loading'?'Checking...':'Check Status'}
+        </Button>
+      </div>
 
-      {status === 'result' && (
-         <div style={{ animation: 'slideUp 0.3s ease-out' }}>
-            {/* PNR Result Status */}
-            <Card style={{ padding: '1.5rem', marginBottom: '1.5rem', border: '1px solid rgba(19, 136, 8, 0.3)' }}>
-               <div className="flex-row justify-between items-center mb-4">
-                  <span style={{ fontSize: '1.1rem', fontWeight: 700 }}>Chart Not Prepared</span>
-                  <span style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 600, boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)' }}>2345678901</span>
-               </div>
+      {status==='result'&&(
+        <div className="stagger">
+          <div className="glass-card mb-4" style={{padding:'20px',position:'relative',overflow:'hidden'}}>
+            <div style={{position:'absolute',left:0,top:0,bottom:0,width:'4px',background:'var(--gradient-success)'}}/>
+            <div className="flex-row justify-between items-center mb-4">
+              <span style={{fontSize:'15px',fontWeight:700}}>Chart Not Prepared</span>
+              <span style={{fontSize:'12px',fontWeight:600,padding:'4px 10px',borderRadius:'var(--radius-full)',background:'var(--bg-input)'}}>2345678901</span>
+            </div>
+            <div className="flex-col gap-2 mb-4">
+              {[['Train','12951 - RAJDHANI'],['Class','3A - Third AC'],['Date','24 Mar 2026'],['Current Status','WL 14']].map(([l,v])=>(
+                <div key={l} className="flex-row justify-between"><span style={{fontSize:'13px',color:'var(--text-tertiary)'}}>{l}</span><span style={{fontSize:'13px',fontWeight:600,color:l==='Current Status'?'var(--warning)':'var(--text-primary)'}}>{v}</span></div>
+              ))}
+            </div>
 
-               <div className="flex-col gap-2 mb-4">
-                  <div className="flex-row justify-between">
-                     <span className="text-light" style={{ fontSize: '0.85rem' }}>Train</span>
-                     <span style={{ fontWeight: 600 }}>12951 - RAJDHANI</span>
-                  </div>
-                  <div className="flex-row justify-between">
-                     <span className="text-light" style={{ fontSize: '0.85rem' }}>Current Status</span>
-                     <span className="text-saffron" style={{ fontWeight: 700 }}>WL 14</span>
-                  </div>
-               </div>
+            {/* ML Prediction */}
+            <div style={{padding:'14px',borderRadius:'var(--radius-md)',background:'var(--success-bg)',display:'flex',alignItems:'center',gap:'12px'}}>
+              <div style={{width:'44px',height:'44px',borderRadius:'var(--radius-md)',background:'var(--gradient-success)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+                <TrendingUp size={22} color="#FFF"/>
+              </div>
+              <div><span style={{fontSize:'11px',color:'var(--success)',fontWeight:600}}>AI Prediction</span><br/><span style={{fontSize:'16px',fontWeight:700,color:'var(--success)'}}>92% Confirmation Chance</span></div>
+            </div>
+          </div>
 
-               {/* ML Prediction Widget */}
-               <div style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '1rem', borderRadius: '12px', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ background: 'var(--accent-green)', color: 'white', padding: '0.5rem', borderRadius: '50%', display: 'flex', boxShadow: 'var(--glass-shadow)' }}>
-                     <Info size={24} />
-                  </div>
-                  <div className="flex-col">
-                     <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Confirmation Probability</span>
-                     <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-green)' }}>92% High Chance</span>
-                  </div>
-               </div>
-            </Card>
-
-            {/* Alternate Suggestions section */}
-            <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', fontWeight: 600 }}>Smart Alternatives</h3>
-            
-            <Card style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-               <div style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '0.5rem', borderRadius: '50%', boxShadow: 'var(--glass-shadow)', color: 'var(--accent-saffron)' }}>
-                  <AlertTriangle size={20} />
-               </div>
-               <div className="flex-col" style={{ flex: 1 }}>
-                  <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>Travel Guarantee</span>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-light)' }}>Add ₹120 to get 3x voucher if ticket unconfirmed.</span>
-               </div>
-               <Button style={{ padding: '0.5rem', fontSize: '0.75rem' }}>+ Add</Button>
-            </Card>
-
-            <Card style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-               <div style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: '0.5rem', borderRadius: '50%', boxShadow: 'var(--glass-shadow)', color: 'var(--text-primary)' }}>
-                  <Route size={20} />
-               </div>
-               <div className="flex-col" style={{ flex: 1 }}>
-                  <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>Alternate Routes</span>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-light)' }}>Break-journey available via Surat.</span>
-               </div>
-            </Card>
-         </div>
+          <h3 style={{fontSize:'16px',fontWeight:700,margin:'0 0 12px'}}>Smart Alternatives</h3>
+          {[
+            {icon:<AlertTriangle size={18} color="var(--accent)"/>,title:'Travel Guarantee',sub:'Add ₹120 for 3x voucher if unconfirmed',action:'+ Add',bg:'var(--accent-glow)'},
+            {icon:<Route size={18} color="var(--info)"/>,title:'Break Journey',sub:'Available via Surat with 2h layover',action:'View',bg:'var(--info-bg)'},
+          ].map(a=>(
+            <div key={a.title} className="glass-card glass-card-interactive mb-3" style={{padding:'14px',display:'flex',alignItems:'center',gap:'12px'}}>
+              <div style={{width:'40px',height:'40px',borderRadius:'var(--radius-md)',background:a.bg,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>{a.icon}</div>
+              <div style={{flex:1}}><span style={{fontSize:'13px',fontWeight:600}}>{a.title}</span><br/><span style={{fontSize:'11px',color:'var(--text-tertiary)'}}>{a.sub}</span></div>
+              <span style={{fontSize:'12px',fontWeight:650,color:'var(--primary)',cursor:'pointer'}}>{a.action}</span>
+            </div>
+          ))}
+        </div>
       )}
-
     </div>
   );
 }

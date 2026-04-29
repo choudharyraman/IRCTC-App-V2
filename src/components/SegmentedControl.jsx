@@ -1,15 +1,15 @@
 import React from 'react';
 
-export default function SegmentedControl({ tabs, activeTab, onChange }) {
+export default function SegmentedControl({ tabs, activeTab, onChange, style = {} }) {
   return (
     <div style={{
       display: 'flex',
-      background: 'rgba(255, 255, 255, 0.05)',
-      borderRadius: '28px',
-      boxShadow: 'var(--glass-shadow)',
+      background: 'var(--bg-input)',
+      borderRadius: 'var(--radius-lg)',
       padding: '4px',
       position: 'relative',
-      border: '1px solid var(--glass-border)'
+      border: '1px solid var(--border-primary)',
+      ...style,
     }}>
       {tabs.map((tab, idx) => {
         const isActive = activeTab === idx;
@@ -19,17 +19,18 @@ export default function SegmentedControl({ tabs, activeTab, onChange }) {
             onClick={() => onChange(idx)}
             style={{
               flex: 1,
-              padding: '12px',
-              borderRadius: '24px',
-              background: isActive ? 'var(--glass-bg)' : 'transparent',
-              border: isActive ? '1px solid var(--glass-border)' : '1px solid transparent',
-              fontSize: '15px',
+              padding: '10px 8px',
+              borderRadius: 'var(--radius-md)',
+              background: isActive ? 'var(--primary)' : 'transparent',
+              border: 'none',
+              fontSize: '13px',
               cursor: 'pointer',
-              color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
-              fontWeight: isActive ? 600 : 500,
-              boxShadow: isActive ? '0 4px 12px rgba(0,0,0,0.05)' : 'none',
-              transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-              backdropFilter: isActive ? 'blur(12px)' : 'none'
+              color: isActive ? '#FFFFFF' : 'var(--text-secondary)',
+              fontWeight: isActive ? 650 : 500,
+              fontFamily: "'Inter', sans-serif",
+              boxShadow: isActive ? '0 2px 12px var(--primary-glow)' : 'none',
+              transition: 'all var(--duration-normal) var(--ease-spring)',
+              letterSpacing: '0.01em',
             }}
           >
             {tab}

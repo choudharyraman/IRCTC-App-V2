@@ -4,76 +4,50 @@ import { ArrowLeft, AlertTriangle } from 'lucide-react';
 import Button from '../components/Button';
 
 export default function CancellationScreen() {
-  const navigate = useNavigate();
+  const nav = useNavigate();
   const [selected, setSelected] = useState([true, false]);
-
-  const toggleSelect = (index) => {
-    const newSel = [...selected];
-    newSel[index] = !newSel[index];
-    setSelected(newSel);
-  };
-
-  const cancelCount = selected.filter(Boolean).length;
-  const refundAmount = cancelCount * 1150;
+  const toggle = (i) => { const n=[...selected]; n[i]=!n[i]; setSelected(n); };
+  const count = selected.filter(Boolean).length;
+  const refund = count * 1150;
 
   return (
-    <div className="screen-wrapper" style={{ paddingBottom: '90px' }}>
-      <div className="flex-row items-center gap-4 mb-6">
-        <button onClick={() => navigate(-1)} className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <ArrowLeft size={20} color="var(--text-primary)" />
-        </button>
-        <div className="flex-col">
-          <h2 style={{ fontSize: '18px', fontWeight: 600, margin: 0 }}>Cancel Ticket</h2>
-          <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>PNR: 8234567890</span>
+    <div className="screen-wrapper" style={{paddingBottom:'24px'}}>
+      <div className="flex-row items-center gap-3 mb-6">
+        <button onClick={()=>nav(-1)} className="icon-btn"><ArrowLeft size={20}/></button>
+        <div><h2 style={{fontSize:'18px',fontWeight:700,margin:0}}>Cancel Ticket</h2><span style={{fontSize:'11px',color:'var(--text-tertiary)'}}>PNR: 8234567890</span></div>
+      </div>
+
+      <div style={{padding:'14px',background:'var(--error-bg)',borderRadius:'var(--radius-md)',display:'flex',gap:'12px',marginBottom:'20px'}}>
+        <AlertTriangle size={18} color="var(--error)" style={{flexShrink:0,marginTop:'2px'}}/>
+        <span style={{fontSize:'12px'}}>Cancellations cannot be undone. Refunds credited in 3-5 business days.</span>
+      </div>
+
+      <h3 style={{fontSize:'16px',fontWeight:700,margin:'0 0 12px'}}>Select Passengers</h3>
+      <div className="flex-col gap-3 mb-6">
+        {[{name:'Arjun K.',age:'28 yrs',berth:'B1-42'},{name:'Neha K.',age:'26 yrs',berth:'B1-43'}].map((p,i)=>(
+          <div key={i} onClick={()=>toggle(i)} className="glass-card" style={{padding:'14px',display:'flex',alignItems:'center',gap:'14px',cursor:'pointer',border:selected[i]?'1.5px solid var(--error)':'1.5px solid transparent',transition:'all 150ms'}}>
+            <div style={{width:'24px',height:'24px',borderRadius:'var(--radius-sm)',border:selected[i]?'none':'2px solid var(--text-tertiary)',background:selected[i]?'var(--error)':'transparent',display:'flex',alignItems:'center',justifyContent:'center',transition:'all 150ms',flexShrink:0}}>
+              {selected[i]&&<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>}
+            </div>
+            <div style={{flex:1}}><span style={{fontSize:'14px',fontWeight:600}}>{p.name}</span><br/><span style={{fontSize:'11px',color:'var(--text-tertiary)'}}>{p.age} • {p.berth} • Confirmed</span></div>
+          </div>
+        ))}
+      </div>
+
+      <div className="glass-card mb-6" style={{padding:'16px'}}>
+        <h4 style={{fontSize:'14px',fontWeight:700,margin:'0 0 12px'}}>Refund Estimate</h4>
+        {[['Ticket Cost (×'+count+')',count*1250],['Cancellation Charges',-count*100]].map(([l,v])=>(
+          <div key={l} className="flex-row justify-between mb-2"><span style={{fontSize:'13px',color:v<0?'var(--error)':'var(--text-secondary)'}}>{l}</span><span style={{fontSize:'13px',fontWeight:600,color:v<0?'var(--error)':'var(--text-primary)'}}>{v<0?'- ':''}₹{Math.abs(v)}</span></div>
+        ))}
+        <div style={{borderTop:'1px dashed var(--border-primary)',marginTop:'8px',paddingTop:'8px'}} className="flex-row justify-between">
+          <span style={{fontSize:'15px',fontWeight:700}}>Refund Amount</span>
+          <span style={{fontSize:'18px',fontWeight:800,color:'var(--success)',fontFamily:"'Outfit'"}}>₹{refund}</span>
         </div>
       </div>
 
-      <div style={{ padding: '16px', background: 'rgba(229, 62, 62, 0.1)', borderRadius: '16px', display: 'flex', gap: '12px', marginBottom: '24px' }}>
-         <AlertTriangle size={20} color="var(--error)" />
-         <span style={{ fontSize: '13px', color: 'var(--text-primary)' }}>Changes cannot be undone once confirmed. Refunds will be credited to original payment method in 3-5 days.</span>
-      </div>
-
-      <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '16px' }}>Select Passengers</h3>
-      <div className="flex-col gap-4 mb-6">
-         <PassengerCheckbox name="Arjun K." age="28 yrs" status="Confirmed" berth="B1-42" checked={selected[0]} onChange={() => toggleSelect(0)} />
-         <PassengerCheckbox name="Neha K." age="26 yrs" status="Confirmed" berth="B1-43" checked={selected[1]} onChange={() => toggleSelect(1)} />
-      </div>
-
-      <div className="neuro-card flex-col" style={{ padding: '20px', marginBottom: '24px' }}>
-         <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '16px' }}>Refund Estimate</h3>
-         
-         <div className="flex-row justify-between mb-2">
-            <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Ticket Cost (x{cancelCount})</span>
-            <span style={{ fontSize: '14px', fontWeight: 600 }}>₹ {cancelCount * 1250}.00</span>
-         </div>
-         <div className="flex-row justify-between mb-4 pb-4" style={{ borderBottom: '1px dashed rgba(184, 197, 214, 0.5)' }}>
-            <span style={{ fontSize: '14px', color: 'var(--error)' }}>Cancellation Charges</span>
-            <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--error)' }}>- ₹ {cancelCount * 100}.00</span>
-         </div>
-         <div className="flex-row justify-between">
-            <span style={{ fontSize: '16px', fontWeight: 600 }}>Total Refund</span>
-            <span style={{ fontSize: '18px', fontWeight: 700, color: 'var(--success)' }}>₹ {refundAmount}.00</span>
-         </div>
-      </div>
-
-      <Button variant="primary" onClick={() => { alert('Cancelled successfully! Refund initiated.'); navigate('/bookings'); }} style={{ background: 'var(--error)' }} disabled={cancelCount === 0}>
-         Confirm Cancellation
+      <Button variant="danger" onClick={()=>{alert('Cancelled! Refund initiated.');nav('/bookings')}} disabled={count===0}>
+        Confirm Cancellation
       </Button>
-
     </div>
   );
-}
-
-function PassengerCheckbox({ name, age, status, berth, checked, onChange }) {
-   return (
-      <div onClick={onChange} className="neuro-raised" style={{ padding: '16px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '16px', cursor: 'pointer', border: checked ? '2px solid var(--error)' : '2px solid transparent' }}>
-         <div style={{ width: '24px', height: '24px', borderRadius: '8px', border: checked ? 'none' : '2px solid var(--text-secondary)', background: checked ? 'var(--error)' : 'var(--bg-page)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: checked ? 'none' : 'inset 0 2px 8px rgba(0,0,0,0.05)' }}>
-            {checked && <div style={{ width: '12px', height: '12px', background: 'white', borderRadius: '2px' }}></div>}
-         </div>
-         <div className="flex-col" style={{ flex: 1 }}>
-            <span style={{ fontSize: '15px', fontWeight: 600 }}>{name}</span>
-            <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{age} • {berth} • {status}</span>
-         </div>
-      </div>
-   );
 }

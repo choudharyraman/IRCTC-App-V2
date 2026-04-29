@@ -1,90 +1,73 @@
 import React, { useState } from 'react';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import { ArrowLeft, Smartphone, CheckCircle, Zap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, Smartphone, CheckCircle, Zap } from 'lucide-react';
+import Button from '../components/Button';
+import Input from '../components/Input';
 
 export default function RechargeScreen() {
-  const navigate = useNavigate();
+  const nav = useNavigate();
   const [step, setStep] = useState('input');
-
-  const handleRecharge = () => {
-     setStep('processing');
-     setTimeout(() => setStep('success'), 2000);
-  };
+  const recharge = () => { setStep('processing'); setTimeout(() => setStep('success'), 2000); };
 
   return (
-    <div className="screen-wrapper" style={{ paddingBottom: '90px' }}>
-      
-      <div className="flex-row items-center gap-4 mb-6">
-        <button onClick={() => navigate('/dashboard')} className="neuro-icon-btn" style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'var(--glass-shadow)', border: 'none', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-          <ArrowLeft size={20} color="var(--text-primary)" />
-        </button>
-        <div className="flex-col">
-           <h2 style={{ fontSize: '18px', fontWeight: 600, margin: 0 }}>Recharge & Bills</h2>
-           <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Powered by Bharat BillPay</span>
-        </div>
+    <div className="screen-wrapper" style={{paddingBottom:'24px'}}>
+      <div className="flex-row items-center gap-3 mb-6">
+        <button onClick={()=>nav('/dashboard')} className="icon-btn"><ArrowLeft size={20}/></button>
+        <div><h2 style={{fontSize:'18px',fontWeight:700,margin:0}}>Recharge & Bills</h2><span style={{fontSize:'11px',color:'var(--text-tertiary)'}}>Powered by Bharat BillPay</span></div>
       </div>
 
-      {step === 'input' && (
-         <div style={{ animation: 'slideUp 0.3s ease-out' }}>
-            <div className="neuro-card flex-col" style={{ padding: '24px', marginBottom: '24px' }}>
-               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
-                  <div style={{ padding: '16px', borderRadius: '24px', background: 'rgba(255, 153, 51, 0.1)' }}>
-                     <Smartphone size={40} color="var(--accent-saffron)" />
-                  </div>
-               </div>
-               
-               <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '16px' }}>Mobile Recharge</h3>
-               <Input placeholder="10-digit Mobile Number" />
-               <div className="mt-4"></div>
-               <Input placeholder="Amount (₹)" />
-               <div className="mt-6"></div>
-               <Button onClick={handleRecharge} icon={<Zap size={18} />}>Proceed to Recharge</Button>
+      {step==='input'&&(
+        <div className="stagger">
+          <div className="glass-card mb-5" style={{padding:'24px'}}>
+            <div style={{display:'flex',justifyContent:'center',marginBottom:'20px'}}>
+              <div style={{width:'60px',height:'60px',borderRadius:'var(--radius-xl)',background:'var(--accent-glow)',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                <Smartphone size={30} color="var(--accent)"/>
+              </div>
             </div>
+            <h3 style={{fontSize:'16px',fontWeight:700,margin:'0 0 16px',textAlign:'center'}}>Mobile Recharge</h3>
+            <div className="flex-col gap-3">
+              <Input placeholder="10-digit Mobile Number"/>
+              <Input placeholder="Amount (₹)"/>
+              <div className="flex-row gap-2 mt-1">
+                {[149,199,299,499].map(a=>(
+                  <div key={a} className="chip" style={{flex:1,justifyContent:'center'}}>₹{a}</div>
+                ))}
+              </div>
+              <Button onClick={recharge} icon={<Zap size={18}/>} style={{marginTop:'8px'}}>Recharge Now</Button>
+            </div>
+          </div>
 
-            <h3 style={{ fontSize: '14px', fontWeight: 600, marginBottom: '12px', color: 'var(--text-secondary)' }}>Recent Recharges</h3>
-            <div className="neuro-raised" style={{ padding: '16px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-               <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: '10px', fontWeight: 700, color: 'var(--accent-primary)' }}>JIO</span>
-               </div>
-               <div className="flex-col" style={{ flex: 1 }}>
-                  <span style={{ fontSize: '14px', fontWeight: 600 }}>98765 43210</span>
-                  <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Last recharged: ₹299 on 15 Mar</span>
-               </div>
-               <button onClick={handleRecharge} style={{ padding: '6px 12px', background: 'transparent', border: '1px solid var(--accent-primary)', color: 'var(--accent-primary)', borderRadius: '12px', fontWeight: 600, fontSize: '12px', cursor: 'pointer' }}>Repeat</button>
+          <h3 style={{fontSize:'14px',fontWeight:600,margin:'0 0 12px',color:'var(--text-secondary)'}}>Recent Recharges</h3>
+          <div className="glass-card" style={{padding:'14px',display:'flex',alignItems:'center',gap:'12px'}}>
+            <div style={{width:'40px',height:'40px',borderRadius:'var(--radius-md)',background:'var(--info-bg)',display:'flex',alignItems:'center',justifyContent:'center'}}>
+              <span style={{fontSize:'10px',fontWeight:800,color:'var(--info)'}}>JIO</span>
             </div>
-         </div>
+            <div style={{flex:1}}><span style={{fontSize:'14px',fontWeight:600}}>98765 43210</span><br/><span style={{fontSize:'11px',color:'var(--text-tertiary)'}}>Last: ₹299 on 15 Apr</span></div>
+            <button onClick={recharge} style={{padding:'6px 14px',background:'transparent',border:'1.5px solid var(--primary)',color:'var(--primary)',borderRadius:'var(--radius-full)',fontWeight:600,fontSize:'12px',cursor:'pointer',fontFamily:"'Inter'"}}>Repeat</button>
+          </div>
+        </div>
       )}
 
-      {step === 'processing' && (
-         <div className="flex-col items-center justify-center p-8 gap-4 mt-8" style={{ animation: 'pulse 1.5s infinite' }}>
-            <Zap size={48} color="var(--accent-saffron)" />
-            <span style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-secondary)' }}>Connecting to Operator...</span>
-         </div>
+      {step==='processing'&&(
+        <div className="flex-col items-center justify-center" style={{padding:'60px 0'}}>
+          <div style={{width:'48px',height:'48px',borderRadius:'50%',border:'3px solid var(--border-primary)',borderTopColor:'var(--accent)',animation:'spin 0.8s linear infinite',marginBottom:'16px'}}/>
+          <span style={{fontSize:'14px',color:'var(--text-tertiary)'}}>Connecting to Operator...</span>
+        </div>
       )}
 
-      {step === 'success' && (
-         <div className="neuro-card flex-col items-center text-center mt-4" style={{ padding: '32px 24px', animation: 'slideUp 0.3s ease-out' }}>
-            <CheckCircle size={56} color="var(--success)" style={{ marginBottom: '16px' }} />
-            <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '8px' }}>Recharge Successful!</h3>
-            <span style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '24px' }}>Your mobile number has been recharged instantly.</span>
-            
-            <div className="neuro-sunken w-full" style={{ padding: '16px', borderRadius: '12px', marginBottom: '32px' }}>
-               <div className="flex-row justify-between mb-2">
-                  <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Reference ID</span>
-                  <span style={{ fontSize: '14px', fontWeight: 600 }}>BBPS-98745</span>
-               </div>
-               <div className="flex-row justify-between">
-                  <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Total Paid</span>
-                  <span style={{ fontSize: '16px', fontWeight: 700 }}>₹ 299.00</span>
-               </div>
-            </div>
-
-            <Button className="w-full" onClick={() => navigate('/dashboard')}>Return Home</Button>
-         </div>
+      {step==='success'&&(
+        <div className="flex-col items-center text-center" style={{paddingTop:'40px',animation:'scaleIn 0.4s var(--ease-spring)'}}>
+          <div style={{width:'72px',height:'72px',borderRadius:'50%',background:'var(--gradient-success)',display:'flex',alignItems:'center',justifyContent:'center',marginBottom:'16px',boxShadow:'0 8px 32px rgba(16,185,129,0.3)'}}><CheckCircle size={36} color="#FFF"/></div>
+          <h3 style={{fontSize:'20px',fontWeight:700,margin:'0 0 8px'}}>Recharge Successful!</h3>
+          <p style={{fontSize:'13px',color:'var(--text-tertiary)',margin:'0 0 24px'}}>Your mobile has been recharged instantly.</p>
+          <div className="glass-card w-full mb-6" style={{padding:'16px'}}>
+            {[['Reference ID','BBPS-98745'],['Total Paid','₹299.00']].map(([l,v])=>(
+              <div key={l} className="flex-row justify-between mb-2"><span style={{fontSize:'13px',color:'var(--text-tertiary)'}}>{l}</span><span style={{fontSize:'13px',fontWeight:600}}>{v}</span></div>
+            ))}
+          </div>
+          <Button onClick={()=>nav('/dashboard')}>Return Home</Button>
+        </div>
       )}
-
     </div>
   );
 }
