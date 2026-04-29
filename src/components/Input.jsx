@@ -20,7 +20,7 @@ export default function Input({
     <div className={className} style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', gap: '6px', ...style }}>
       {label && (
         <label style={{ 
-          fontSize: '13px', 
+          fontSize: 'var(--text-sm)', 
           fontWeight: 600, 
           color: focused ? 'var(--primary)' : error ? 'var(--error)' : 'var(--text-secondary)',
           transition: 'color var(--duration-fast) var(--ease-smooth)',
@@ -51,10 +51,10 @@ export default function Input({
           style={{
             background: 'var(--bg-input)',
             borderRadius: 'var(--radius-md)',
-            height: '52px',
-            padding: icon ? '0 16px 0 48px' : '0 16px',
-            paddingRight: iconRight ? '48px' : '16px',
-            fontSize: '15px',
+            height: 'clamp(44px, 3vw, 56px)',
+            padding: icon ? '0 var(--space-md) 0 48px' : '0 var(--space-md)',
+            paddingRight: iconRight ? '48px' : 'var(--space-md)',
+            fontSize: 'var(--text-base)',
             fontFamily: "'Inter', sans-serif",
             color: 'var(--text-primary)',
             transition: 'all var(--duration-fast) var(--ease-smooth)',

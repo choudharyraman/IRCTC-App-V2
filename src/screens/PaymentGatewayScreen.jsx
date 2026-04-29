@@ -64,7 +64,7 @@ export default function PaymentGatewayScreen() {
       </div>
 
       {/* Bottom Bar */}
-      <div style={{position:'fixed',bottom:0,left:'50%',transform:'translateX(-50%)',width:'100%',maxWidth:'480px',background:'var(--bg-primary)',borderTop:'1px solid var(--border-primary)',padding:'16px',zIndex:100}}>
+      <div style={{position:'fixed',bottom:0,left:0,right:0,width:'100%',background:'var(--bg-primary)',borderTop:'1px solid var(--border-primary)',padding:'16px',zIndex:100}}>
         <Button variant="primary" onClick={handlePay} loading={processing} size="lg">
           {processing ? 'Processing...' : 'Pay ₹2,785'}
         </Button>

@@ -55,7 +55,7 @@ export default function TrainListScreen() {
 
       {filters&&(
         <div style={{position:'fixed',inset:0,background:'var(--bg-overlay)',zIndex:1000,display:'flex',flexDirection:'column',justifyContent:'flex-end',alignItems:'center',animation:'fadeIn 0.2s'}} onClick={()=>setFilters(false)}>
-          <div onClick={e=>e.stopPropagation()} style={{width:'100%',maxWidth:'480px',background:'var(--bg-primary)',borderRadius:'var(--radius-2xl) var(--radius-2xl) 0 0',padding:'24px',maxHeight:'75vh',overflowY:'auto',animation:'slideUp 0.3s var(--ease-spring)'}}>
+          <div onClick={e=>e.stopPropagation()} style={{width:'100%',maxWidth:'600px',background:'var(--bg-primary)',borderRadius:'var(--radius-2xl) var(--radius-2xl) 0 0',padding:'24px',maxHeight:'75vh',overflowY:'auto',animation:'slideUp 0.3s var(--ease-spring)'}}>
             <div className="flex-row items-center justify-between mb-6">
               <h3 style={{fontSize:'18px',fontWeight:700,margin:0}}>Filters</h3>
               <button onClick={()=>setFilters(false)} className="icon-btn"><X size={18}/></button>

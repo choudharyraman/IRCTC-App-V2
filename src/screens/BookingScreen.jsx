@@ -112,7 +112,7 @@ export default function BookingScreen() {
       </div>
 
       {/* Bottom Pay Bar */}
-      <div style={{position:'fixed',bottom:0,left:'50%',transform:'translateX(-50%)',width:'100%',maxWidth:'480px',background:'var(--bg-primary)',borderTop:'1px solid var(--border-primary)',padding:'16px',zIndex:100,backdropFilter:'blur(24px)'}}>
+      <div style={{position:'fixed',bottom:0,left:0,right:0,width:'100%',background:'var(--bg-primary)',borderTop:'1px solid var(--border-primary)',padding:'16px',zIndex:100,backdropFilter:'blur(24px)'}}>
         <div className="flex-row items-center gap-4">
           <div className="flex-col"><span style={{fontSize:'11px',color:'var(--text-tertiary)'}}>Total Fare</span><span style={{fontSize:'20px',fontWeight:800,fontFamily:"'Outfit'"}}>₹{total.toLocaleString()}</span></div>
           <div style={{flex:1}}><Button variant="primary" onClick={()=>nav('/payment')}>Continue to Pay</Button></div>

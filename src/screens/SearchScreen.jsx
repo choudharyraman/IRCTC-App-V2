@@ -91,7 +91,7 @@ export default function SearchScreen() {
       <div style={{
         position: 'fixed', inset: 0, background: 'var(--bg-primary)',
         zIndex: 1000, display: 'flex', flexDirection: 'column',
-        maxWidth: '480px', margin: '0 auto',
+        maxWidth: '100%',
       }}>
         {/* Picker Header */}
         <div style={{ padding: '16px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid var(--border-primary)' }}>

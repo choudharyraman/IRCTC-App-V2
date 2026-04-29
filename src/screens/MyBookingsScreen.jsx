@@ -21,6 +21,7 @@ export default function MyBookingsScreen() {
   const lists = [bookings.upcoming, bookings.completed, bookings.cancelled];
 
   return (
+    <div className="has-sidebar">
     <div className="screen-wrapper" style={{paddingBottom:'90px'}}>
       <div className="flex-row items-center gap-3 mb-6">
         <button onClick={()=>nav('/dashboard')} className="icon-btn"><ArrowLeft size={20}/></button>
@@ -72,6 +73,7 @@ export default function MyBookingsScreen() {
         ))}
       </div>
       <BottomNav active="bookings"/>
+    </div>
     </div>
   );
 }

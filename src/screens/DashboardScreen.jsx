@@ -23,7 +23,6 @@ export default function DashboardScreen() {
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
 
-  // Promotional banners
   const promos = [
     { title: 'Tatkal Bookings', subtitle: 'Book faster with auto-fill', gradient: 'linear-gradient(135deg, #FF6B35, #F7931A)', icon: Zap },
     { title: 'Travel Insurance', subtitle: 'Protect your journey for ₹35', gradient: 'linear-gradient(135deg, #10B981, #059669)', icon: Shield },
@@ -36,7 +35,6 @@ export default function DashboardScreen() {
     return () => clearInterval(timer);
   }, []);
 
-  // Quick Actions grid
   const quickActions = [
     { icon: Search, label: 'PNR Status', color: '#F59E0B', bg: 'rgba(245,158,11,0.12)', path: '/pnr' },
     { icon: Navigation, label: 'Live Track', color: '#10B981', bg: 'rgba(16,185,129,0.12)', path: '/live' },
@@ -49,21 +47,22 @@ export default function DashboardScreen() {
   ];
 
   return (
-    <div className="screen-wrapper" style={{ paddingBottom: '90px' }}>
+    <div className="has-sidebar">
+    <div className="screen-wrapper" style={{ paddingBottom: 'clamp(80px, 8vw, 40px)' }}>
 
       {/* ─── HEADER ─────────────────────────────────────── */}
       <div className="flex-row items-center justify-between mb-6" style={{ animation: 'slideDown 0.4s var(--ease-spring)' }}>
         <div className="flex-row items-center gap-3">
           <div style={{ 
-            width: '44px', height: '44px', borderRadius: '50%', overflow: 'hidden', 
+            width: 'clamp(40px, 3vw, 52px)', height: 'clamp(40px, 3vw, 52px)', borderRadius: '50%', overflow: 'hidden', 
             border: '2px solid var(--primary)', padding: '2px',
             boxShadow: '0 0 20px var(--primary-glow)',
           }}>
             <img src="https://i.pravatar.cc/150?img=11" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
           </div>
           <div className="flex-col">
-            <span style={{ fontSize: '11px', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Welcome back</span>
-            <h2 style={{ fontSize: '17px', margin: 0, fontWeight: 700 }}>Arjun Sharma</h2>
+            <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Welcome back</span>
+            <h2 style={{ fontSize: 'var(--text-md)', margin: 0, fontWeight: 700 }}>Arjun Sharma</h2>
           </div>
         </div>
         
@@ -85,12 +84,10 @@ export default function DashboardScreen() {
         style={{ 
           background: 'var(--gradient-primary)', 
           borderRadius: 'var(--radius-2xl)', 
-          padding: '24px',
-          marginBottom: '20px',
-          border: 'none',
-          cursor: 'pointer',
-          position: 'relative',
-          overflow: 'hidden',
+          padding: 'clamp(18px, 1.5vw, 32px)',
+          marginBottom: 'var(--space-lg)',
+          border: 'none', cursor: 'pointer',
+          position: 'relative', overflow: 'hidden',
           boxShadow: '0 8px 32px var(--primary-glow)',
           transition: 'transform var(--duration-fast) var(--ease-spring)',
         }}
@@ -98,44 +95,35 @@ export default function DashboardScreen() {
         onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
         onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
       >
-        {/* Decorative circles */}
-        <div style={{ position: 'absolute', right: '-30px', top: '-30px', width: '120px', height: '120px', borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
-        <div style={{ position: 'absolute', right: '40px', bottom: '-20px', width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)' }} />
+        <div style={{ position: 'absolute', right: '-30px', top: '-30px', width: 'clamp(80px, 8vw, 160px)', height: 'clamp(80px, 8vw, 160px)', borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
+        <div style={{ position: 'absolute', right: '40px', bottom: '-20px', width: 'clamp(60px, 5vw, 100px)', height: 'clamp(60px, 5vw, 100px)', borderRadius: '50%', background: 'rgba(255,255,255,0.05)' }} />
         
         <div className="flex-row items-center justify-between mb-3" style={{ position: 'relative', zIndex: 1 }}>
           <div className="flex-row items-center gap-2">
             <Train size={20} color="#FFF" />
-            <span style={{ fontSize: '12px', fontWeight: 700, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase', letterSpacing: '1px' }}>Book Tickets</span>
+            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase', letterSpacing: '1px' }}>Book Tickets</span>
           </div>
-          <div style={{ 
-            background: 'rgba(255,255,255,0.15)', padding: '6px 12px', borderRadius: 'var(--radius-full)',
-            fontSize: '11px', fontWeight: 600, color: '#FFF',
-          }}>
+          <div style={{ background: 'rgba(255,255,255,0.15)', padding: 'clamp(4px, 0.4vw, 8px) clamp(8px, 0.8vw, 14px)', borderRadius: 'var(--radius-full)', fontSize: 'var(--text-xs)', fontWeight: 600, color: '#FFF' }}>
             <Sparkles size={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
             10,000+ Routes
           </div>
         </div>
 
-        {/* Search Preview */}
-        <div style={{ 
-          background: 'rgba(255,255,255,0.12)', borderRadius: 'var(--radius-lg)', 
-          padding: '16px', position: 'relative', zIndex: 1, backdropFilter: 'blur(8px)',
-        }}>
+        <div style={{ background: 'rgba(255,255,255,0.12)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', position: 'relative', zIndex: 1, backdropFilter: 'blur(8px)' }}>
           <div className="flex-row items-center gap-3">
             <div style={{ flex: 1 }}>
               <div className="flex-row items-center gap-2 mb-2">
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FCD34D' }} />
-                <span style={{ fontSize: '15px', fontWeight: 600, color: '#FFF' }}>Where from?</span>
+                <span style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: '#FFF' }}>Where from?</span>
               </div>
               <div className="flex-row items-center gap-2">
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#34D399' }} />
-                <span style={{ fontSize: '15px', fontWeight: 600, color: '#FFF' }}>Where to?</span>
+                <span style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: '#FFF' }}>Where to?</span>
               </div>
             </div>
             <div style={{
-              width: '44px', height: '44px', borderRadius: '50%',
-              background: 'rgba(255,255,255,0.2)', display: 'flex',
-              alignItems: 'center', justifyContent: 'center',
+              width: 'clamp(40px, 3vw, 52px)', height: 'clamp(40px, 3vw, 52px)', borderRadius: '50%',
+              background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <Search size={20} color="#FFF" />
             </div>
@@ -146,10 +134,10 @@ export default function DashboardScreen() {
       {/* ─── QUICK ACTIONS ──────────────────────────────── */}
       <div className="mb-6">
         <div className="flex-row items-center justify-between mb-4">
-          <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0 }}>Quick Actions</h3>
-          <span style={{ fontSize: '12px', color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}>View All</span>
+          <h3 style={{ fontSize: 'var(--text-md)', fontWeight: 700, margin: 0 }}>Quick Actions</h3>
+          <span style={{ fontSize: 'var(--text-xs)', color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}>View All</span>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }} className="stagger">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(clamp(70px, 5vw, 100px), 1fr))', gap: 'var(--space-md)' }} className="stagger">
           {quickActions.map((action, i) => {
             const Icon = action.icon;
             return (
@@ -157,8 +145,8 @@ export default function DashboardScreen() {
                 key={i}
                 onClick={() => navigate(action.path)}
                 style={{ 
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px',
-                  cursor: 'pointer', padding: '12px 4px',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-sm)',
+                  cursor: 'pointer', padding: 'var(--space-md) var(--space-xs)',
                   transition: 'transform var(--duration-fast)',
                 }}
                 onMouseDown={e => e.currentTarget.style.transform = 'scale(0.92)'}
@@ -166,14 +154,13 @@ export default function DashboardScreen() {
                 onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
               >
                 <div style={{
-                  width: '48px', height: '48px', borderRadius: 'var(--radius-lg)',
-                  background: action.bg, display: 'flex',
-                  alignItems: 'center', justifyContent: 'center',
+                  width: 'clamp(44px, 3vw, 56px)', height: 'clamp(44px, 3vw, 56px)', borderRadius: 'var(--radius-lg)',
+                  background: action.bg, display: 'flex', alignItems: 'center', justifyContent: 'center',
                   transition: 'all var(--duration-fast)',
                 }}>
                   <Icon size={22} color={action.color} strokeWidth={1.8} />
                 </div>
-                <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-secondary)', textAlign: 'center', lineHeight: '1.2' }}>
+                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-secondary)', textAlign: 'center', lineHeight: '1.2' }}>
                   {action.label}
                 </span>
               </div>
@@ -182,64 +169,86 @@ export default function DashboardScreen() {
         </div>
       </div>
 
-      {/* ─── PROMO BANNER ───────────────────────────────── */}
-      <div style={{ marginBottom: '24px' }}>
-        <div 
-          style={{
-            background: promos[promoIndex].gradient,
-            borderRadius: 'var(--radius-xl)',
-            padding: '20px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '16px',
-            cursor: 'pointer',
-            position: 'relative',
-            overflow: 'hidden',
-            transition: 'transform var(--duration-fast)',
-          }}
-          onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
-          onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-          onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-        >
-          <div style={{ position: 'absolute', right: '-20px', bottom: '-20px', width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)' }} />
-          <div style={{
-            width: '48px', height: '48px', borderRadius: 'var(--radius-lg)',
-            background: 'rgba(255,255,255,0.2)', display: 'flex',
-            alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-          }}>
-            {React.createElement(promos[promoIndex].icon, { size: 24, color: '#FFF' })}
+      {/* ─── TWO COLUMN SECTION (Desktop) ───────────────── */}
+      <div className="desktop-two-col mb-6">
+        {/* PROMO BANNER */}
+        <div>
+          <div 
+            style={{
+              background: promos[promoIndex].gradient, borderRadius: 'var(--radius-xl)',
+              padding: 'var(--space-lg)', display: 'flex', alignItems: 'center', gap: 'var(--space-md)',
+              cursor: 'pointer', position: 'relative', overflow: 'hidden',
+              transition: 'transform var(--duration-fast)',
+              height: '100%',
+            }}
+            onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
+            onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+          >
+            <div style={{ position: 'absolute', right: '-20px', bottom: '-20px', width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)' }} />
+            <div style={{
+              width: 'clamp(44px, 3vw, 56px)', height: 'clamp(44px, 3vw, 56px)', borderRadius: 'var(--radius-lg)',
+              background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+            }}>
+              {React.createElement(promos[promoIndex].icon, { size: 24, color: '#FFF' })}
+            </div>
+            <div style={{ flex: 1, zIndex: 1 }}>
+              <h4 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: '#FFF', margin: '0 0 4px 0' }}>{promos[promoIndex].title}</h4>
+              <p style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.85)', margin: 0 }}>{promos[promoIndex].subtitle}</p>
+            </div>
+            <ChevronRight size={20} color="rgba(255,255,255,0.6)" />
           </div>
-          <div style={{ flex: 1, zIndex: 1 }}>
-            <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#FFF', margin: '0 0 4px 0' }}>{promos[promoIndex].title}</h4>
-            <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.85)', margin: 0 }}>{promos[promoIndex].subtitle}</p>
+          <div className="flex-row justify-center gap-2 mt-3">
+            {promos.map((_, i) => (
+              <div key={i} style={{
+                width: i === promoIndex ? '20px' : '6px', height: '6px',
+                borderRadius: 'var(--radius-full)',
+                background: i === promoIndex ? 'var(--primary)' : 'var(--border-primary)',
+                transition: 'all var(--duration-normal) var(--ease-spring)',
+              }} />
+            ))}
           </div>
-          <ChevronRight size={20} color="rgba(255,255,255,0.6)" />
         </div>
-        {/* Dots */}
-        <div className="flex-row justify-center gap-2 mt-3">
-          {promos.map((_, i) => (
-            <div key={i} style={{
-              width: i === promoIndex ? '20px' : '6px', height: '6px',
-              borderRadius: 'var(--radius-full)',
-              background: i === promoIndex ? 'var(--primary)' : 'var(--border-primary)',
-              transition: 'all var(--duration-normal) var(--ease-spring)',
-            }} />
-          ))}
+
+        {/* WALLET BALANCE */}
+        <div 
+          className="glass-card glass-card-interactive"
+          onClick={() => navigate('/wallet')}
+          style={{ padding: 'var(--space-md)', display: 'flex', alignItems: 'center' }}
+        >
+          <div className="flex-row items-center justify-between w-full">
+            <div className="flex-row items-center gap-3">
+              <div style={{
+                width: 'clamp(40px, 3vw, 52px)', height: 'clamp(40px, 3vw, 52px)', borderRadius: 'var(--radius-lg)',
+                background: 'rgba(139,92,246,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <Wallet size={22} color="#8B5CF6" />
+              </div>
+              <div className="flex-col">
+                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', fontWeight: 500 }}>R-Wallet Balance</span>
+                <span style={{ fontSize: 'var(--text-xl)', fontWeight: 800, fontFamily: "'Outfit', sans-serif" }}>₹4,500</span>
+              </div>
+            </div>
+            <div style={{
+              padding: 'var(--space-sm) var(--space-md)', borderRadius: 'var(--radius-full)',
+              background: 'var(--primary-glow)', color: 'var(--primary)',
+              fontSize: 'var(--text-sm)', fontWeight: 650,
+            }}>
+              + Add
+            </div>
+          </div>
         </div>
       </div>
 
       {/* ─── ACTIVE BOOKING CARD ────────────────────────── */}
       <div className="mb-6">
-        <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 12px 0' }}>Active Journey</h3>
+        <h3 style={{ fontSize: 'var(--text-md)', fontWeight: 700, margin: '0 0 var(--space-md) 0' }}>Active Journey</h3>
         <div 
           className="glass-card glass-card-interactive"
           onClick={() => navigate('/live')}
-          style={{ padding: '16px', position: 'relative', overflow: 'hidden' }}
+          style={{ padding: 'var(--space-md)', position: 'relative', overflow: 'hidden' }}
         >
-          <div style={{ 
-            position: 'absolute', left: 0, top: 0, bottom: 0, width: '4px',
-            background: 'var(--gradient-success)', borderRadius: '0 4px 4px 0',
-          }} />
+          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '4px', background: 'var(--gradient-success)', borderRadius: '0 4px 4px 0' }} />
           
           <div className="flex-row items-center justify-between mb-3">
             <div className="flex-row items-center gap-2">
@@ -247,56 +256,26 @@ export default function DashboardScreen() {
                 <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--success)' }} />
                 On Time
               </span>
-              <span style={{ fontSize: '12px', color: 'var(--text-tertiary)', fontWeight: 500 }}>12951 • Rajdhani Express</span>
+              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', fontWeight: 500 }}>12951 • Rajdhani Express</span>
             </div>
           </div>
 
           <div className="flex-row items-center justify-between">
             <div className="flex-col items-start">
-              <span style={{ fontSize: '22px', fontWeight: 800, fontFamily: "'Outfit', sans-serif" }}>MMCT</span>
-              <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>17:00</span>
+              <span style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, fontFamily: "'Outfit', sans-serif" }}>MMCT</span>
+              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}>17:00</span>
             </div>
-            <div className="flex-col items-center" style={{ flex: 1, padding: '0 12px' }}>
-              <span style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginBottom: '4px' }}>15h 32m</span>
+            <div className="flex-col items-center" style={{ flex: 1, padding: '0 var(--space-md)' }}>
+              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', marginBottom: '4px' }}>15h 32m</span>
               <div style={{ width: '100%', height: '2px', background: 'var(--border-primary)', borderRadius: '1px', position: 'relative' }}>
                 <div style={{ position: 'absolute', left: '35%', top: '-3px', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--success)', boxShadow: '0 0 8px rgba(16,185,129,0.5)' }} />
               </div>
-              <span style={{ fontSize: '10px', color: 'var(--success)', marginTop: '4px', fontWeight: 600 }}>105 km/h</span>
+              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--success)', marginTop: '4px', fontWeight: 600 }}>105 km/h</span>
             </div>
             <div className="flex-col items-end">
-              <span style={{ fontSize: '22px', fontWeight: 800, fontFamily: "'Outfit', sans-serif" }}>NDLS</span>
-              <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>08:32</span>
+              <span style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, fontFamily: "'Outfit', sans-serif" }}>NDLS</span>
+              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}>08:32</span>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ─── WALLET BALANCE ─────────────────────────────── */}
-      <div 
-        className="glass-card glass-card-interactive mb-6"
-        onClick={() => navigate('/wallet')}
-        style={{ padding: '16px' }}
-      >
-        <div className="flex-row items-center justify-between">
-          <div className="flex-row items-center gap-3">
-            <div style={{
-              width: '44px', height: '44px', borderRadius: 'var(--radius-lg)',
-              background: 'rgba(139,92,246,0.12)', display: 'flex',
-              alignItems: 'center', justifyContent: 'center',
-            }}>
-              <Wallet size={22} color="#8B5CF6" />
-            </div>
-            <div className="flex-col">
-              <span style={{ fontSize: '12px', color: 'var(--text-tertiary)', fontWeight: 500 }}>R-Wallet Balance</span>
-              <span style={{ fontSize: '20px', fontWeight: 800, fontFamily: "'Outfit', sans-serif" }}>₹4,500</span>
-            </div>
-          </div>
-          <div style={{
-            padding: '8px 16px', borderRadius: 'var(--radius-full)',
-            background: 'var(--primary-glow)', color: 'var(--primary)',
-            fontSize: '13px', fontWeight: 650,
-          }}>
-            + Add
           </div>
         </div>
       </div>
@@ -305,9 +284,9 @@ export default function DashboardScreen() {
       <div>
         <div className="flex-row items-center gap-2 mb-3">
           <TrendingUp size={16} color="var(--accent)" />
-          <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0 }}>Trending Routes</h3>
+          <h3 style={{ fontSize: 'var(--text-md)', fontWeight: 700, margin: 0 }}>Trending Routes</h3>
         </div>
-        <div className="flex-col gap-3 stagger">
+        <div className="desktop-three-col stagger">
           {[
             { from: 'New Delhi', to: 'Mumbai', price: '₹1,765', trains: '42 trains' },
             { from: 'Bengaluru', to: 'Chennai', price: '₹450', trains: '38 trains' },
@@ -317,22 +296,22 @@ export default function DashboardScreen() {
               key={i}
               className="glass-card glass-card-interactive"
               onClick={() => navigate('/trains')}
-              style={{ padding: '14px', display: 'flex', alignItems: 'center', gap: '12px' }}
+              style={{ padding: 'var(--space-md)', display: 'flex', alignItems: 'center', gap: 'var(--space-md)' }}
             >
               <div style={{
-                width: '40px', height: '40px', borderRadius: 'var(--radius-md)',
+                width: 'clamp(36px, 2.5vw, 48px)', height: 'clamp(36px, 2.5vw, 48px)', borderRadius: 'var(--radius-md)',
                 background: `hsl(${220 + i * 30}, 70%, 95%)`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
               }}>
                 <Train size={18} color={`hsl(${220 + i * 30}, 70%, 50%)`} />
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: '14px', fontWeight: 600 }}>{route.from} → {route.to}</div>
-                <div style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>{route.trains} available</div>
+                <div style={{ fontSize: 'var(--text-base)', fontWeight: 600 }}>{route.from} → {route.to}</div>
+                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}>{route.trains} available</div>
               </div>
               <div className="flex-col items-end">
-                <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--primary)' }}>{route.price}</span>
-                <span style={{ fontSize: '10px', color: 'var(--text-tertiary)' }}>onwards</span>
+                <span style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--primary)' }}>{route.price}</span>
+                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}>onwards</span>
               </div>
             </div>
           ))}
@@ -340,6 +319,7 @@ export default function DashboardScreen() {
       </div>
 
       <BottomNav active="home" />
+    </div>
     </div>
   );
 }

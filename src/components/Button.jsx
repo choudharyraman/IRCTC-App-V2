@@ -14,9 +14,9 @@ export default function Button({
   fullWidth = true
 }) {
   const sizes = {
-    sm: { height: '40px', fontSize: '13px', padding: '0 16px', borderRadius: 'var(--radius-md)' },
-    md: { height: '52px', fontSize: '15px', padding: '0 24px', borderRadius: 'var(--radius-lg)' },
-    lg: { height: '56px', fontSize: '16px', padding: '0 32px', borderRadius: 'var(--radius-lg)' },
+    sm: { height: 'clamp(36px, 2.5vw, 44px)', fontSize: 'var(--text-sm)', padding: '0 clamp(12px, 1vw, 20px)', borderRadius: 'var(--radius-md)' },
+    md: { height: 'clamp(44px, 3vw, 56px)', fontSize: 'var(--text-base)', padding: '0 clamp(18px, 1.5vw, 28px)', borderRadius: 'var(--radius-lg)' },
+    lg: { height: 'clamp(48px, 3.5vw, 60px)', fontSize: 'var(--text-md)', padding: '0 clamp(24px, 2vw, 36px)', borderRadius: 'var(--radius-lg)' },
   };
 
   const variants = {
