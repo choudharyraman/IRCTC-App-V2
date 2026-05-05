@@ -13,6 +13,15 @@ export default function DashboardScreen() {
   const [theme, setTheme] = useState(document.body.getAttribute('data-theme') || 'dark');
   const isDark = theme === 'dark';
   const [transitMode, setTransitMode] = useState('trains');
+  
+  // Load dynamic user data
+  const [user] = useState(() => {
+    const saved = localStorage.getItem('railone_user');
+    return saved ? JSON.parse(saved) : {
+      name: 'Arjun Sharma',
+      avatar: 'https://i.pravatar.cc/150?img=11'
+    };
+  });
 
   const toggleTheme = () => {
     const next = isDark ? 'light' : 'dark';
@@ -62,7 +71,11 @@ export default function DashboardScreen() {
 
         {/* ── HEADER ──────────────────────────────────────── */}
         <div className="flex-row items-center justify-between mb-8 animate-slide-up">
-          <div className="flex-row items-center gap-3">
+          <div 
+            className="flex-row items-center gap-3 press-scale" 
+            onClick={() => navigate('/profile')}
+            style={{ cursor: 'pointer' }}
+          >
             {/* Avatar with aurora ring */}
             <div style={{
               padding: '2.5px', borderRadius: '50%',
@@ -74,12 +87,12 @@ export default function DashboardScreen() {
                 width: '44px', height: '44px', borderRadius: '50%',
                 overflow: 'hidden', border: '2.5px solid var(--bg-primary)'
               }}>
-                <img src="https://i.pravatar.cc/150?img=11" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src={user.avatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
             </div>
             <div className="flex-col" style={{ gap: '1px' }}>
               <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.6px' }}>Welcome back</span>
-              <h2 style={{ fontSize: 'var(--text-lg)', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>Arjun Sharma</h2>
+              <h2 style={{ fontSize: 'var(--text-lg)', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>{user.name}</h2>
             </div>
           </div>
 
