@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  MapPin, Calendar, Utensils, AlertTriangle, CreditCard, Search, 
-  ArrowRight, Train, Shield, Moon, Sun, Ticket, Bell, ChevronRight,
-  Wallet, ArrowUpDown, Clock, Sparkles, Zap, Star, TrendingUp,
-  Navigation, FileText, Smartphone
+  Search, Train, Moon, Sun, Bell, 
+  Wallet, Sparkles, Navigation, Utensils, CreditCard, 
+  AlertTriangle, Smartphone, FileText, PlaneTakeoff, Building,
+  ChevronRight, Shield, ArrowUpDown, Zap
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import BottomNav from '../components/BottomNav';
@@ -12,314 +12,292 @@ export default function DashboardScreen() {
   const navigate = useNavigate();
   const [theme, setTheme] = useState(document.body.getAttribute('data-theme') || 'dark');
   const isDark = theme === 'dark';
+  const [transitMode, setTransitMode] = useState('trains');
 
   const toggleTheme = () => {
-    const newTheme = isDark ? 'light' : 'dark';
-    setTheme(newTheme);
-    document.body.setAttribute('data-theme', newTheme);
+    const next = isDark ? 'light' : 'dark';
+    setTheme(next);
+    document.body.setAttribute('data-theme', next);
   };
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
 
-  const promos = [
-    { title: 'Tatkal Bookings', subtitle: 'Book faster with auto-fill', gradient: 'linear-gradient(135deg, #FF6B35, #F7931A)', icon: Zap },
-    { title: 'Travel Insurance', subtitle: 'Protect your journey for ₹35', gradient: 'linear-gradient(135deg, #10B981, #059669)', icon: Shield },
-    { title: 'Refer & Earn', subtitle: 'Get ₹100 for each referral', gradient: 'linear-gradient(135deg, #8B5CF6, #6366F1)', icon: Star },
-  ];
-
-  const [promoIndex, setPromoIndex] = useState(0);
-  useEffect(() => {
-    const timer = setInterval(() => setPromoIndex(i => (i + 1) % promos.length), 4000);
-    return () => clearInterval(timer);
-  }, []);
-
   const quickActions = [
-    { icon: Search, label: 'PNR Status', color: '#F59E0B', bg: 'rgba(245,158,11,0.12)', path: '/pnr' },
-    { icon: Navigation, label: 'Live Track', color: '#10B981', bg: 'rgba(16,185,129,0.12)', path: '/live' },
-    { icon: Utensils, label: 'Food', color: '#EF4444', bg: 'rgba(239,68,68,0.12)', path: '/food' },
-    { icon: CreditCard, label: 'R-Wallet', color: '#8B5CF6', bg: 'rgba(139,92,246,0.12)', path: '/wallet' },
-    { icon: AlertTriangle, label: 'Rail Madad', color: '#F43F5E', bg: 'rgba(244,63,94,0.12)', path: '/madad' },
-    { icon: Shield, label: 'UTS', color: '#3B82F6', bg: 'rgba(59,130,246,0.12)', path: '/uts' },
-    { icon: Smartphone, label: 'Recharge', color: '#06B6D4', bg: 'rgba(6,182,212,0.12)', path: '/recharge' },
-    { icon: FileText, label: 'Bookings', color: '#6366F1', bg: 'rgba(99,102,241,0.12)', path: '/bookings' },
+    { icon: Search,       label: 'PNR Status',  color: '#F59E0B', path: '/pnr' },
+    { icon: Navigation,   label: 'Live Track',  color: '#10B981', path: '/live' },
+    { icon: Utensils,     label: 'Food',        color: '#EF4444', path: '/food' },
+    { icon: CreditCard,   label: 'R-Wallet',    color: '#8B5CF6', path: '/wallet' },
+    { icon: AlertTriangle,label: 'Rail Madad',  color: '#F43F5E', path: '/madad' },
+    { icon: Shield,       label: 'UTS',         color: '#3B82F6', path: '/uts' },
+    { icon: Smartphone,   label: 'Recharge',    color: '#06B6D4', path: '/recharge' },
+    { icon: FileText,     label: 'Bookings',    color: '#8B5CF6', path: '/bookings' },
   ];
+
+  const modesConfig = {
+    trains:  { label: 'Trains',  icon: Train,       path: '/search' },
+    flights: { label: 'Flights', icon: PlaneTakeoff, path: '/flights' },
+    hotels:  { label: 'Hotels',  icon: Building,    path: '/hotels' },
+    buses:   { label: 'Buses',   icon: ArrowUpDown,  path: '/buses' },
+  };
 
   return (
-    <div className="has-sidebar">
-    <div className="screen-wrapper" style={{ paddingBottom: 'clamp(80px, 8vw, 40px)' }}>
+    <div className="app-container">
+      <div className="screen-wrapper animate-fade-in" style={{ paddingBottom: '100px' }}>
 
-      {/* ─── HEADER ─────────────────────────────────────── */}
-      <div className="flex-row items-center justify-between mb-6" style={{ animation: 'slideDown 0.4s var(--ease-spring)' }}>
-        <div className="flex-row items-center gap-3">
-          <div style={{ 
-            width: 'clamp(40px, 3vw, 52px)', height: 'clamp(40px, 3vw, 52px)', borderRadius: '50%', overflow: 'hidden', 
-            border: '2px solid var(--primary)', padding: '2px',
-            boxShadow: '0 0 20px var(--primary-glow)',
-          }}>
-            <img src="https://i.pravatar.cc/150?img=11" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
-          </div>
-          <div className="flex-col">
-            <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Welcome back</span>
-            <h2 style={{ fontSize: 'var(--text-md)', margin: 0, fontWeight: 700 }}>Arjun Sharma</h2>
-          </div>
-        </div>
-        
-        <div className="flex-row items-center gap-2">
-          <button onClick={() => {}} className="icon-btn" style={{ position: 'relative' }}>
-            <Bell size={20} />
-            <span style={{ position: 'absolute', top: '8px', right: '8px', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--error)', border: '2px solid var(--bg-primary)' }} />
-          </button>
-          <button onClick={toggleTheme} className="icon-btn">
-            {isDark ? <Sun size={20} color="#FCD34D" /> : <Moon size={20} />}
-          </button>
-        </div>
-      </div>
+        {/* ── AURORA BACKGROUND ORBS ──────────────────────── */}
+        <div className="aurora-orb" style={{
+          width: '320px', height: '320px',
+          background: 'radial-gradient(circle, rgba(139,92,246,0.25) 0%, transparent 70%)',
+          top: '-80px', right: '-80px',
+          animationDelay: '0s',
+        }} />
+        <div className="aurora-orb" style={{
+          width: '240px', height: '240px',
+          background: 'radial-gradient(circle, rgba(245,158,11,0.18) 0%, transparent 70%)',
+          bottom: '200px', left: '-60px',
+          animationDelay: '4.5s',
+        }} />
 
-      {/* ─── HERO SEARCH CARD ───────────────────────────── */}
-      <div 
-        onClick={() => navigate('/search')}
-        className="glass-card-interactive"
-        style={{ 
-          background: 'var(--gradient-primary)', 
-          borderRadius: 'var(--radius-2xl)', 
-          padding: 'clamp(18px, 1.5vw, 32px)',
-          marginBottom: 'var(--space-lg)',
-          border: 'none', cursor: 'pointer',
-          position: 'relative', overflow: 'hidden',
-          boxShadow: '0 8px 32px var(--primary-glow)',
-          transition: 'transform var(--duration-fast) var(--ease-spring)',
-        }}
-        onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
-        onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-      >
-        <div style={{ position: 'absolute', right: '-30px', top: '-30px', width: 'clamp(80px, 8vw, 160px)', height: 'clamp(80px, 8vw, 160px)', borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
-        <div style={{ position: 'absolute', right: '40px', bottom: '-20px', width: 'clamp(60px, 5vw, 100px)', height: 'clamp(60px, 5vw, 100px)', borderRadius: '50%', background: 'rgba(255,255,255,0.05)' }} />
-        
-        <div className="flex-row items-center justify-between mb-3" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="flex-row items-center gap-2">
-            <Train size={20} color="#FFF" />
-            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase', letterSpacing: '1px' }}>Book Tickets</span>
-          </div>
-          <div style={{ background: 'rgba(255,255,255,0.15)', padding: 'clamp(4px, 0.4vw, 8px) clamp(8px, 0.8vw, 14px)', borderRadius: 'var(--radius-full)', fontSize: 'var(--text-xs)', fontWeight: 600, color: '#FFF' }}>
-            <Sparkles size={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
-            10,000+ Routes
-          </div>
-        </div>
-
-        <div style={{ background: 'rgba(255,255,255,0.12)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', position: 'relative', zIndex: 1, backdropFilter: 'blur(8px)' }}>
+        {/* ── HEADER ──────────────────────────────────────── */}
+        <div className="flex-row items-center justify-between mb-8 animate-slide-up">
           <div className="flex-row items-center gap-3">
-            <div style={{ flex: 1 }}>
-              <div className="flex-row items-center gap-2 mb-2">
-                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FCD34D' }} />
-                <span style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: '#FFF' }}>Where from?</span>
-              </div>
-              <div className="flex-row items-center gap-2">
-                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#34D399' }} />
-                <span style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: '#FFF' }}>Where to?</span>
+            {/* Avatar with aurora ring */}
+            <div style={{
+              padding: '2.5px', borderRadius: '50%',
+              background: 'var(--aurora-animated)', backgroundSize: '200% 200%',
+              animation: 'aurora-flow 6s ease infinite',
+              boxShadow: 'var(--shadow-aurora)',
+            }}>
+              <div style={{
+                width: '44px', height: '44px', borderRadius: '50%',
+                overflow: 'hidden', border: '2.5px solid var(--bg-primary)'
+              }}>
+                <img src="https://i.pravatar.cc/150?img=11" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
             </div>
-            <div style={{
-              width: 'clamp(40px, 3vw, 52px)', height: 'clamp(40px, 3vw, 52px)', borderRadius: '50%',
-              background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <Search size={20} color="#FFF" />
+            <div className="flex-col" style={{ gap: '1px' }}>
+              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.6px' }}>Welcome back</span>
+              <h2 style={{ fontSize: 'var(--text-lg)', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>Arjun Sharma</h2>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* ─── QUICK ACTIONS ──────────────────────────────── */}
-      <div className="mb-6">
-        <div className="flex-row items-center justify-between mb-4">
-          <h3 style={{ fontSize: 'var(--text-md)', fontWeight: 700, margin: 0 }}>Quick Actions</h3>
-          <span style={{ fontSize: 'var(--text-xs)', color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}>View All</span>
+          <div className="flex-row items-center gap-2">
+            <button onClick={() => {}} className="icon-btn" style={{ position: 'relative' }}>
+              <Bell size={19} />
+              {/* Live notification dot */}
+              <span style={{
+                position: 'absolute', top: '9px', right: '10px',
+                width: '8px', height: '8px', borderRadius: '50%',
+                background: 'var(--accent)', boxShadow: '0 0 6px var(--accent-glow)',
+                animation: 'ping-dot 2s ease-in-out infinite',
+              }} />
+            </button>
+            <button onClick={toggleTheme} className="icon-btn">
+              {isDark
+                ? <Sun size={19} color="#FCD34D" />
+                : <Moon size={19} />}
+            </button>
+          </div>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(clamp(70px, 5vw, 100px), 1fr))', gap: 'var(--space-md)' }} className="stagger">
-          {quickActions.map((action, i) => {
-            const Icon = action.icon;
+
+        {/* ── TRANSIT MODE SELECTOR ───────────────────────── */}
+        <div className="flex-row gap-2 mb-4" style={{ overflowX: 'auto', scrollbarWidth: 'none', paddingBottom: '2px' }}>
+          {Object.entries(modesConfig).map(([id, cfg]) => {
+            const Icon = cfg.icon;
+            const isActive = transitMode === id;
             return (
-              <div 
-                key={i}
-                onClick={() => navigate(action.path)}
-                style={{ 
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-sm)',
-                  cursor: 'pointer', padding: 'var(--space-md) var(--space-xs)',
-                  transition: 'transform var(--duration-fast)',
+              <button
+                key={id}
+                onClick={() => { setTransitMode(id); if (id !== 'trains') navigate(cfg.path); }}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '6px',
+                  padding: '9px 16px', borderRadius: 'var(--radius-full)', border: 'none',
+                  background: isActive ? 'var(--primary)' : 'var(--bg-card)',
+                  color: isActive ? '#FFF' : 'var(--text-secondary)',
+                  fontWeight: 700, fontSize: '13px', cursor: 'pointer', flexShrink: 0,
+                  boxShadow: isActive ? 'var(--shadow-aurora)' : 'var(--shadow-sm)',
+                  border: isActive ? 'none' : '1px solid var(--border-primary)',
+                  transition: 'all var(--dur-normal) var(--ease-out)',
                 }}
-                onMouseDown={e => e.currentTarget.style.transform = 'scale(0.92)'}
-                onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
               >
-                <div style={{
-                  width: 'clamp(44px, 3vw, 56px)', height: 'clamp(44px, 3vw, 56px)', borderRadius: 'var(--radius-lg)',
-                  background: action.bg, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  transition: 'all var(--duration-fast)',
-                }}>
-                  <Icon size={22} color={action.color} strokeWidth={1.8} />
-                </div>
-                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--text-secondary)', textAlign: 'center', lineHeight: '1.2' }}>
-                  {action.label}
-                </span>
-              </div>
+                <Icon size={14} />
+                {cfg.label}
+              </button>
             );
           })}
         </div>
-      </div>
 
-      {/* ─── TWO COLUMN SECTION (Desktop) ───────────────── */}
-      <div className="desktop-two-col mb-6">
-        {/* PROMO BANNER */}
-        <div>
-          <div 
-            style={{
-              background: promos[promoIndex].gradient, borderRadius: 'var(--radius-xl)',
-              padding: 'var(--space-lg)', display: 'flex', alignItems: 'center', gap: 'var(--space-md)',
-              cursor: 'pointer', position: 'relative', overflow: 'hidden',
-              transition: 'transform var(--duration-fast)',
-              height: '100%',
-            }}
-            onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
-            onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-          >
-            <div style={{ position: 'absolute', right: '-20px', bottom: '-20px', width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)' }} />
-            <div style={{
-              width: 'clamp(44px, 3vw, 56px)', height: 'clamp(44px, 3vw, 56px)', borderRadius: 'var(--radius-lg)',
-              background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-            }}>
-              {React.createElement(promos[promoIndex].icon, { size: 24, color: '#FFF' })}
+        {/* ── AURORA HERO SEARCH CARD ──────────────────────── */}
+        <div
+          onClick={() => navigate(modesConfig[transitMode].path)}
+          className="aurora-card mb-8 press-scale"
+          style={{
+            padding: 'var(--space-lg)',
+            cursor: 'pointer',
+            boxShadow: 'var(--shadow-aurora)',
+          }}
+        >
+          {/* Noise texture overlay */}
+          <div style={{ position: 'absolute', inset: 0, borderRadius: 'var(--radius-2xl)', opacity: 0.03,
+            backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")" }} />
+
+          {/* Header row */}
+          <div className="flex-row items-center justify-between mb-5" style={{ position: 'relative', zIndex: 1 }}>
+            <div className="flex-row items-center gap-2">
+              <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Train size={16} color="#FFF" />
+              </div>
+              <span style={{ fontSize: '11px', fontWeight: 800, color: 'rgba(255,255,255,0.9)', textTransform: 'uppercase', letterSpacing: '1.2px' }}>Book Tickets</span>
             </div>
-            <div style={{ flex: 1, zIndex: 1 }}>
-              <h4 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: '#FFF', margin: '0 0 4px 0' }}>{promos[promoIndex].title}</h4>
-              <p style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.85)', margin: 0 }}>{promos[promoIndex].subtitle}</p>
+            <div style={{ background: 'rgba(255,255,255,0.18)', padding: '5px 12px', borderRadius: 'var(--radius-full)', fontSize: '11px', fontWeight: 700, color: '#FFF', backdropFilter: 'blur(8px)' }}>
+              <Sparkles size={10} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+              10,000+ Routes
             </div>
-            <ChevronRight size={20} color="rgba(255,255,255,0.6)" />
           </div>
-          <div className="flex-row justify-center gap-2 mt-3">
-            {promos.map((_, i) => (
-              <div key={i} style={{
-                width: i === promoIndex ? '20px' : '6px', height: '6px',
-                borderRadius: 'var(--radius-full)',
-                background: i === promoIndex ? 'var(--primary)' : 'var(--border-primary)',
-                transition: 'all var(--duration-normal) var(--ease-spring)',
-              }} />
-            ))}
+
+          {/* From / To rows */}
+          <div className="aurora-glass" style={{ padding: '18px 20px', position: 'relative', zIndex: 1 }}>
+            <div className="flex-row items-center gap-4">
+              <div className="flex-col justify-between" style={{ height: '52px', position: 'relative' }}>
+                <div style={{ width: '11px', height: '11px', borderRadius: '50%', border: '2.5px solid rgba(255,255,255,0.7)', background: 'transparent', zIndex: 1 }} />
+                <div style={{ position: 'absolute', left: '4.5px', top: '11px', bottom: '11px', width: '2px', background: 'rgba(255,255,255,0.25)', borderRadius: '1px' }} />
+                <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 10px var(--accent-glow)', zIndex: 1 }} />
+              </div>
+              <div className="flex-col justify-between" style={{ flex: 1, height: '52px' }}>
+                <span style={{ fontSize: '16px', fontWeight: 700, color: '#FFF' }}>Where from?</span>
+                <span style={{ fontSize: '16px', fontWeight: 700, color: '#FFF' }}>Where to?</span>
+              </div>
+              <div style={{ width: '46px', height: '46px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(8px)', flexShrink: 0 }}>
+                <Search size={20} color="#FFF" />
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* WALLET BALANCE */}
-        <div 
-          className="glass-card glass-card-interactive"
+        {/* ── QUICK ACTIONS ────────────────────────────────── */}
+        <div className="mb-8">
+          <div className="flex-row items-center justify-between mb-4">
+            <h3 style={{ fontSize: 'var(--text-md)', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>Quick Actions</h3>
+            <span style={{ fontSize: 'var(--text-sm)', color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}>View All</span>
+          </div>
+
+          <div className="quick-action-grid stagger">
+            {quickActions.map((action, i) => {
+              const Icon = action.icon;
+              return (
+                <div
+                  key={i}
+                  onClick={() => navigate(action.path)}
+                  className="press-scale"
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+                >
+                  <div style={{
+                    width: '56px', height: '56px', borderRadius: '16px',
+                    background: 'var(--bg-card)', border: '1px solid var(--border-primary)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: 'var(--shadow-sm)',
+                    transition: 'box-shadow var(--dur-fast), border-color var(--dur-fast)',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.boxShadow = `0 0 20px ${action.color}30`;
+                    e.currentTarget.style.borderColor = `${action.color}40`;
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+                    e.currentTarget.style.borderColor = 'var(--border-primary)';
+                  }}
+                  >
+                    <Icon size={23} color={action.color} strokeWidth={2} />
+                  </div>
+                  <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-secondary)', textAlign: 'center', lineHeight: '1.3' }}>
+                    {action.label}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ── R-WALLET CARD ────────────────────────────────── */}
+        <div
+          className="premium-card premium-card-interactive mb-6"
           onClick={() => navigate('/wallet')}
-          style={{ padding: 'var(--space-md)', display: 'flex', alignItems: 'center' }}
         >
           <div className="flex-row items-center justify-between w-full">
-            <div className="flex-row items-center gap-3">
-              <div style={{
-                width: 'clamp(40px, 3vw, 52px)', height: 'clamp(40px, 3vw, 52px)', borderRadius: 'var(--radius-lg)',
-                background: 'rgba(139,92,246,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <Wallet size={22} color="#8B5CF6" />
+            <div className="flex-row items-center gap-4">
+              <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'var(--primary-glow)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Wallet size={24} color="var(--primary)" />
               </div>
-              <div className="flex-col">
-                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', fontWeight: 500 }}>R-Wallet Balance</span>
-                <span style={{ fontSize: 'var(--text-xl)', fontWeight: 800, fontFamily: "'Outfit', sans-serif" }}>₹4,500</span>
+              <div className="flex-col" style={{ gap: '2px' }}>
+                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>R-Wallet</span>
+                <span style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--text-primary)', fontFamily: "'Outfit'" }}>₹4,500</span>
               </div>
             </div>
-            <div style={{
-              padding: 'var(--space-sm) var(--space-md)', borderRadius: 'var(--radius-full)',
-              background: 'var(--primary-glow)', color: 'var(--primary)',
-              fontSize: 'var(--text-sm)', fontWeight: 650,
-            }}>
-              + Add
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ─── ACTIVE BOOKING CARD ────────────────────────── */}
-      <div className="mb-6">
-        <h3 style={{ fontSize: 'var(--text-md)', fontWeight: 700, margin: '0 0 var(--space-md) 0' }}>Active Journey</h3>
-        <div 
-          className="glass-card glass-card-interactive"
-          onClick={() => navigate('/live')}
-          style={{ padding: 'var(--space-md)', position: 'relative', overflow: 'hidden' }}
-        >
-          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '4px', background: 'var(--gradient-success)', borderRadius: '0 4px 4px 0' }} />
-          
-          <div className="flex-row items-center justify-between mb-3">
-            <div className="flex-row items-center gap-2">
-              <span className="badge badge-success">
-                <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--success)' }} />
-                On Time
-              </span>
-              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', fontWeight: 500 }}>12951 • Rajdhani Express</span>
-            </div>
-          </div>
-
-          <div className="flex-row items-center justify-between">
-            <div className="flex-col items-start">
-              <span style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, fontFamily: "'Outfit', sans-serif" }}>MMCT</span>
-              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}>17:00</span>
-            </div>
-            <div className="flex-col items-center" style={{ flex: 1, padding: '0 var(--space-md)' }}>
-              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', marginBottom: '4px' }}>15h 32m</span>
-              <div style={{ width: '100%', height: '2px', background: 'var(--border-primary)', borderRadius: '1px', position: 'relative' }}>
-                <div style={{ position: 'absolute', left: '35%', top: '-3px', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--success)', boxShadow: '0 0 8px rgba(16,185,129,0.5)' }} />
-              </div>
-              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--success)', marginTop: '4px', fontWeight: 600 }}>105 km/h</span>
-            </div>
-            <div className="flex-col items-end">
-              <span style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, fontFamily: "'Outfit', sans-serif" }}>NDLS</span>
-              <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}>08:32</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ─── TRENDING ROUTES ────────────────────────────── */}
-      <div>
-        <div className="flex-row items-center gap-2 mb-3">
-          <TrendingUp size={16} color="var(--accent)" />
-          <h3 style={{ fontSize: 'var(--text-md)', fontWeight: 700, margin: 0 }}>Trending Routes</h3>
-        </div>
-        <div className="desktop-three-col stagger">
-          {[
-            { from: 'New Delhi', to: 'Mumbai', price: '₹1,765', trains: '42 trains' },
-            { from: 'Bengaluru', to: 'Chennai', price: '₹450', trains: '38 trains' },
-            { from: 'Kolkata', to: 'Delhi', price: '₹1,250', trains: '28 trains' },
-          ].map((route, i) => (
-            <div 
-              key={i}
-              className="glass-card glass-card-interactive"
-              onClick={() => navigate('/trains')}
-              style={{ padding: 'var(--space-md)', display: 'flex', alignItems: 'center', gap: 'var(--space-md)' }}
+            <button
+              style={{
+                padding: '9px 18px', borderRadius: 'var(--radius-full)', border: 'none',
+                background: 'var(--primary)', color: '#FFF',
+                fontSize: '13px', fontWeight: 700, cursor: 'pointer',
+                boxShadow: 'var(--shadow-aurora)', transition: 'transform var(--dur-fast) var(--ease-spring)'
+              }}
+              onMouseDown={e => e.currentTarget.style.transform = 'scale(0.93)'}
+              onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
             >
-              <div style={{
-                width: 'clamp(36px, 2.5vw, 48px)', height: 'clamp(36px, 2.5vw, 48px)', borderRadius: 'var(--radius-md)',
-                background: `hsl(${220 + i * 30}, 70%, 95%)`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-              }}>
-                <Train size={18} color={`hsl(${220 + i * 30}, 70%, 50%)`} />
+              + Add
+            </button>
+          </div>
+        </div>
+
+        {/* ── AI PLANNER BANNER (Aurora Hero) ─────────────── */}
+        <div
+          onClick={() => navigate('/ai-planner')}
+          className="aurora-card mb-6 press-scale"
+          style={{ padding: 'var(--space-lg)', cursor: 'pointer', boxShadow: 'var(--shadow-aurora)' }}
+        >
+          <div className="flex-row items-center gap-4" style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{
+              width: '52px', height: '52px', borderRadius: '16px',
+              background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(12px)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0, animation: 'aurora-pulse 3s ease-in-out infinite',
+            }}>
+              <Sparkles size={26} color="#FFF" />
+            </div>
+            <div className="flex-col flex-1" style={{ gap: '4px' }}>
+              <span style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '1px' }}>Powered by AI</span>
+              <h4 style={{ fontSize: 'var(--text-lg)', fontWeight: 900, color: '#FFF', margin: 0 }}>AI Travel Planner</h4>
+              <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.75)', margin: 0 }}>Craft your perfect trip in seconds.</p>
+            </div>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <ChevronRight size={20} color="#FFF" />
+            </div>
+          </div>
+        </div>
+
+        {/* ── REFER & EARN ─────────────────────────────────── */}
+        <div
+          className="premium-card premium-card-interactive"
+          style={{ position: 'relative', overflow: 'hidden' }}
+        >
+          <div style={{ position: 'absolute', right: '-30px', top: '-30px', width: '130px', height: '130px', borderRadius: '50%', background: 'var(--accent-glow)', filter: 'blur(40px)', zIndex: 0 }} />
+          <div className="flex-row items-center justify-between" style={{ position: 'relative', zIndex: 1 }}>
+            <div className="flex-row items-center gap-4">
+              <div style={{ width: '46px', height: '46px', borderRadius: '14px', background: 'var(--accent-glow)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Zap size={22} color="var(--accent)" />
               </div>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 'var(--text-base)', fontWeight: 600 }}>{route.from} → {route.to}</div>
-                <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}>{route.trains} available</div>
-              </div>
-              <div className="flex-col items-end">
-                <span style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--primary)' }}>{route.price}</span>
-                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}>onwards</span>
+              <div className="flex-col" style={{ gap: '3px' }}>
+                <h4 style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>Refer & Earn</h4>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', margin: 0 }}>Get ₹100 for each referral</p>
               </div>
             </div>
-          ))}
+            <div style={{ padding: '8px 14px', borderRadius: 'var(--radius-full)', background: 'var(--accent-glow)', color: 'var(--accent)', fontSize: '13px', fontWeight: 700 }}>Share</div>
+          </div>
         </div>
-      </div>
 
+      </div>
       <BottomNav active="home" />
-    </div>
     </div>
   );
 }

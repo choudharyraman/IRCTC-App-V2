@@ -10,6 +10,7 @@ import PNRStatusScreen from './screens/PNRStatusScreen';
 import LiveTrackingScreen from './screens/LiveTrackingScreen';
 
 // Auth Screens
+import WelcomeScreen from './screens/WelcomeScreen';
 import AuthLoginScreen from './screens/AuthLoginScreen';
 import AuthOtpScreen from './screens/AuthOtpScreen';
 import AuthBiometricScreen from './screens/AuthBiometricScreen';
@@ -26,6 +27,10 @@ import FoodScreen from './screens/FoodScreen';
 import UtsScreen from './screens/UtsScreen';
 import RailMadadScreen from './screens/RailMadadScreen';
 import RechargeScreen from './screens/RechargeScreen';
+import FlightSearchScreen from './screens/FlightSearchScreen';
+import HotelSearchScreen from './screens/HotelSearchScreen';
+import BusSearchScreen from './screens/BusSearchScreen';
+import AITravelPlannerScreen from './screens/AITravelPlannerScreen';
 
 // Checkout & Tickets
 import PaymentGatewayScreen from './screens/PaymentGatewayScreen';
@@ -41,6 +46,7 @@ function App() {
           <Route path="/" element={<Navigate to="/login" replace />} />
           
           {/* Auth Ecosystem */}
+          <Route path="/welcome" element={<WelcomeScreen />} />
           <Route path="/login" element={<AuthLoginScreen />} />
           <Route path="/otp" element={<AuthOtpScreen />} />
           <Route path="/biometric" element={<AuthBiometricScreen />} />
@@ -65,6 +71,10 @@ function App() {
           <Route path="/uts" element={<UtsScreen />} />
           <Route path="/madad" element={<RailMadadScreen />} />
           <Route path="/recharge" element={<RechargeScreen />} />
+          <Route path="/flights" element={<FlightSearchScreen />} />
+          <Route path="/hotels" element={<HotelSearchScreen />} />
+          <Route path="/buses" element={<BusSearchScreen />} />
+          <Route path="/ai-planner" element={<AITravelPlannerScreen />} />
 
           {/* Checkout & Tickets */}
           <Route path="/payment" element={<PaymentGatewayScreen />} />
